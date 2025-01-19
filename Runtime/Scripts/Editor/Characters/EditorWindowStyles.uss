@@ -1,0 +1,81 @@
+.Button {
+    font-size: 22px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    -unity-font-style: bold;
+}
+
+.HeadingText {
+    font-size: 18px;
+    color: rgb(204, 255, 4);
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+}
+
+.Field {
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin-left: 15px;
+    margin-right: 10px;
+    -unity-font-style: bold;
+}
+
+.InstructionText {
+    flex-wrap: wrap;
+    flex-grow: 0;
+    flex-direction: column;
+    text-overflow: clip;
+    letter-spacing: 0;
+    white-space: normal;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    padding-right: 3px;
+    padding-left: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.LogText {
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    white-space: normal;
+    justify-content: flex-end;
+}
+
+.ScrollView {
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.Label {
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.Dropdown {
+}
+
+.ScrollViewTextContainer {
+    flex-wrap: wrap;
+    white-space: normal;
+}

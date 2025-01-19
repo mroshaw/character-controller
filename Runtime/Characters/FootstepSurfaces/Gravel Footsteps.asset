@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664532d508375604994950e76a111915, type: 3}
+  m_Name: Gravel Footsteps
+  m_EditorClassIdentifier: 
+  spawnParticle: 1
+  spawnDecal: 0
+  textureNames:
+  - GravelPath_a
+  audioClips:
+  - {fileID: 8300000, guid: 3ef24c9695b01874aba8f291e1db86cc, type: 3}
+  - {fileID: 8300000, guid: 1419f36b72dd2344ebfa7418a3fa8bbe, type: 3}
+  - {fileID: 8300000, guid: 58ff29a249b695744aaad559fb54536c, type: 3}
