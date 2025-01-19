@@ -1,0 +1,31 @@
+{
+  "name": "com.daftapplegames.tp-character-controller",
+  "version": "1.0.0",
+  "displayName": "Third Person character controller",
+  "description": "An extension of Easy Character Movement 2, providing a feature rich Third Person controller in Unity 6 HDRP",
+  "unity": "6000.0",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "dependencies": {
+    "com.unity.render-pipelines.high-definition": "17.0.3"
+ },
+"samples": [
+  {
+    "displayName": "Demo Scene",
+    "description": "Unity 6 HDRP scene demonstrating the features of the package.",
+    "path": "Samples/DemoScene"
+  }
+],
+ "keywords": [
+    "HDRP",
+    "controller",
+    "tps",
+    "third person"
+  ],
+  "author": {
+    "name": "Oli Ollerenshaw",
+    "email": "oli@mroshaw.co.uk",
+    "url": ""
+  }
+}
