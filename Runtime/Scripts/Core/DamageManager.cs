@@ -10,11 +10,14 @@ namespace DaftAppleGames.TpCharacterController
     public class DamageManager : MonoBehaviour
     {
         #region Class Variables
+
         [BoxGroup("Settings")] [SerializeField] private DamageApplier[] damageAppliers;
         [BoxGroup("Settings")] [SerializeField] private bool refreshAppliersOnStart;
+
         #endregion
 
         #region Startup
+
         private void Start()
         {
             if (refreshAppliersOnStart)
@@ -30,6 +33,7 @@ namespace DaftAppleGames.TpCharacterController
         {
             damageAppliers = GetComponentsInChildren<DamageApplier>(true);
         }
+
         #endregion
 
         #region Class methods
@@ -49,6 +53,7 @@ namespace DaftAppleGames.TpCharacterController
                 damageApplier.enabled = false;
             }
         }
+
         #endregion
     }
 }

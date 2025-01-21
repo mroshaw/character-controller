@@ -15,7 +15,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
         public override bool IsTrue()
         {
             float distanceToTarget = (Agent.Value.transform.position - Target.Value.transform.position).magnitude;
-            return  distanceToTarget > Distance.Value;
+            return distanceToTarget > Distance.Value;
         }
     }
 }

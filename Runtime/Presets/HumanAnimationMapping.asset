@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fdca12436ff3143b0df0091d512544, type: 3}
+  m_Name: HumanAnimationMapping
+  m_EditorClassIdentifier: 
+  referenceController: {fileID: 9100000, guid: 41f49f3cd60f47e47a8dfde48a2a8827, type: 2}
+  animMappings:
+  - animationHeader: Actions
+    animationName: Rolling
+    stateName: Rolling
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Airborne
+    animationName: Midair Turn Right
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 0
+  - animationHeader: Airborne
+    animationName: Midair Forward Right
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 1
+  - animationHeader: Airborne
+    animationName: Midair Forward Left
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 2
+  - animationHeader: Airborne
+    animationName: Midair Falling
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 3
+  - animationHeader: Airborne
+    animationName: Midair Turn Left
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 4
+  - animationHeader: Airborne
+    animationName: Jump Up
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 5
+  - animationHeader: Airborne
+    animationName: Midair
+    stateName: Airborne
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Airborne Blend Tree
+    blendTreeIndex: 6
+  - animationHeader: Crouching Movement
+    animationName: Crouch Idle
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 0
+  - animationHeader: Crouching Movement
+    animationName: Crouch Forward
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 1
+  - animationHeader: Crouching Movement
+    animationName: Crouch Walk Left
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 2
+  - animationHeader: Crouching Movement
+    animationName: Crouch Walk Right
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 3
+  - animationHeader: Crouching Movement
+    animationName: Crouch Walk Backwards
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 4
+  - animationHeader: Crouching Movement
+    animationName: Crouch Walk Back Left
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 5
+  - animationHeader: Crouching Movement
+    animationName: Crouch Walk Back Right
+    stateName: Crouching
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Crouch Blend Tree
+    blendTreeIndex: 6
+  - animationHeader: Swimming
+    animationName: Swim Idle
+    stateName: Swimming
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Swimming Blend Tree
+    blendTreeIndex: 0
+  - animationHeader: Upright Movement
+    animationName: Stand Idle
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 0
+  - animationHeader: Upright Movement
+    animationName: Quarter Turn Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 1
+  - animationHeader: Upright Movement
+    animationName: Half Turn Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 2
+  - animationHeader: Upright Movement
+    animationName: Quarter Turn Left
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 3
+  - animationHeader: Upright Movement
+    animationName: Half Turn Left
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 4
+  - animationHeader: Upright Movement
+    animationName: Walk Forward
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 5
+  - animationHeader: Upright Movement
+    animationName: Walk Right Sharp
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 6
+  - animationHeader: Upright Movement
+    animationName: Walk Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 7
+  - animationHeader: Upright Movement
+    animationName: Walk Left Sharp
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 8
+  - animationHeader: Upright Movement
+    animationName: Walk Left
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 9
+  - animationHeader: Upright Movement
+    animationName: Run Forward
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 10
+  - animationHeader: Upright Movement
+    animationName: Run Sharp Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 11
+  - animationHeader: Upright Movement
+    animationName: Run Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 12
+  - animationHeader: Upright Movement
+    animationName: Run Sharp Left
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 13
+  - animationHeader: Upright Movement
+    animationName: Run Left
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 14
+  - animationHeader: Upright Movement
+    animationName: Sprint Forward
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 15
+  - animationHeader: Upright Movement
+    animationName: Sprint Right
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 16
+  - animationHeader: Upright Movement
+    animationName: Sprint Forward
+    stateName: Grounded
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: Upright Movement Blend Tree
+    blendTreeIndex: 17
+  - animationHeader: Actions
+    animationName: Death
+    stateName: Dead
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0

@@ -5,6 +5,6 @@ using Unity.Behavior;
 public enum RelationshipToPlayer
 {
     Fearful,
-	Enemy,
-	Neutral
+    Enemy,
+    Neutral
 }

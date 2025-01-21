@@ -11,7 +11,9 @@ namespace DaftAppleGames.TpCharacterController.Spawning
     public abstract class Spawner : MonoBehaviour
     {
         #region Class Variables
+
         [BoxGroup("Debug")] [SerializeReference] private List<ISpawnable> spawnables;
+
         #endregion
 
         #region Class Methods

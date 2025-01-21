@@ -17,6 +17,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
                 LogFailure("No AIBrain found on agent.");
                 return false;
             }
+
             return true;
         }
     }

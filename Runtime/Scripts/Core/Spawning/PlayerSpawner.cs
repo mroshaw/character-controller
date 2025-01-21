@@ -12,26 +12,30 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public class PlayerSpawner : CharacterSpawner
     {
         #region Class Variables
-        [PropertyOrder(2)][BoxGroup("Behaviour")][SerializeField] protected bool disableExistingMainCamera;
-        [PropertyOrder(3)][BoxGroup("Player")][SerializeField] private string cameraInstanceName = "Player Main Camera";
-        [PropertyOrder(3)][BoxGroup("Player")][SerializeField] private string cinemachineRigInstanceName = "Player CM Camera Rig";
 
-        [PropertyOrder(99)][FoldoutGroup("DEBUG")][SerializeField] private GameObject cameraGameObjectInstance;
-        [PropertyOrder(99)][FoldoutGroup("DEBUG")][SerializeField] private GameObject cmRigGameObjectInstance;
+        [PropertyOrder(2)] [BoxGroup("Behaviour")] [SerializeField] protected bool disableExistingMainCamera;
+        [PropertyOrder(3)] [BoxGroup("Player")] [SerializeField] private string cameraInstanceName = "Player Main Camera";
+        [PropertyOrder(3)] [BoxGroup("Player")] [SerializeField] private string cinemachineRigInstanceName = "Player CM Camera Rig";
+
+        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject cameraGameObjectInstance;
+        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject cmRigGameObjectInstance;
 
         private PlayerSpawnerSettings _playerSpawnerSettings;
 
         private Camera _camera;
         private CinemachineCamera _cinemachine;
         private ThirdPersonCharacter _thirdPersonCharacter;
+
         #endregion
 
         #region Startup
+
         protected override void Awake()
         {
             base.Awake();
             _playerSpawnerSettings = spawnSettings as PlayerSpawnerSettings;
         }
+
         #endregion
 
         #region Class Methods
@@ -61,6 +65,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 Debug.LogError($"PlayerSpawner: Failed to find CinemachineCamera component on PrefabInstance {_playerSpawnerSettings.cmCameraRigPrefab.name}");
                 IsValidSpawn = false;
             }
+
             return IsValidSpawn;
         }
 
@@ -97,8 +102,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
             base.SetSpawnsActive();
             SetSpawnActive(cameraGameObjectInstance);
             SetSpawnActive(cmRigGameObjectInstance);
-
         }
+
         #endregion
 
 #if UNITY_EDITOR

@@ -1,8 +1,14 @@
 using System;
 using UnityEngine;
+
 namespace DaftAppleGames.TpCharacterController
 {
-    public enum MovementSpeed { Walking = 2, Running = 4, Sprinting = 6 }
+    public enum MovementSpeed
+    {
+        Walking = 2,
+        Running = 4,
+        Sprinting = 6
+    }
 
     [Serializable]
     public struct MoveSpeeds

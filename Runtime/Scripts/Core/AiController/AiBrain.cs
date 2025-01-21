@@ -27,46 +27,53 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public abstract class AiBrain : MonoBehaviour
     {
         #region Class Variables
-        [BoxGroup("Patrol Settings")][SerializeField] private PatrolRoute patrolRoute;
-        [BoxGroup("Patrol Settings")][SerializeField] private float patrolSpeed;
-        [BoxGroup("Patrol Settings")][SerializeField] private float patrolRotationRate;
-        [BoxGroup("Patrol Settings")][SerializeField] private float patrolMinPause;
-        [BoxGroup("Patrol Settings")][SerializeField] private float patrolMaxPause;
 
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderSpeed;
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderRotationRate;
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderMinRange;
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderMaxRange;
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderMinPause;
-        [BoxGroup("Wander Settings")][SerializeField] private float wanderMaxPause;
-        [BoxGroup("Wander Settings")][SerializeField] private Transform wanderCenterTransform;
+        [BoxGroup("Patrol Settings")] [SerializeField] private PatrolRoute patrolRoute;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolSpeed;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolRotationRate;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMinPause;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMaxPause;
 
-        [BoxGroup("Flee Settings")][SerializeField] private float fleeSpeed;
-        [BoxGroup("Flee Settings")][SerializeField] private float fleeRotationRate;
-        [BoxGroup("Flee Settings")][SerializeField] private float fleeMinRange;
-        [BoxGroup("Flee Settings")][SerializeField] private float fleeMaxRange;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderSpeed;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderRotationRate;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinRange;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxRange;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinPause;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxPause;
+        [BoxGroup("Wander Settings")] [SerializeField] private Transform wanderCenterTransform;
+
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeSpeed;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRotationRate;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMinRange;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMaxRange;
         [BoxGroup("Flee Settings")] [SerializeField] private float fleeRestTime;
 
-        [BoxGroup("Needs")][SerializeField] private float startingThirst = 100.0f;
-        [BoxGroup("Needs")][SerializeField] private float thirstRate = 0.01f;
-        [BoxGroup("Needs")][SerializeField] private WaterSource[] knownWaterSources;
+        [BoxGroup("Needs")] [SerializeField] private float startingThirst = 100.0f;
+        [BoxGroup("Needs")] [SerializeField] private float thirstRate = 0.01f;
+        [BoxGroup("Needs")] [SerializeField] private WaterSource[] knownWaterSources;
 
-        [BoxGroup("Needs Debug")][SerializeField] private float _thirst;
+        [BoxGroup("Needs Debug")] [SerializeField] private float _thirst;
 
         private BlackboardReference _blackboardRef;
+
         #endregion
+
         #region Properties
+
         public NavMeshCharacter NavMeshCharacter { get; private set; }
-        public TpCharacter TpCharacter { get; private set; }
+        public ThirdPersonCharacter TpCharacter { get; private set; }
         public DetectorManager DetectorManager { get; private set; }
         public Animator Animator { get; private set; }
         public AiState AiState { get; private set; }
+
         #endregion
+
         #region Startup
+
         protected virtual void Awake()
         {
             NavMeshCharacter = GetComponent<NavMeshCharacter>();
-            TpCharacter = GetComponent<TpCharacter>();
+            TpCharacter = GetComponent<ThirdPersonCharacter>();
             DetectorManager = GetComponent<DetectorManager>();
             Animator = GetComponent<Animator>();
 
@@ -82,8 +89,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
         protected virtual void Start()
         {
         }
+
         #endregion
+
         #region Update
+
         protected virtual void Update()
         {
             if (_thirst > 0)
@@ -95,9 +105,13 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 _thirst = 0.0f;
             }
         }
+
         #endregion
+
         #region Class methods
+
         #region Move methods
+
         public void SetMoveSpeed(float speed)
         {
             TpCharacter.maxWalkSpeed = speed;
@@ -134,7 +148,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
             NavMeshCharacter.DestinationReached += arrivalCallBack;
             NavMeshCharacter.MoveToDestination(position);
         }
+
         #endregion
+
         #region Patrol methods
 
         public bool HasPatrolRoute()
@@ -145,7 +161,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [Button("Start Patrol")]
         public void Patrol()
         {
-            if(!patrolRoute || AiState == AiState.Patrolling)
+            if (!patrolRoute || AiState == AiState.Patrolling)
             {
                 return;
             }
@@ -176,14 +192,18 @@ namespace DaftAppleGames.TpCharacterController.AiController
             yield return new WaitForSeconds(UnityEngine.Random.Range(patrolMinPause, patrolMaxPause));
             NavMeshCharacter.MoveToDestination(patrolRoute.GetNextDestination().position);
         }
+
         #endregion
+
         #region Wander methods
+
         public void Wander()
         {
             if (AiState == AiState.Wandering)
             {
                 return;
             }
+
             SetMoveSpeed(wanderSpeed);
             SetRotationRate(wanderRotationRate);
             NavMeshCharacter.DestinationReached += ArrivedAtWanderDestination;
@@ -220,8 +240,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
         {
             StartCoroutine(MoveToRandomPositionAfterDelayAsync());
         }
+
         #endregion
+
         #region Flee methods
+
         public void Flee(Transform fleeFromTarget)
         {
             switch (AiState)
@@ -261,6 +284,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 return myNavHit.position;
             }
+
             return fleePosition;
         }
 
@@ -268,8 +292,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
         {
             StopFleeing();
         }
+
         #endregion
+
         #region Needs methods
+
         public bool IsThirsty()
         {
             return _thirst <= 0;
@@ -293,7 +320,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 closestWaterSource = null;
                 return false;
-
             }
 
             float closestDistanceSqr = float.MaxValue;
@@ -318,7 +344,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
             return closestWaterSource != null;
         }
+
         #endregion
+
         #endregion
     }
 }

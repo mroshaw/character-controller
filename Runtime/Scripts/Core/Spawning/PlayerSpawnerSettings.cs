@@ -13,7 +13,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
     [CreateAssetMenu(fileName = "PlayerSpawnerSettings", menuName = "Daft Apple Games/Character/Player Spawner Settings", order = 1)]
     public class PlayerSpawnerSettings : CharacterSpawnerSettings
     {
-        [BoxGroup("Prefabs")][AssetsOnly] public GameObject cameraPrefab;
-        [BoxGroup("Prefabs")][AssetsOnly] public GameObject cmCameraRigPrefab;
+        [BoxGroup("Prefabs")] [AssetsOnly] public GameObject cameraPrefab;
+        [BoxGroup("Prefabs")] [AssetsOnly] public GameObject cmCameraRigPrefab;
     }
 }

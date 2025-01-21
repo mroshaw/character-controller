@@ -13,7 +13,8 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
 
         public override bool IsTrue()
         {
-            return AiBrain.TpCharacter.CurrentHealth >= HealthValue.Value;
+            return true;
+            // return AiBrain.TpCharacter.CurrentHealth >= HealthValue.Value;
         }
     }
 }

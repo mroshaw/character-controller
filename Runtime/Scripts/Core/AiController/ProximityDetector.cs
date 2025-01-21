@@ -9,15 +9,20 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 #endif
+
 namespace DaftAppleGames.TpCharacterController.AiController
 {
     internal class ProximityDetector : Detector
     {
         #region Class Variables
+
         private Collider[] _overlapSphereBuffer;
         private readonly HashSet<string> _existingGuidsBuffer = new();
+
         #endregion
+
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -26,8 +31,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
             DetectedTargets = new DetectorTargets();
             _overlapSphereBuffer = new Collider[DetectionBufferSize];
         }
+
         #endregion
+
         #region Update Logic
+
         /* protected virtual void Update()
         {
             if (Time.frameCount % checkFrequency == 0)
@@ -38,6 +46,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         */
 
         #endregion
+
         #region Class methods
 
         protected internal override DetectorTarget GetClosestTarget()
@@ -84,6 +93,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     }
                 }
             }
+
             // Check to see if there are any objects in the 'aware dictionary' that are no longer in the alert list
             List<string> keysToRemove = new List<string>();
             foreach (KeyValuePair<string, DetectorTarget> currTarget in currentTargets)
@@ -108,7 +118,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
         }
 
         #endregion
+
         #region Editor methods
+
 #if UNITY_EDITOR
 
         protected override void DrawGizmos()
@@ -118,6 +130,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             Gizmos.DrawSphere(transform.position, detectorRange);
         }
 #endif
+
         #endregion
     }
 }

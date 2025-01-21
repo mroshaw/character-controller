@@ -114,14 +114,7 @@ namespace DaftAppleGames.TpCharacterController
         protected override void HandleInput()
         {
             // Move
-            Vector2 movementInput = GetMovementInput();
-
-            Vector3 movementDirection = Vector3.zero;
-            movementDirection += Vector3.forward * movementInput.y;
-            movementDirection += Vector3.right * movementInput.x;
-
-            movementDirection = movementDirection.relativeTo(ThirdPersonCharacter.cameraTransform, ThirdPersonCharacter.GetUpVector());
-
+            Vector3 movementDirection = CalcMovementDirection(ThirdPersonCharacter.cameraTransform, ThirdPersonCharacter.GetUpVector());
             ThirdPersonCharacter.SetMovementDirection(movementDirection);
 
             // Look

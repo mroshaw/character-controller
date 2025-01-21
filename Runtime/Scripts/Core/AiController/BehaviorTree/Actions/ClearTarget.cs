@@ -11,6 +11,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
     public partial class ClearTargetAction : Action
     {
         [SerializeReference] public BlackboardVariable<Transform> Target;
+
         protected override Status OnStart()
         {
             Target.ObjectValue = null;

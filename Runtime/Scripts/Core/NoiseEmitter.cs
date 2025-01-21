@@ -23,6 +23,7 @@ namespace DaftAppleGames.TpCharacterController
         {
             _noiseMaker = gameObject.transform.root.GetComponent<INoiseMaker>();
         }
+
         #endregion
 
         #region Class Methods
@@ -37,21 +38,24 @@ namespace DaftAppleGames.TpCharacterController
             _noiseMaker.MakeNoise(noiseLevel);
         }
 
-        
+
         public void SetNoiseLevel(float newNoiseLevel)
         {
             noiseLevel = newNoiseLevel;
         }
+
         #endregion
 
         #region Editor Methods
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         [Button("Set Noise Maker")]
         private void SetNoiseMaker()
         {
             _noiseMaker = gameObject.transform.root.GetComponent<INoiseMaker>();
         }
-        #endif
+#endif
+
         #endregion
     }
 }

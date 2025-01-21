@@ -10,10 +10,13 @@ namespace DaftAppleGames.TpCharacterController
     public class DamageApplier : MonoBehaviour
     {
         #region Class Variables
+
         [BoxGroup("Damage Settings")] [SerializeField] private float damageDealt = 10.0f;
+
         #endregion
 
         #region Class methods
+
         private void OnTriggerEnter(Collider other)
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
@@ -22,7 +25,7 @@ namespace DaftAppleGames.TpCharacterController
                 damageable.TakeDamage(damageDealt);
             }
         }
-        #endregion
 
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ using DaftAppleGames.Attributes;
 using UnityEngine;
 #if UNITY_EDITOR
 #endif
+
 namespace DaftAppleGames.TpCharacterController.AiController
 {
     internal class SoundDetector : ProximityDetector
@@ -16,12 +17,15 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [BoxGroup("Debug")] [ShowInInspector] private DetectorTargets _audibleTargets;
 
         #region Startup
+
         protected override void Start()
         {
             base.Start();
             _audibleTargets = new DetectorTargets();
         }
+
         #endregion
+
         protected internal override void CheckForTargets(bool triggerEvents)
         {
             base.CheckForTargets(false);

@@ -1,0 +1,357 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6eadbd399063240bb4cd065fef69a5, type: 3}
+  m_Name: HumanAnimationPreset - Basic Motions (Female RM)
+  m_EditorClassIdentifier: 
+  animMappings: {fileID: 11400000, guid: 51197ca75fd72724db0fb336bd3539a8, type: 2}
+  animPresets:
+  - animClip: {fileID: 3094330708855449807, guid: 167a35c786f55384580421027047db5f, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Stand Idle
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 0
+  - animClip: {fileID: 3094330708855449807, guid: 2ed6dc6d4b1abd94795f5055763eaabf, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Quarter Turn Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 1
+  - animClip: {fileID: 3094330708855449807, guid: 2ed6dc6d4b1abd94795f5055763eaabf, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Half Turn Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 2
+  - animClip: {fileID: 3094330708855449807, guid: 5bd3d7f1a4660714fac37ca2bed05096, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Quarter Turn Left
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 3
+  - animClip: {fileID: 3094330708855449807, guid: 5bd3d7f1a4660714fac37ca2bed05096, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Half Turn Left
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 4
+  - animClip: {fileID: 3094330708855449807, guid: ba4b29849962c4449b8058ef24b1f028, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Walk Forward
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 5
+  - animClip: {fileID: 3094330708855449807, guid: 0a08d205231ed564d97c4e32af47f926, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Walk Right Sharp
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 6
+  - animClip: {fileID: 3094330708855449807, guid: 0a08d205231ed564d97c4e32af47f926, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Walk Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 7
+  - animClip: {fileID: 3094330708855449807, guid: 2f5a53d28687c874faf248c44a9c078e, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Walk Left Sharp
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 8
+  - animClip: {fileID: 3094330708855449807, guid: 2f5a53d28687c874faf248c44a9c078e, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Walk Left
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 9
+  - animClip: {fileID: 3094330708855449807, guid: 03bf1c96adac62b46a0e488a76375af9, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Run Forward
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 10
+  - animClip: {fileID: 3094330708855449807, guid: 8bae35a6e070b2e43bd0607763dd548f, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Run Sharp Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 11
+  - animClip: {fileID: 3094330708855449807, guid: 8bae35a6e070b2e43bd0607763dd548f, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Run Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 12
+  - animClip: {fileID: 3094330708855449807, guid: faafa64dd80e3fc40b18e8b3eb9cd2c4, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Run Sharp Left
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 13
+  - animClip: {fileID: 3094330708855449807, guid: faafa64dd80e3fc40b18e8b3eb9cd2c4, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Run Left
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 14
+  - animClip: {fileID: 3094330708855449807, guid: 29f9b17ef50fbbf4cb8e686efa00a917, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Sprint Forward
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 15
+  - animClip: {fileID: 3094330708855449807, guid: 15beb0142d7fb7341ace9a53818e8690, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Sprint Right
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 16
+  - animClip: {fileID: 3094330708855449807, guid: c630ab8c35758e2499b3809a483d58db, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Upright Movement
+      animationName: Sprint Forward
+      stateName: Grounded
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Upright Movement Blend Tree
+      blendTreeIndex: 17
+  - animClip: {fileID: 0}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair Turn Right
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 0
+  - animClip: {fileID: 0}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair Forward Right
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 1
+  - animClip: {fileID: 0}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair Forward Left
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 2
+  - animClip: {fileID: 3094330708855449807, guid: 282cde1477c9b9043b439d1e6f3fde0c, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair Falling
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 3
+  - animClip: {fileID: 0}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair Turn Left
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 4
+  - animClip: {fileID: 3094330708855449807, guid: fc2bbc9eb3f0e0f428219f9491de972b, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Jump Up
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 5
+  - animClip: {fileID: 0}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Airborne
+      animationName: Midair
+      stateName: Airborne
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Airborne Blend Tree
+      blendTreeIndex: 6
+  - animClip: {fileID: 3094330708855449807, guid: 4dd1a2a5635c6b94c9794d0e1df83ee2, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Crouching Movement
+      animationName: Crouch Idle
+      stateName: Crouching
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Crouch Blend Tree
+      blendTreeIndex: 0
+  - animClip: {fileID: 3094330708855449807, guid: 42b77e964c471594eb84af76214a9b26, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Crouching Movement
+      animationName: Crouch Forward
+      stateName: Crouching
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Crouch Blend Tree
+      blendTreeIndex: 1
+  - animClip: {fileID: 3094330708855449807, guid: c1b812e9180acd74eace771cc3354423, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Crouching Movement
+      animationName: Crouch Walk Left
+      stateName: Crouching
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Crouch Blend Tree
+      blendTreeIndex: 2
+  - animClip: {fileID: 3094330708855449807, guid: f3b2c6ccb7e710f44bf3da62b4a4a57c, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Crouching Movement
+      animationName: Crouch Walk Right
+      stateName: Crouching
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Crouch Blend Tree
+      blendTreeIndex: 3
+  - animClip: {fileID: 3094330708855449807, guid: bc2a475bab6f9ad4b93434d854575dff, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Actions
+      animationName: Rolling
+      stateName: Rolling
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: 
+      blendTreeIndex: 0
+  - animClip: {fileID: 3094330708855449807, guid: 330d3547c6e6d9244948976c64109471, type: 3}
+    mirrorAnimation: 0
+    animSpeed: 1
+    animMapping:
+      animationHeader: Swimming
+      animationName: Swim Idle
+      stateName: Swimming
+      stateMachineName: 
+      layerName: Base Layer
+      blendTreeName: Swimming Blend Tree
+      blendTreeIndex: 0

@@ -15,24 +15,26 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #region Class Variables
 
         [BoxGroup("Settings")] public bool footstepsEnabled;
-        [BoxGroup("Settings")][SerializeField] private List<FootstepTrigger> footstepTriggers;
-        [BoxGroup("Settings")][SerializeField] private FootstepSurface[] footstepSurfaces;
-        [BoxGroup("Settings")][SerializeField] private FootstepSurface defaultSurface;
-        [BoxGroup("Settings")][SerializeField] private LayerMask triggerLayerMask;
-        [BoxGroup("Settings")][SerializeField] private AudioMixerGroup audioMixerGroup;
-        [BoxGroup("Debug")][SerializeField] public bool debugTextureName;
+        [BoxGroup("Settings")] [SerializeField] private List<FootstepTrigger> footstepTriggers;
+        [BoxGroup("Settings")] [SerializeField] private FootstepSurface[] footstepSurfaces;
+        [BoxGroup("Settings")] [SerializeField] private FootstepSurface defaultSurface;
+        [BoxGroup("Settings")] [SerializeField] private LayerMask triggerLayerMask;
+        [BoxGroup("Settings")] [SerializeField] private AudioMixerGroup audioMixerGroup;
+        [BoxGroup("Debug")] [SerializeField] public bool debugTextureName;
 
         [BoxGroup("Spawn Settings")] public bool alignToTerrainSlope;
 
-        [BoxGroup("Pool Settings")][SerializeField] private PrefabPool particleFxPool;
-        [BoxGroup("Pool Settings")][SerializeField] private PrefabPool decalPool;
+        [BoxGroup("Pool Settings")] [SerializeField] private PrefabPool particleFxPool;
+        [BoxGroup("Pool Settings")] [SerializeField] private PrefabPool decalPool;
 
         public bool DebugTextureName => debugTextureName;
+
         #endregion
 
         private Dictionary<string, FootstepSurface> _footstepSurfaceDict;
 
         #region Startup
+
         public void OnEnable()
         {
             // Register the triggers
@@ -50,6 +52,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             // Create a dictionary of all supported textures to corresponding surfaces
             CreateSurfaceDictionary();
         }
+
         #endregion
 
         #region Class methods
@@ -95,6 +98,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #endregion
 
         #region Editor methods
+
         [Button("Create Triggers")]
         private void CreateFootstepTriggers()
         {

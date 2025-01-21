@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using DaftAppleGames.Utils.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DaftAppleGames.Darskerry.Editor.Characters
+namespace DaftAppleGames.TpCharacterController.Editor
 {
     public class CharacterConfigurationEditorWindow : EditorWindow
     {
@@ -50,6 +51,9 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                 ClearLog();
                 ApplySettings();
             });
+
+            Button configureSettingsButton = rootVisualElement.Q<Button>("ConfigureSettingsButton");
+            configureSettingsButton.RegisterCallback<ClickEvent>(evt => { ConfigureSettings(); });
 
             _logText = rootVisualElement.Q<TextField>("LogTextField");
             _logText.value = "";
@@ -146,6 +150,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             {
                 AddToLog(resultLogs);
             }
+
             return validationResult;
         }
 
@@ -155,6 +160,21 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             characterEditorPreset = null;
         }
 
+        private void ConfigureSettings()
+        {
+            CreateLayers();
+            CreateTags();
+        }
 
+        private void CreateLayers()
+        {
+            EditorUtils.AddLayer("Player");
+            EditorUtils.AddLayer("Terrain");
+        }
+
+        private void CreateTags()
+        {
+            EditorUtils.AddTag("Player");
+        }
     }
 }

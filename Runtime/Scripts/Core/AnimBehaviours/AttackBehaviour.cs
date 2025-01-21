@@ -1,10 +1,11 @@
 using UnityEngine;
 
-namespace DaftAppleGames.TpCharacterController.AiController.AnimBehaviours
+namespace DaftAppleGames.TpCharacterController.AnimBehaviours
 {
     public class AttackBehaviour : CharacterBehaviour
     {
         private DamageManager _damageManager;
+
         #region State events
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,8 +30,13 @@ namespace DaftAppleGames.TpCharacterController.AiController.AnimBehaviours
             {
                 _damageManager.DisableDamageAppliers();
             }
-            Character.StopAttacking();
+
+            if (HasAdditionalAbilities)
+            {
+                CharacterAbilities.StopAttacking();
+            }
         }
+
         #endregion
     }
 }

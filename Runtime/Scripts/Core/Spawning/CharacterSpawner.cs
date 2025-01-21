@@ -14,18 +14,19 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public abstract class CharacterSpawner : MonoBehaviour
     {
         #region Class Variables
-        [PropertyOrder(-1)][BoxGroup("Settings")][SerializeField] protected CharacterSpawnerSettings spawnSettings;
-        [PropertyOrder(2)][BoxGroup("Behaviour")][SerializeField] protected bool spawnOnStart;
-        [PropertyOrder(3)][BoxGroup("Character")][SerializeField] private bool enableFootsteps;
-        [PropertyOrder(3)][BoxGroup("Character")][SerializeField] private string characterInstanceName = "Player Character";
-        [PropertyOrder(3)][BoxGroup("Character")][SerializeField] private string footstepPoolsInstanceName = "Footstep Pools";
-        [PropertyOrder(3)][BoxGroup("Character")][SerializeField] protected Transform characterParentContainer;
+
+        [PropertyOrder(-1)] [BoxGroup("Settings")] [SerializeField] protected CharacterSpawnerSettings spawnSettings;
+        [PropertyOrder(2)] [BoxGroup("Behaviour")] [SerializeField] protected bool spawnOnStart;
+        [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private bool enableFootsteps;
+        [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private string characterInstanceName = "Player Character";
+        [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private string footstepPoolsInstanceName = "Footstep Pools";
+        [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] protected Transform characterParentContainer;
 
         [PropertyOrder(10)]
         [FoldoutGroup("Events")] public UnityEvent CharacterSpawnedEvent;
 
-        [PropertyOrder(99)][FoldoutGroup("DEBUG")][SerializeField] private GameObject characterGameObjectInstance;
-        [PropertyOrder(99)][FoldoutGroup("DEBUG")][SerializeField] private GameObject footstepPoolsGameObjectInstance;
+        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject characterGameObjectInstance;
+        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject footstepPoolsGameObjectInstance;
 
         protected Character character { get; private set; }
         protected bool IsValidSpawn { get; set; } = false;
@@ -35,9 +36,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
         private PrefabPool[] _footstepPools;
         private PrefabPool _stepMarkPool;
         private PrefabPool _particlePool;
+
         #endregion
 
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -82,8 +85,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 Spawn();
             }
         }
+
         #endregion
+
         #region Class Methods
+
         protected virtual void Spawn()
         {
             if (SpawnInstances())
@@ -102,7 +108,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
         {
             bool spawnStatus = true;
 
-            characterGameObjectInstance = SpawnPrefab(spawnSettings.characterPrefab, transform.position, transform.rotation, characterParentContainer, characterInstanceName, false);
+            characterGameObjectInstance =
+                SpawnPrefab(spawnSettings.characterPrefab, transform.position, transform.rotation, characterParentContainer, characterInstanceName, false);
             character = characterGameObjectInstance.GetComponent<Character>();
             if (!character)
             {
@@ -135,6 +142,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                         {
                             _stepMarkPool = currPool;
                         }
+
                         if (currPool.PrefabPoolType == PrefabPoolType.FootstepParticles)
                         {
                             _particlePool = currPool;
@@ -143,7 +151,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
                     if (!_stepMarkPool || !_particlePool)
                     {
-                        Debug.LogError($"CharacterSpawner: There should be 1 'FootstepMarks' and 1 'FootstepParticles' ParticlePool in PrefabInstance {spawnSettings.footstepPoolsPrefab.name}");
+                        Debug.LogError(
+                            $"CharacterSpawner: There should be 1 'FootstepMarks' and 1 'FootstepParticles' ParticlePool in PrefabInstance {spawnSettings.footstepPoolsPrefab.name}");
                         spawnStatus = false;
                     }
                 }
@@ -171,6 +180,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 return prefabInstance;
             }
+
             prefabInstance.name = instanceName;
             return prefabInstance;
         }
@@ -184,6 +194,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 {
                     _footstepManager.footstepsEnabled = false;
                 }
+
                 return;
             }
 
@@ -197,6 +208,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 SetSpawnActive(footstepPoolsGameObjectInstance);
             }
+
             SetSpawnActive(characterGameObjectInstance);
         }
 

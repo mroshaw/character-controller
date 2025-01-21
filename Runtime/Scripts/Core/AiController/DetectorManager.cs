@@ -15,13 +15,21 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         [BoxGroup("Settings")] [Tooltip("Only colliders on these layers will be considered as targets.")] [SerializeField] private LayerMask detectionLayerMask;
         [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] [TagSelector] string[] detectionTags;
-        [BoxGroup("Settings")] [Tooltip("Maximum number of colliders that can be detected by detectors. This is to avoid garbage collection.")] [SerializeField] protected int detectionBufferSize = 20;
-        [BoxGroup("Settings")] [Tooltip("List of detectors that will be queried by this manager. Use the button below to automatically populate, or manually drag in detectors required.")] [SerializeField] private Detector[] detectors;
+
+        [BoxGroup("Settings")] [Tooltip("Maximum number of colliders that can be detected by detectors. This is to avoid garbage collection.")]
+        [SerializeField] protected int detectionBufferSize = 20;
+
+        [BoxGroup("Settings")]
+        [Tooltip("List of detectors that will be queried by this manager. Use the button below to automatically populate, or manually drag in detectors required.")]
+        [SerializeField] private Detector[] detectors;
+
         [BoxGroup("Events")] [Tooltip("This event is fired when a new closest target is acquired.")] public UnityEvent newTargetDetectedEvent;
         [BoxGroup("Events")] [Tooltip("This event is fired when the current closest target is lost.")] public UnityEvent targetLostEvent;
 
         [BoxGroup("Debug")] [ShowInInspector] [SerializeField] private SortedDetectorTargetList _sortedDetectedTargets;
+
         [BoxGroup("Debug")] [ShowInInspector] private Dictionary<string, SortedDetectorTargetList> _detectorTargetsByTag;
+
         // This is used to distribute 'Update' calls to sensors across DetectorManagers. So rather than all instances polling on exactly the same frame,
         // calls will be randomly distributed across the number of seed frames.
         private const int LoadBalanceSeed = 10;
@@ -51,6 +59,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 detector.DetectionBufferSize = detectionBufferSize;
                 detector.DetectionLayerMask = detectionLayerMask;
             }
+
             _detectorTargetsByTag = new Dictionary<string, SortedDetectorTargetList>();
             foreach (string currTag in detectionTags)
             {
@@ -66,6 +75,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 detector.targetLostEvent.RemoveListener(TargetLost);
             }
         }
+
         #endregion
 
         #region Update
@@ -99,7 +109,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             return _detectorTargetsByTag[tagToFind].GetClosestTarget()?.targetObject;
         }
 
-        private void NewTargetDetected(DetectorTarget detectorTarget )
+        private void NewTargetDetected(DetectorTarget detectorTarget)
         {
             _detectorTargetsByTag[detectorTarget.tag].Add(detectorTarget);
             _sortedDetectedTargets.Add(detectorTarget);
@@ -120,7 +130,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         #endregion
 
-
         #endregion
 
         #region Editor Methods
@@ -130,6 +139,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         {
             detectors = GetComponentsInChildren<Detector>(true);
         }
+
         #endregion
     }
 }

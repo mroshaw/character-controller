@@ -13,14 +13,18 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public class NavMeshSplineModifier : MonoBehaviour
     {
         #region Class Variables
+
         [BoxGroup("Settings")] public GameObject navMeshModifierPrefab; // Prefab with NavMeshModifierVolume
         [BoxGroup("Settings")] public float interval = 1f; // Interval to sample the spline
+
         [BoxGroup("Settings")] public Vector3 volumeSize = new Vector3(2f, 2f, 2f); // Size of the modifier volume
         // [BoxGroup("Settings")] public int splineAreaType = 1; // Set an area type ID (1 is commonly 'Walkable')
+
         #endregion
 
         #region Editor methods
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         [Button("Refresh NavMeshModifiers")]
         internal void RefreshNavMeshModifiers()
         {
@@ -59,7 +63,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     }
 
                     // Instantiate a NavMeshModifierVolume at the world position
-                    GameObject modifierObj = (GameObject) PrefabUtility.InstantiatePrefab(navMeshModifierPrefab);
+                    GameObject modifierObj = (GameObject)PrefabUtility.InstantiatePrefab(navMeshModifierPrefab);
                     modifierObj.transform.SetParent(splineContainer.transform, true);
                     modifierObj.transform.position = worldPosition;
                     modifierObj.transform.localRotation = Quaternion.identity;
@@ -70,11 +74,10 @@ namespace DaftAppleGames.TpCharacterController.AiController
                         // modifier.area = splineAreaType; // Assign area type
                     }
                 }
-
             }
         }
-        #endif
-        #endregion
+#endif
 
+        #endregion
     }
 }

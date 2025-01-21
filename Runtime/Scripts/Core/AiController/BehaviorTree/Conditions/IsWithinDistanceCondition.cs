@@ -19,6 +19,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
                 Debug.LogError("IsWithinDistanceCondition Target is null");
                 return false;
             }
+
             return (Agent.Value.transform.position - Target.Value.transform.position).magnitude < Distance.Value;
         }
     }

@@ -6,6 +6,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
     public class FootstepTrigger : CharacterTrigger
     {
         #region Class Variables
+
         private AudioSource _audioSource;
         private float _cooldownCounter = 0.0f;
         public FootstepManager FootstepManager { get; set; }
@@ -17,9 +18,9 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #endregion
 
         #region Startup
+
         private void Awake()
         {
-
             _audioSource = GetComponent<AudioSource>();
 
             if (!_audioSource)
@@ -42,12 +43,14 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
                 GetComponent<SphereCollider>().enabled = false;
                 return;
             }
+
             _defaultSurface = FootstepManager.GetDefaultSurface();
         }
 
         #endregion
 
         #region Class methods
+
         public override void TriggerEnter(Collider other)
         {
             if (_cooldownCounter > 0.0f || other is null)
@@ -78,7 +81,6 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             _audioSource.PlayOneShot(audioClip);
 
             _cooldownCounter = 0.5f;
-
         }
 
         private void Update()
@@ -89,13 +91,14 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         public override void TriggerExit(Collider other)
         {
         }
+
         #endregion
 
         #region Class methods
+
         public void GetSurfaceFromCollision(Transform footTransform, Collider otherCollider,
             out FootstepSurface footstepSurface, out Vector3 spawnPosition)
         {
-
             // Collision if on a Terrain
             if (otherCollider is TerrainCollider)
             {
@@ -111,12 +114,14 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
                     spawnPosition = new Vector3(collisionPosition.x, terrainHeight, collisionPosition.z);
                     footstepSurface = FootstepManager.GetSurfaceFromTextureName(terrainTextureName);
                 }
-                return;
 
+                return;
             }
 
             // Collision if with a Mesh or other collider type
-            spawnPosition = otherCollider is MeshCollider { convex: true } or BoxCollider or SphereCollider or CapsuleCollider ? otherCollider.ClosestPoint(footTransform.position) : footTransform.position;
+            spawnPosition = otherCollider is MeshCollider { convex: true } or BoxCollider or SphereCollider or CapsuleCollider
+                ? otherCollider.ClosestPoint(footTransform.position)
+                : footTransform.position;
 
             if (FindMaterialTextureFromCollider(otherCollider, out var meshTextureName))
             {
@@ -138,16 +143,19 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             {
                 return false;
             }
+
             Material meshMaterial = meshRender.material;
             if (!meshMaterial || !meshMaterial.mainTexture)
             {
                 return false;
             }
+
             textureName = meshMaterial.mainTexture.name;
             if (FootstepManager.DebugTextureName)
             {
                 Debug.Log($"FootstepManager: Mesh texture is : {textureName}");
             }
+
             return true;
         }
 
@@ -195,14 +203,18 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             }
 
             // Texture is at index textureMaxIndex
-            textureName = (_terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex].diffuseTexture) ? (_terrainData.terrainLayers[textureMaxIndex]).diffuseTexture.name : "";
+            textureName = (_terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex].diffuseTexture)
+                ? (_terrainData.terrainLayers[textureMaxIndex]).diffuseTexture.name
+                : "";
 
             if (FootstepManager.DebugTextureName)
             {
                 Debug.Log($"FootstepManager: Terrain texture is : {textureName}");
             }
+
             return true;
         }
+
         #endregion
     }
 }

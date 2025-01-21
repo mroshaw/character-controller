@@ -16,6 +16,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
             {
                 Debug.LogError("No Agent set on Condition!");
             }
+
             AiBrain = Agent.Value.GetComponent<AiBrain>();
 
             if (!AiBrain)

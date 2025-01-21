@@ -20,6 +20,12 @@ namespace DaftAppleGames.TpCharacterController
         [SerializeField]
         private Character character;
 
+        [Tooltip("Additional character abilities. If left unassigned, this will attempt to locate a Character component within this GameObject.")]
+        [SerializeField]
+        private CharacterAbilities characterAbilities;
+
+        private Vector3 _rollCachedDirection;
+
         /// <summary>
         /// Our controlled character.
         /// </summary>
@@ -29,7 +35,6 @@ namespace DaftAppleGames.TpCharacterController
         /// <summary>
         /// InputActions assets.
         /// </summary>
-
         public InputActionAsset InputActionsAsset
         {
             get => inputActionsAsset;
@@ -45,35 +50,76 @@ namespace DaftAppleGames.TpCharacterController
         /// <summary>
         /// Movement InputAction.
         /// </summary>
-
         public InputAction MovementInputAction { get; set; }
+
+        // Abilities InputAction
+        public InputAction SprintInputAction { get; set; }
+        public InputAction RollInputAction { get; set; }
+        public InputAction AttackInputAction { get; set; }
+        public InputAction InteractInputAction { get; set; }
 
         /// <summary>
         /// Jump InputAction.
         /// </summary>
-
         public InputAction JumpInputAction { get; set; }
 
         /// <summary>
         /// Crouch InputAction.
         /// </summary>
-
         public InputAction CrouchInputAction { get; set; }
 
         /// <summary>
         /// Polls movement InputAction (if any).
         /// Return its current value or zero if no valid InputAction found.
         /// </summary>
-
         public virtual Vector2 GetMovementInput()
         {
             return MovementInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
         }
 
         /// <summary>
+        /// Sprint InputAction handler.
+        /// </summary>
+        public virtual void OnSprint(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                characterAbilities.Sprint();
+            else if (context.canceled)
+                characterAbilities.StopSprinting();
+        }
+
+        public virtual void OnRoll(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                _rollCachedDirection = character.GetMovementDirection();
+                characterAbilities.Roll();
+            }
+            else if (context.canceled)
+            {
+                characterAbilities.StopRolling();
+            }
+        }
+
+        public virtual void OnAttack(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                characterAbilities.Attack();
+            else if (context.canceled)
+                characterAbilities.StopAttacking();
+        }
+
+        public virtual void OnInteract(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                characterAbilities.Interact();
+            else if (context.canceled)
+                characterAbilities.StopInteracting();
+        }
+
+        /// <summary>
         /// Jump InputAction handler.
         /// </summary>
-
         public virtual void OnJump(InputAction.CallbackContext context)
         {
             if (context.started)
@@ -85,7 +131,6 @@ namespace DaftAppleGames.TpCharacterController
         /// <summary>
         /// Crouch InputAction handler.
         /// </summary>
-
         public virtual void OnCrouch(InputAction.CallbackContext context)
         {
             if (context.started)
@@ -98,16 +143,13 @@ namespace DaftAppleGames.TpCharacterController
         /// Initialize player InputActions (if any).
         /// E.g. Subscribe to input action events and enable input actions here.
         /// </summary>
-
         protected virtual void InitPlayerInput()
         {
             // Attempts to cache Character InputActions (if any)
-
             if (InputActionsAsset == null)
                 return;
 
             // Movement input action (no handler, this is polled, e.g. GetMovementInput())
-
             MovementInputAction = InputActionsAsset.FindAction("Move");
             MovementInputAction?.Enable();
 
@@ -123,7 +165,6 @@ namespace DaftAppleGames.TpCharacterController
             }
 
             // Setup Crouch input action handlers
-
             CrouchInputAction = InputActionsAsset.FindAction("Crouch");
             if (CrouchInputAction != null)
             {
@@ -132,12 +173,48 @@ namespace DaftAppleGames.TpCharacterController
 
                 CrouchInputAction.Enable();
             }
+
+            // Abilities input action handlers
+            SprintInputAction = inputActionsAsset.FindAction("Sprint");
+            if (SprintInputAction != null)
+            {
+                SprintInputAction.started += OnSprint;
+                SprintInputAction.canceled += OnSprint;
+
+                SprintInputAction.Enable();
+            }
+
+            RollInputAction = inputActionsAsset.FindAction("Roll");
+            if (RollInputAction != null)
+            {
+                RollInputAction.started += OnRoll;
+                RollInputAction.canceled += OnRoll;
+
+                RollInputAction.Enable();
+            }
+
+            AttackInputAction = inputActionsAsset.FindAction("Attack");
+            if (AttackInputAction != null)
+            {
+                AttackInputAction.started += OnAttack;
+                AttackInputAction.canceled += OnAttack;
+
+                AttackInputAction.Enable();
+            }
+
+            InteractInputAction = inputActionsAsset.FindAction("Interact");
+            if (InteractInputAction != null)
+            {
+                InteractInputAction.started += OnInteract;
+                InteractInputAction.canceled += OnInteract;
+
+                InteractInputAction.Enable();
+            }
         }
 
         /// <summary>
         /// Unsubscribe from input action events and disable input actions.
         /// </summary>
-
         protected virtual void DeinitPlayerInput()
         {
             // Unsubscribe from input action events and disable input actions
@@ -165,45 +242,108 @@ namespace DaftAppleGames.TpCharacterController
                 CrouchInputAction.Disable();
                 CrouchInputAction = null;
             }
+
+            if (SprintInputAction != null)
+            {
+                SprintInputAction.started -= OnSprint;
+                SprintInputAction.canceled -= OnSprint;
+
+                SprintInputAction.Disable();
+                SprintInputAction = null;
+            }
+
+            if (RollInputAction != null)
+            {
+                RollInputAction.started -= OnRoll;
+                RollInputAction.canceled -= OnRoll;
+
+                RollInputAction.Disable();
+                RollInputAction = null;
+            }
+
+            if (AttackInputAction != null)
+            {
+                AttackInputAction.started -= OnAttack;
+                AttackInputAction.canceled -= OnAttack;
+
+                AttackInputAction.Disable();
+                AttackInputAction = null;
+            }
+
+            if (InteractInputAction != null)
+            {
+                InteractInputAction.started -= OnInteract;
+                InteractInputAction.canceled -= OnInteract;
+
+                InteractInputAction.Disable();
+                InteractInputAction = null;
+            }
         }
 
-        protected virtual void HandleInput()
+        protected Vector3 CalcMovementDirection(Transform relativeTransform, Vector3 relativeVector)
         {
-            // Should this character handle input ?
-
-            if (InputActionsAsset == null)
-                return;
+            // Handle rolling
+            if (characterAbilities.IsRolling())
+            {
+                if (_rollCachedDirection.magnitude < 0.1f)
+                {
+                    _rollCachedDirection = character.transform.forward *  characterAbilities.rollSpeed;
+                }
+                character.SetMovementDirection(_rollCachedDirection);
+            }
 
             // Poll movement InputAction
-
             Vector2 movementInput = GetMovementInput();
-
-            Vector3 movementDirection =  Vector3.zero;
+            Vector3 movementDirection = Vector3.zero;
 
             movementDirection += Vector3.right * movementInput.x;
             movementDirection += Vector3.forward * movementInput.y;
 
             // If character has a camera assigned...
+            if (relativeTransform)
+            {
+                // Make movement direction relative to its camera view direction
+                movementDirection = movementDirection.relativeTo(relativeTransform, relativeVector);
+            }
 
+            return movementDirection;
+        }
+
+        protected virtual void HandleInput()
+        {
+            // Should this character handle input ?
+            if (InputActionsAsset == null)
+                return;
+
+            // Poll movement InputAction
+            Vector2 movementInput = GetMovementInput();
+            Vector3 movementDirection = Vector3.zero;
+
+            movementDirection += Vector3.right * movementInput.x;
+            movementDirection += Vector3.forward * movementInput.y;
+
+            // If character has a camera assigned...
             if (character.camera)
             {
                 // Make movement direction relative to its camera view direction
-
-                movementDirection = movementDirection.relativeTo(character.cameraTransform, character.GetUpVector());
+                movementDirection = CalcMovementDirection(character.cameraTransform, character.GetUpVector());
             }
 
             // Set character's movement direction vector
-
             character.SetMovementDirection(movementDirection);
         }
 
         protected virtual void Awake()
         {
             // If no character assigned, try to get Character from this GameObject
-
             if (character == null)
             {
                 character = GetComponent<Character>();
+            }
+
+            if (characterAbilities == null)
+            {
+                characterAbilities = GetComponent<CharacterAbilities>();
             }
         }
 

@@ -10,10 +10,11 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
     {
         protected override Status OnStart()
         {
-            if(!Init())
+            if (!Init())
             {
                 return Status.Failure;
             }
+
             AiBrain.Wander();
             return Status.Success;
         }

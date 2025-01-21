@@ -10,7 +10,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
     [NodeDescription(name: "AI Flee", story: "[Agent] flees from [Target]", category: "Action/Navigation", id: "d9102898acb44b193285ab3326751e54")]
     public partial class FleeAction : AiBrainAction
     {
-    [SerializeReference] public BlackboardVariable<Transform> Target;
+        [SerializeReference] public BlackboardVariable<Transform> Target;
 
         private NavMeshCharacter _navMeshCharacter;
 
@@ -18,10 +18,11 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
 
         protected override Status OnStart()
         {
-            if(!Init())
+            if (!Init())
             {
                 return Status.Failure;
             }
+
             AiBrain.Flee(Target.Value);
             return Status.Running;
         }
@@ -32,6 +33,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
             {
                 return Status.Running;
             }
+
             return Status.Success;
         }
 

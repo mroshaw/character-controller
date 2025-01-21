@@ -11,6 +11,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
     public partial class SetVariableNullAction : Action
     {
         [SerializeReference] public BlackboardVariable Variable;
+
         protected override Status OnStart()
         {
             Variable.ObjectValue = null;

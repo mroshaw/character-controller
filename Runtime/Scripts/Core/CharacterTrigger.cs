@@ -7,16 +7,21 @@ namespace DaftAppleGames.TpCharacterController
     public abstract class CharacterTrigger : MonoBehaviour
     {
         #region Class Variables
+
         [Header("Trigger Settings")]
         [Tooltip("Trigger will only fire if the collider has any one of these tags.")] public string[] triggerTags;
+
         [Tooltip("Trigger will only fire if the collider is on any one of these layers.")] public LayerMask triggerLayers;
 
         [Header("Events")]
         public UnityEvent<Collider> triggerEnterEvent;
+
         public UnityEvent<Collider> triggerExitEvent;
+
         #endregion
 
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -27,6 +32,7 @@ namespace DaftAppleGames.TpCharacterController
                 Debug.LogError($"CharacterTrigger: There is no collider on this gameobject! {gameObject}");
             }
         }
+
         #endregion
 
         private void OnTriggerEnter(Collider other)

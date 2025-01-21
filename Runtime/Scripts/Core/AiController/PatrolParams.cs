@@ -11,6 +11,5 @@ namespace DaftAppleGames.TpCharacterController.AiController
     [Serializable]
     public struct PatrolParams
     {
-
     }
 }

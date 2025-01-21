@@ -15,15 +15,16 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
 
         protected override Status OnStart()
         {
-            if(!Init())
+            if (!Init())
             {
                 return Status.Failure;
             }
 
-            if(AiBrain.GetClosestWaterSource(out _foundWaterSource))
+            if (AiBrain.GetClosestWaterSource(out _foundWaterSource))
             {
                 WaterSource.Value = _foundWaterSource;
             }
+
             return Status.Success;
         }
     }

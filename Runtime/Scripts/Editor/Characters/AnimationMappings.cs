@@ -4,24 +4,23 @@ using Sirenix.Utilities;
 #else
 using DaftAppleGames.Attributes;
 #endif
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace DaftAppleGames.Darskerry.Editor.Characters
+namespace DaftAppleGames.TpCharacterController.Editor
 {
     [CreateAssetMenu(fileName = "AnimationMapping", menuName = "Daft Apple Games/Character/Animation Mapping", order = 1)]
     public class AnimationMappings : ScriptableObject
     {
-        [Header("Animator Settings")] public AnimatorController referenceController;
-        [Header("Animation Targets")] public AnimMapping[] animMappings;
+        [BoxGroup("Animator Settings")] public AnimatorController referenceController;
+        [BoxGroup("Animation Targets")] public AnimMapping[] animMappings;
 
         #region Public class methods
+
         public bool Validate(out List<string> validationErrors)
         {
             bool validationResult = true;
@@ -34,6 +33,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                     validationErrors.Add($"Animation Map is missing layer name: {currAnimMapping.AnimLabel}");
                     validationResult = false;
                 }
+
                 currAnimMapping.ApplyAnimSettings(referenceController, null, false, 0.0f, false);
             }
 
@@ -43,7 +43,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
         [Button("Sort")]
         public void Sort()
         {
-            // animMappings.Sort;
+            Array.Sort(animMappings);
         }
 
         public AnimatorController DuplicateController(string targetFileName)
@@ -61,8 +61,10 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             {
                 AssetDatabase.CopyAsset(sourcePath, targetPath);
             }
+
             return AssetDatabase.LoadAssetAtPath<AnimatorController>(targetPath);
         }
+
         #endregion
 
         [Serializable]
@@ -79,9 +81,24 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
 
             public string AnimLabel => $"{animationHeader}/{animationName}";
 
-            public override bool Equals(object obj) => this.Equals(obj as AnimMapping);
+            public int CompareTo(AnimMapping otherAnimMapping)
+            {
+                if (otherAnimMapping == null) return 1;
+
+                // Compare each property in the specified order
+                int comparison = string.Compare(animationHeader, otherAnimMapping.animationHeader, StringComparison.Ordinal);
+                if (comparison != 0) return comparison;
+                comparison = string.Compare(blendTreeName, otherAnimMapping.blendTreeName, StringComparison.Ordinal);
+                if (comparison != 0) return comparison;
+
+                // Finally, compare blendTreeIndex numerically
+                return blendTreeIndex.CompareTo(otherAnimMapping.blendTreeIndex);
+            }
+
+            public override bool Equals(object obj) => Equals(obj as AnimMapping);
 
             #region Equality overrides
+
             public bool Equals(AnimMapping animMapping)
             {
                 if (animMapping is null)
@@ -90,13 +107,13 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                 }
 
                 // Optimization for a common success case.
-                if (Object.ReferenceEquals(this, animMapping))
+                if (ReferenceEquals(this, animMapping))
                 {
                     return true;
                 }
 
                 // If run-time types are not exactly the same, return false.
-                if (this.GetType() != animMapping.GetType())
+                if (GetType() != animMapping.GetType())
                 {
                     return false;
                 }
@@ -127,8 +144,11 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             }
 
             public static bool operator !=(AnimMapping lhs, AnimMapping rhs) => !(lhs == rhs);
+
             #endregion
+
             #region Public class methods
+
             public void ApplyAnimSettings(AnimatorController animatorController,
                 AnimationClip animClip, bool mirrorAnim, float animSpeed, bool applyChanges)
             {
@@ -146,16 +166,15 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
 
                     if (applyChanges)
                     {
-
                         newMotions[blendTreeIndex].motion = animClip;
                         newMotions[blendTreeIndex].mirror = mirrorAnim;
                         if (animSpeed > 0)
                         {
                             newMotions[blendTreeIndex].timeScale = animSpeed;
                         }
+
                         blendTree.children = newMotions;
                     }
-
                 }
                 else
                 {
@@ -167,8 +186,11 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                     }
                 }
             }
+
             #endregion
+
             #region Animation controller helper methods
+
             private AnimatorState GetStateInController(AnimatorController animatorController)
             {
                 AnimatorControllerLayer layer = GetLayerByName(animatorController, layerName);
@@ -311,34 +333,6 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             {
                 EditorUtility.SetDirty(animatorController);
                 AssetDatabase.SaveAssets();
-            }
-
-            public int CompareTo(AnimMapping otherAnimMapping)
-            {
-                if (otherAnimMapping == null) return 1;
-
-                // Compare each property in the specified order
-                int comparison = string.Compare(this.animationHeader, otherAnimMapping.animationHeader, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-
-                /*
-                comparison = string.Compare(this.animationName, otherAnimMapping.animationName, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-
-                comparison = string.Compare(this.stateName, otherAnimMapping.stateName, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-
-                comparison = string.Compare(this.stateMachineName, otherAnimMapping.stateMachineName, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-
-                comparison = string.Compare(this.layerName, otherAnimMapping.layerName, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-                */
-                comparison = string.Compare(this.blendTreeName, otherAnimMapping.blendTreeName, StringComparison.Ordinal);
-                if (comparison != 0) return comparison;
-
-                // Finally, compare blendTreeIndex numerically
-                return this.blendTreeIndex.CompareTo(otherAnimMapping.blendTreeIndex);
             }
 
             #endregion

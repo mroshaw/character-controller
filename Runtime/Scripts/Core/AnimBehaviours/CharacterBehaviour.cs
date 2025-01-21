@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DaftAppleGames.TpCharacterController.AiController.AnimBehaviours
+namespace DaftAppleGames.TpCharacterController.AnimBehaviours
 {
     /// <summary>
     /// Base class for Character/Player based animation state behaviours
@@ -8,19 +8,28 @@ namespace DaftAppleGames.TpCharacterController.AiController.AnimBehaviours
     public abstract class CharacterBehaviour : StateMachineBehaviour
     {
         #region Class Variables
-        protected TpCharacter Character { get; private set; }
+
+        protected Character Character { get; private set; }
+        protected CharacterAbilities CharacterAbilities { get; private set; }
         protected AudioSource AudioSource { get; private set; }
+
+        protected bool HasAdditionalAbilities { get; private set; }
+
         #endregion
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (Character == null)
             {
-                Character = animator.GetComponent<TpCharacter>();
+                Character = animator.GetComponent<Character>();
 
                 if (!Character)
                 {
                     Debug.LogError($"No GameCharacter found on {animator.transform.root.gameObject.name}");
                 }
+
+                CharacterAbilities = Character.gameObject.GetComponent<CharacterAbilities>();
+                HasAdditionalAbilities = CharacterAbilities != null;
             }
 
             if (AudioSource == null)
@@ -30,7 +39,6 @@ namespace DaftAppleGames.TpCharacterController.AiController.AnimBehaviours
                 {
                     Debug.LogError($"No AudioSource found on {animator.transform.root.gameObject.name}");
                 }
-
             }
         }
     }

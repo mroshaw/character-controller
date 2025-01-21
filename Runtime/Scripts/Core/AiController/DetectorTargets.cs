@@ -21,9 +21,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 return false;
             }
+
             _targets.Add(detectorTarget.guid, detectorTarget);
             return true;
         }
+
         internal DetectorTarget AddTarget(string guid, GameObject target, float distance, string tagValue)
         {
             if (_targets.TryGetValue(guid, out DetectorTarget addTarget))
@@ -72,6 +74,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -87,6 +90,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     minTarget = entry;
                 }
             }
+
             return minTarget.Value;
         }
 
@@ -148,6 +152,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             {
                 return;
             }
+
             target.OnDistanceChanged += HandleDistanceChanged;
             _targets.Add(target);
             Sort();
@@ -203,6 +208,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [SerializeField] internal string tag;
 
         [SerializeField] private float distance;
+
         public float Distance
         {
             get => distance;

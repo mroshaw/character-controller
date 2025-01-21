@@ -10,7 +10,7 @@ public partial class StopMovementAction : AiBrainAction
 {
     protected override Status OnStart()
     {
-        if(!Init())
+        if (!Init())
         {
             return Status.Failure;
         }

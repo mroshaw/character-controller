@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71dc5af571104d4eaa4059a9b13994e, type: 3}
   m_Name: PlayerPreset
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  footstepPoolPrefab: {fileID: 0}
-  animPresets: {fileID: 0}
+  characterPrefab: {fileID: 5967676593939672407, guid: 283a0457ff8bbbb4f8824ccd6785e09b, type: 3}
+  cinemachinePrefab: {fileID: 7089791468290949790, guid: 374437dfeb7e9944daa9b8ee402b1b8d, type: 3}
+  footstepsPrefab: {fileID: 0}
+  animPresets: {fileID: 11400000, guid: 6a39d85352910d74ab15233b0419528f, type: 2}
   layer: Player
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049

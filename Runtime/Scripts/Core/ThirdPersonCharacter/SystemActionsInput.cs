@@ -15,10 +15,12 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
     {
         #region Class Variables
 
-        [BoxGroup("Events")][SerializeField] public UnityEvent pausePressedEvent;
+        [BoxGroup("Events")] [SerializeField] public UnityEvent pausePressedEvent;
+
         #endregion
 
         #region Startup
+
         private void OnEnable()
         {
             // StartCoroutine(RegisterWithInputManagerAsync());
@@ -44,9 +46,11 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
             PlayerInputManager.Instance.PlayerControls.SystemControls.Disable();
             PlayerInputManager.Instance.PlayerControls.SystemControls.RemoveCallbacks(this);
         }
+
         #endregion
 
         #region Input Callbacks
+
         public void OnPause(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -61,12 +65,12 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
             {
                 yield return null;
             }
+
             Debug.Log("SystemActionsInpt: Found PlayerCharacterInputManager!");
             PlayerInputManager.Instance.PlayerControls.SystemControls.Enable();
             PlayerInputManager.Instance.PlayerControls.SystemControls.SetCallbacks(this);
         }
 
         #endregion
-
     }
 }

@@ -37,7 +37,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
         /// <summary>
         /// Computes the average normal sampling a 3x3 area, each ray is a rayOffset distance of other.
         /// </summary>
-
         private Vector3 ComputeAverageNormal()
         {
             CharacterMovement characterMovement = _character.GetCharacterMovement();
@@ -75,7 +74,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                             if (drawRays)
                                 Debug.DrawRay(hitResult.point, hitResult.normal, Color.yellow);
 
-                            hitCount ++;
+                            hitCount++;
                         }
                     }
 

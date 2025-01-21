@@ -14,6 +14,7 @@ namespace DaftAppleGames.TpCharacterController.Spawning
     public class CharacterSpawnable : MonoBehaviour, ISpawnable
     {
         #region Class Variables
+
         [FoldoutGroup("Events")] public UnityEvent spawnEvent;
         [FoldoutGroup("Events")] public UnityEvent despawnEvent;
 
@@ -25,6 +26,7 @@ namespace DaftAppleGames.TpCharacterController.Spawning
         public Spawner Spawner { get; set; }
 
         #endregion
+
         #region Startup
 
         private void Awake()
@@ -34,7 +36,9 @@ namespace DaftAppleGames.TpCharacterController.Spawning
             _navMeshCharacter = GetComponent<NavMeshCharacter>();
             _behaviourGraphAgent = GetComponent<BehaviorGraphAgent>();
         }
+
         #endregion
+
         #region Class Methods
 
         public void PreSpawn()
@@ -67,6 +71,7 @@ namespace DaftAppleGames.TpCharacterController.Spawning
             _navMeshCharacter.enabled = true;
             _behaviourGraphAgent.enabled = true;
         }
+
         #endregion
     }
 }

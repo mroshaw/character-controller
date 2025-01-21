@@ -7,11 +7,14 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
     public class FootstepSurface : ScriptableObject
     {
         #region Class Variables
+
         [Header("Footstep Settings")]
         public bool spawnParticle;
+
         public bool spawnDecal;
         public string[] textureNames;
         public AudioClip[] audioClips;
+
         #endregion
 
         #region Class methods
@@ -20,6 +23,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         {
             return textureNames.Contains(textureName);
         }
+
         #endregion
     }
 }

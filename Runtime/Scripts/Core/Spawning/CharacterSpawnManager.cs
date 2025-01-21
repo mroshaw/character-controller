@@ -13,11 +13,14 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public class CharacterSpawnManager : Singleton<CharacterSpawnManager>
     {
         #region Class Variables
-        [BoxGroup("Spawners")][SerializeField] private List<CharacterSpawner> spawners;
+
+        [BoxGroup("Spawners")] [SerializeField] private List<CharacterSpawner> spawners;
         [FoldoutGroup("Events")] public UnityEvent playerSpawnedEvent;
+
         #endregion
 
         #region Startup
+
         public void RegisterNewSpawner(CharacterSpawner spawner)
         {
             if (spawners != null && !spawners.Contains(spawner))

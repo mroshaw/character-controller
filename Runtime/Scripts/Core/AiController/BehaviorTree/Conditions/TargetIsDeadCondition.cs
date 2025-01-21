@@ -10,12 +10,12 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
     {
         [SerializeReference] public BlackboardVariable<Transform> Target;
 
-        TpCharacter _character;
+        Character _character;
 
         public override void OnStart()
         {
             base.OnStart();
-            _character = Target.Value.GetComponent<TpCharacter>();
+            _character = Target.Value.GetComponent<Character>();
             if (!_character)
             {
                 Debug.LogError("Checking for Dead on a Target that has no GameCharacter attached");
@@ -24,7 +24,8 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
 
         public override bool IsTrue()
         {
-            return _character.IsDead();
+            return true;
+            // return _character.IsDead();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DaftAppleGames.Darskerry.Editor.Characters
+namespace DaftAppleGames.TpCharacterController.Editor
 {
     [CustomEditor(typeof(AnimationMappings))]
     public class AnimationMappingsEditor : UnityEditor.Editor
@@ -24,21 +24,16 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             {
                 return null;
             }
+
             _inspectorTree = new VisualElement();
             rootVisualElement.CloneTree(_inspectorTree);
 
             Button validateButton = _inspectorTree.Q<Button>("ValidateButton");
-            validateButton.RegisterCallback<ClickEvent>(evt =>
-            {
-                Validate();
-            });
+            validateButton.RegisterCallback<ClickEvent>(evt => { Validate(); });
 
 
             Button sortButton = _inspectorTree.Q<Button>("SortButton");
-            sortButton.RegisterCallback<ClickEvent>(evt =>
-            {
-                Sort();
-            });
+            sortButton.RegisterCallback<ClickEvent>(evt => { Sort(); });
 
             return _inspectorTree;
         }

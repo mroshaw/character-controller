@@ -29,6 +29,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
                 Target.Value = target.transform;
                 return true;
             }
+
             return false;
         }
     }

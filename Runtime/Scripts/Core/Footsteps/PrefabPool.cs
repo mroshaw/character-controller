@@ -10,18 +10,26 @@ using UnityEngine.Pool;
 
 namespace DaftAppleGames.TpCharacterController.FootSteps
 {
-    public enum PrefabPoolType { FootstepMarks, FootstepParticles, AiCharacter };
+    public enum PrefabPoolType
+    {
+        FootstepMarks,
+        FootstepParticles,
+        AiCharacter
+    };
 
     public class PrefabPool : MonoBehaviour
     {
         #region Class Variables
-        [BoxGroup("Prefab Settings")][SerializeField] private PrefabPoolType prefabPoolType;
+
+        [BoxGroup("Prefab Settings")] [SerializeField] private PrefabPoolType prefabPoolType;
         [BoxGroup("Prefab Settings")] [SerializeField] private bool destroyAfterDelay = true;
-        [ShowIf("destroyAfterDelay")] [BoxGroup("Prefab Settings")][SerializeField] private float lifeTimeInSeconds;
-        [BoxGroup("Prefab Settings")][SerializeField] private GameObject poolPrefab;
-        [BoxGroup("Prefab Settings")][SerializeField] private Transform instanceContainer;
-        [BoxGroup("Pool Settings")][SerializeField] internal int poolMaxSize = 5;
-        [BoxGroup("Pool Settings")][SerializeField] internal int poolInitialSize = 10;
+        [ShowIf("destroyAfterDelay")] [BoxGroup("Prefab Settings")] [SerializeField] private float lifeTimeInSeconds;
+        [BoxGroup("Prefab Settings")] [SerializeField] private GameObject poolPrefab;
+        [BoxGroup("Prefab Settings")] [SerializeField] private Transform instanceContainer;
+        [BoxGroup("Pool Settings")] [SerializeField] internal int poolMaxSize = 5;
+
+        [BoxGroup("Pool Settings")] [SerializeField] internal int poolInitialSize = 10;
+
         /*
         [BoxGroup("DEBUG")][SerializeField] private int poolActiveCountDebug;
         [BoxGroup("DEBUG")][SerializeField] private int poolInactiveCountDebug;
@@ -34,6 +42,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #endregion
 
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -43,9 +52,11 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
                 PrefabInstanceOnReturnToPool, PrefabInstanceOnDestroyPoolObject, false,
                 poolInitialSize, poolMaxSize);
         }
+
         #endregion
 
         #region Update
+
         /*
         private void Update()
         {
@@ -54,8 +65,11 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         }
 
         */
+
         #endregion
+
         #region Class methods
+
         public GameObject SpawnInstance(Vector3 spawnPosition, Quaternion spawnRotation)
         {
             GameObject prefabInstance = _prefabInstancePool.Get();
@@ -65,6 +79,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             {
                 StartCoroutine(ReturnToPoolAfterDelay(prefabInstance));
             }
+
             return prefabInstance;
         }
 
@@ -107,6 +122,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         {
             Destroy(prefabInstance);
         }
+
         #endregion
     }
 }

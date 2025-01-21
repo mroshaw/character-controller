@@ -11,20 +11,24 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public class NpcSpawner : CharacterSpawner
     {
         #region Class Variables
+
         [PropertyOrder(10)]
         [FoldoutGroup("Events")] public UnityEvent NpcReadyEvent;
 
-        [PropertyOrder(99)][FoldoutGroup("DEBUG")][SerializeField] private GameObject npcTestObject;
+        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject npcTestObject;
 
         NpcSpawnerSettings _npcSpawnerSettings;
+
         #endregion
 
         #region Startup
+
         protected override void Awake()
         {
             base.Awake();
             _npcSpawnerSettings = spawnSettings as NpcSpawnerSettings;
         }
+
         #endregion
 
         #region Class Methods
@@ -45,6 +49,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         {
             base.SetSpawnsActive();
         }
+
         #endregion
     }
 }

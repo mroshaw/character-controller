@@ -1,16 +1,22 @@
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
+#else
+using DaftAppleGames.Attributes;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
 
-namespace DaftAppleGames.Darskerry.Editor.Characters
+namespace DaftAppleGames.TpCharacterController.Editor
 {
     [CreateAssetMenu(fileName = "AnimationPreset", menuName = "Daft Apple Games/Character/Animation Presets", order = 1)]
     public class AnimationPresets : ScriptableObject
     {
-        [Header("Animation Targets")] public AnimationMappings animMappings;
-        [Header("Animation Mapping")] public AnimPreset[] animPresets;
+        [BoxGroup("Animation Targets")] public AnimationMappings animMappings;
+        [BoxGroup("Animation Mapping")] public AnimPreset[] animPresets;
 
         public void UpdateMappings()
         {
@@ -28,6 +34,13 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             animPresets = tempAnimMappingList.ToArray();
         }
 
+
+        [Button("Sort")]
+        public void Sort()
+        {
+            Array.Sort(animPresets);
+        }
+
         private bool DoesTargetExist(AnimationMappings.AnimMapping animMapping)
         {
             foreach (AnimPreset currAnimMapping in animPresets)
@@ -37,6 +50,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -83,12 +97,12 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                     validationResult = false;
                 }
             }
-            return validationResult;
 
+            return validationResult;
         }
 
         [Serializable]
-        public class AnimPreset
+        public class AnimPreset : IComparable<AnimPreset>
         {
             public AnimationClip animClip;
             public bool mirrorAnimation;
@@ -112,6 +126,21 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                 mirrorAnimation = false;
                 animSpeed = 1.0f;
             }
+
+            public int CompareTo(AnimPreset otherAnimPreset)
+            {
+                if (otherAnimPreset == null) return 1;
+
+                // Compare each property in the specified order
+                int comparison = string.Compare(animMapping.animationHeader, otherAnimPreset.animMapping.animationHeader, StringComparison.Ordinal);
+                if (comparison != 0) return comparison;
+                comparison = string.Compare(animMapping.blendTreeName, otherAnimPreset.animMapping.blendTreeName, StringComparison.Ordinal);
+                if (comparison != 0) return comparison;
+
+                // Finally, compare blendTreeIndex numerically
+                return animMapping.blendTreeIndex.CompareTo(otherAnimPreset.animMapping.blendTreeIndex);
+            }
+
             public void UpdateInController(AnimatorController animatorController)
             {
                 if (animMapping == null)
@@ -125,6 +154,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                     Debug.LogError($"CharacterAnimationSettings: AnimClip is empty on: {animMapping.AnimLabel}");
                     return;
                 }
+
                 animMapping.ApplyAnimSettings(animatorController, animClip, mirrorAnimation, animSpeed, true);
             }
         }

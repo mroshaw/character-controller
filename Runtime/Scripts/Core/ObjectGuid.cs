@@ -28,7 +28,6 @@ namespace DaftAppleGames.TpCharacterController
                 _guid = System.Guid.NewGuid().ToString();
                 guid = _guid;
             }
-
         }
     }
 }

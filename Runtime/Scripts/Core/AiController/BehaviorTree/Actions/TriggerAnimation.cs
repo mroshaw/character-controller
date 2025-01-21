@@ -13,10 +13,11 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
 
         protected override Status OnStart()
         {
-            if(!Init())
+            if (!Init())
             {
                 return Status.Failure;
             }
+
             AiBrain.Animator.SetTrigger(Trigger.Value);
             return Status.Success;
         }

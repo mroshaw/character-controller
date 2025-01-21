@@ -14,20 +14,22 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Class Fields
 
         [BoxGroup("Settings")] [Tooltip("The range of this detector, presented as a sphere around the gameObject transform.")] [SerializeField] protected float detectorRange;
-        [BoxGroup("Settings")] [Tooltip("The number of frames to wait before refreshing the detector targets. Balance this between accuracy and performance.")] [SerializeField] public float refreshFrequency = 5.0f;
+
+        [BoxGroup("Settings")] [Tooltip("The number of frames to wait before refreshing the detector targets. Balance this between accuracy and performance.")]
+        [SerializeField] public float refreshFrequency = 5.0f;
 
 #if UNITY_EDITOR
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] protected bool drawGizmos = true;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] protected Color gizmoColor1 = Color.yellow;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] protected Color gizmoColor2 = Color.green;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] protected bool drawGizmos = true;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] protected Color gizmoColor1 = Color.yellow;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] protected Color gizmoColor2 = Color.green;
 #endif
 
         internal LayerMask DetectionLayerMask { get; set; }
         internal string[] DetectionTags { get; set; }
         internal int DetectionBufferSize { get; set; }
 
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<DetectorTarget> newTargetDetectedEvent;
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<DetectorTarget> targetLostEvent;
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<DetectorTarget> newTargetDetectedEvent;
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<DetectorTarget> targetLostEvent;
 
         protected DetectorTargets DetectedTargets;
 
@@ -37,6 +39,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         protected internal abstract void CheckForTargets(bool triggerEvents);
         protected internal abstract DetectorTarget GetClosestTarget();
+
         #endregion
 
         #region Class Methods
@@ -104,7 +107,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             }
         }
 #endif
-        #endregion
 
+        #endregion
     }
 }

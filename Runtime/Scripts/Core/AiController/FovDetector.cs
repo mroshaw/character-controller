@@ -9,26 +9,35 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 #endif
+
 namespace DaftAppleGames.TpCharacterController.AiController
 {
     internal class FovDetector : ProximityDetector
     {
         #region Class Variables
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("Objects on these layers will block vision.")][SerializeField] private LayerMask blockedLayerMask;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("Vision cone will be projected from the eyes transform.")][SerializeField] private Transform eyesTransform;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("Only objects within this distance are added to the target list")][SerializeField] private float visionSensorRange = 5;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("The angle 'sweep' of the vision sensor.")][SerializeField] private float visionSensorAngle = 170.0f;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("Objects on these layers will block vision.")] [SerializeField] private LayerMask blockedLayerMask;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("Vision cone will be projected from the eyes transform.")]
+        [SerializeField] private Transform eyesTransform;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("Only objects within this distance are added to the target list")]
+        [SerializeField] private float visionSensorRange = 5;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("The angle 'sweep' of the vision sensor.")] [SerializeField] private float visionSensorAngle = 170.0f;
 
 #if UNITY_EDITOR
         [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private bool drawLineOfSightRay;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private int visionConeGizmoResolution = 50;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private int visionConeGizmoResolution = 50;
 #endif
 
         [BoxGroup("Debug")] [ShowInInspector] private DetectorTargets _visibleTargets;
         private RaycastHit[] _rayHitsBuffer;
 
         #endregion
+
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -39,7 +48,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
             _rayHitsBuffer = new RaycastHit[DetectionBufferSize];
         }
+
         #endregion
+
         #region Class methods
 
         protected internal override void CheckForTargets(bool triggerEvents)
@@ -68,7 +79,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
             // If target drops out of the detection range of hte base proximity detector, drop it from the list
             _visibleTargets.RemoveTarget(lostTarget.guid);
             base.TargetLost(lostTarget, true);
-
         }
 
         private void CheckForVisibleTargets()
@@ -76,7 +86,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
             // Loop through the 'proximity' game objects, and see if any are within range, within the FOV angle, and not behind any blocking layers
             foreach (KeyValuePair<string, DetectorTarget> currTarget in DetectedTargets)
             {
-                if (GetDistanceToTarget(currTarget.Value.targetObject) < visionSensorRange && GetAngleToTarget(currTarget.Value.targetObject) < visionSensorAngle / 2 && CanSeeTarget(currTarget.Value.targetObject))
+                if (GetDistanceToTarget(currTarget.Value.targetObject) < visionSensorRange && GetAngleToTarget(currTarget.Value.targetObject) < visionSensorAngle / 2 &&
+                    CanSeeTarget(currTarget.Value.targetObject))
                 {
                     // Add the target, if it's not already there
                     if (_visibleTargets.AddTarget(currTarget.Value))
@@ -124,7 +135,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
         }
 
         #endregion
+
         #region Editor methods
+
 #if UNITY_EDITOR
 
         protected override void DrawGizmos()
@@ -134,6 +147,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             GizmoTools.DrawConeGizmo(eyesTransform, visionSensorAngle, visionSensorRange, gizmoColor2, visionConeGizmoResolution);
         }
 #endif
+
         #endregion
     }
 }

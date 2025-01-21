@@ -14,9 +14,10 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
         private float _progress = 0.0f;
         private Quaternion m_StartRotation;
         private Quaternion m_EndRotation;
+
         protected override Status OnStart()
         {
-            if(!Init())
+            if (!Init())
             {
                 return Status.Failure;
             }

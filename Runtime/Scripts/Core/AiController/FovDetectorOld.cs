@@ -11,36 +11,59 @@ using UnityEngine.Events;
 
 #if UNITY_EDITOR
 #endif
+
 namespace DaftAppleGames.TpCharacterController.AiController
 {
     public class FovDetectorOld : MonoBehaviour
     {
         #region Class Variables
-        [PropertyOrder(1)][BoxGroup("Sensor Configuration")][Tooltip("Only GameObjects in these layers will be detected.")][SerializeField] protected LayerMask detectionLayerMask;
-        [PropertyOrder(1)][BoxGroup("Sensor Configuration")][Tooltip("Only GameObjects with this tag will be detected.")][SerializeField][TagSelector] protected string detectionTag;
-        [PropertyOrder(1)][BoxGroup("Sensor Configuration")][Tooltip("Maximum number of GameObjects that can be detected by the OverlapSphere. Used to avoid GC.")][SerializeField] private int detectionBufferSize = 20;
-        [PropertyOrder(1)][BoxGroup("Aware Sensor Configuration")][Tooltip("An GameObject that is within the OverlapSphere of this radius will be added to the 'awareObjects' list")][SerializeField] private float awareSensorRange = 15;
-        [PropertyOrder(1)][BoxGroup("Aware Sensor Configuration")][Tooltip("The frequency with which the 'awareness' OverlapSphere is cast. Smaller number for greater accuracy, larger for better performance.")][SerializeField] private int awareCheckFrequencyFrames = 5;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("Objects on these layers will block vision.")][SerializeField] private LayerMask blockedLayerMask;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("Vision cone will be projected from the eyes transform.")][SerializeField] private Transform eyesTransform;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("When a GameObject is in the 'awareObjects' list, a vision cone is cast at this range. If hit, the GameObject is added to the 'seeObjects' list")][SerializeField] private float visionSensorRange = 5;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("The angle 'sweep' of the vision sensor.")][SerializeField] private float visionSensorAngle = 170.0f;
-        [PropertyOrder(1)][BoxGroup("Vision Sensor Configuration")][Tooltip("The frequency with which the vision cone is cast. Smaller number for greater accuracy, larger for better performance.")][SerializeField] private int visionCheckFrequencyFrames = 5;
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<GameObject> visionDetectedEvent;
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<GameObject> visionLostEvent;
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<GameObject> awareDetectedEvent;
-        [PropertyOrder(2)][FoldoutGroup("Events")] public UnityEvent<GameObject> awareLostEvent;
 
-        [PropertyOrder(4)][BoxGroup("Debug")][SerializeField] protected bool debugEnabled = true;
-        [PropertyOrder(4)][BoxGroup("Debug")][SerializeField] private GameObject[] awareGameObjectsDebug;
-        [PropertyOrder(4)][BoxGroup("Debug")][SerializeField] private GameObject[] visionGameObjectsDebug;
+        [PropertyOrder(1)] [BoxGroup("Sensor Configuration")] [Tooltip("Only GameObjects in these layers will be detected.")]
+        [SerializeField] protected LayerMask detectionLayerMask;
+
+        [PropertyOrder(1)] [BoxGroup("Sensor Configuration")] [Tooltip("Only GameObjects with this tag will be detected.")] [SerializeField]
+        [TagSelector] protected string detectionTag;
+
+        [PropertyOrder(1)] [BoxGroup("Sensor Configuration")] [Tooltip("Maximum number of GameObjects that can be detected by the OverlapSphere. Used to avoid GC.")]
+        [SerializeField] private int detectionBufferSize = 20;
+
+        [PropertyOrder(1)] [BoxGroup("Aware Sensor Configuration")]
+        [Tooltip("An GameObject that is within the OverlapSphere of this radius will be added to the 'awareObjects' list")] [SerializeField] private float awareSensorRange = 15;
+
+        [PropertyOrder(1)] [BoxGroup("Aware Sensor Configuration")]
+        [Tooltip("The frequency with which the 'awareness' OverlapSphere is cast. Smaller number for greater accuracy, larger for better performance.")]
+        [SerializeField] private int awareCheckFrequencyFrames = 5;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("Objects on these layers will block vision.")] [SerializeField] private LayerMask blockedLayerMask;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("Vision cone will be projected from the eyes transform.")]
+        [SerializeField] private Transform eyesTransform;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")]
+        [Tooltip("When a GameObject is in the 'awareObjects' list, a vision cone is cast at this range. If hit, the GameObject is added to the 'seeObjects' list")]
+        [SerializeField] private float visionSensorRange = 5;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")] [Tooltip("The angle 'sweep' of the vision sensor.")] [SerializeField] private float visionSensorAngle = 170.0f;
+
+        [PropertyOrder(1)] [BoxGroup("Vision Sensor Configuration")]
+        [Tooltip("The frequency with which the vision cone is cast. Smaller number for greater accuracy, larger for better performance.")]
+        [SerializeField] private int visionCheckFrequencyFrames = 5;
+
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<GameObject> visionDetectedEvent;
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<GameObject> visionLostEvent;
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<GameObject> awareDetectedEvent;
+        [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<GameObject> awareLostEvent;
+
+        [PropertyOrder(4)] [BoxGroup("Debug")] [SerializeField] protected bool debugEnabled = true;
+        [PropertyOrder(4)] [BoxGroup("Debug")] [SerializeField] private GameObject[] awareGameObjectsDebug;
+        [PropertyOrder(4)] [BoxGroup("Debug")] [SerializeField] private GameObject[] visionGameObjectsDebug;
 
 #if UNITY_EDITOR
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private bool drawVisionSphereGizmo = true;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private Color visionConeGizmoColor = Color.red;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private int visionConeGizmoResolution = 50;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private bool drawAwareSphereGizmo = true;
-        [PropertyOrder(3)][FoldoutGroup("Gizmos")][SerializeField] private Color awareSphereGizmoColor = Color.yellow;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private bool drawVisionSphereGizmo = true;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private Color visionConeGizmoColor = Color.red;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private int visionConeGizmoResolution = 50;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private bool drawAwareSphereGizmo = true;
+        [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] private Color awareSphereGizmoColor = Color.yellow;
 #endif
 
         // private Dictionary<string, GameObject> _visionGameObjectsDict;
@@ -56,8 +79,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         private bool _isAwareOfTargets;
         private bool _canSeeTargets;
+
         #endregion
+
         #region Startup
+
         /// <summary>
         /// Configure the component on awake
         /// </summary>   
@@ -73,8 +99,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
             // _visionGameObjectsDistanceDict = new Dictionary<float, string>();
             _detectedBuffer = new Collider[detectionBufferSize];
         }
+
         #endregion
+
         #region Update Logic
+
         protected void Update()
         {
             if (!_canSeeTargets && Time.frameCount % awareCheckFrequencyFrames == 0)
@@ -90,7 +119,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 _canSeeTargets = _visionTargets.HasTargets();
             }
         }
+
         #endregion
+
         #region Class methods
 
         // Can the detector currently see any targets at all?
@@ -129,7 +160,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
             // Loop through the 'aware' game objects, and see if any are within range, within the FOV angle, and not behind any blocking layers
             foreach (KeyValuePair<string, DetectorTarget> currTarget in _awareTargets)
             {
-                if (GetDistanceToTarget(currTarget.Value.targetObject) < visionSensorRange && GetAngleToTarget(currTarget.Value.targetObject) < visionSensorAngle / 2 && CanSeeTarget(currTarget.Value.targetObject))
+                if (GetDistanceToTarget(currTarget.Value.targetObject) < visionSensorRange && GetAngleToTarget(currTarget.Value.targetObject) < visionSensorAngle / 2 &&
+                    CanSeeTarget(currTarget.Value.targetObject))
                 {
                     _detectedBuffer[detectedBufferIndex] = currTarget.Value.targetObject.GetComponent<Collider>();
                     detectedBufferIndex++;
@@ -150,7 +182,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
             }
         }
 
-        private void UpdateTargetDict(Collider[] detectedColliders, int numberDetected, ref DetectorTargets currentTargets, Action<GameObject> targetAddedDelegate, Action<GameObject> targetLostDelegate)
+        private void UpdateTargetDict(Collider[] detectedColliders, int numberDetected, ref DetectorTargets currentTargets, Action<GameObject> targetAddedDelegate,
+            Action<GameObject> targetLostDelegate)
         {
             _existingGuidsBuffer.Clear();
 
@@ -173,6 +206,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     }
                 }
             }
+
             // Check to see if there are any objects in the 'aware dictionary' that are no longer in the alert list
             List<string> keysToRemove = new List<string>();
             foreach (KeyValuePair<string, DetectorTarget> currTarget in currentTargets)
@@ -279,7 +313,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
         }
 
         #endregion
+
         #region Editor methods
+
 #if UNITY_EDITOR
         protected void OnDrawGizmosSelected()
         {
@@ -297,6 +333,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             }
         }
 #endif
+
         #endregion
     }
 }

@@ -9,6 +9,7 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
 
         [Header("Character Audio Settings")]
         [SerializeField] private AudioClip[] jumpAudioClips;
+
         [SerializeField] private AudioClip[] effortAudioClips;
         [SerializeField] private AudioClip[] hitAudioClips;
         [SerializeField] private AudioClip[] attackAudioClips;
@@ -20,13 +21,16 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
         [SerializeField] private AudioClip[] groundThudAudioClips;
 
         private AudioSource _audioSource;
+
         #endregion
 
         #region Startup
+
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
         }
+
         #endregion
 
         #region Class Methods
@@ -77,11 +81,12 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
             {
                 return null;
             }
+
             System.Random randomClipRand = new System.Random();
             int randomIndex = randomClipRand.Next(0, audioClipArray.Length);
             return audioClipArray[randomIndex];
-
         }
+
         #endregion
     }
 }

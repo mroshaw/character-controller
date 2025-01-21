@@ -7,13 +7,13 @@ using DaftAppleGames.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace DaftAppleGames.Darskerry.Editor.Characters
+namespace DaftAppleGames.TpCharacterController.Editor
 {
-    #if ODIN_INSPECTOR
+#if ODIN_INSPECTOR
     public class CleanCharacterScriptsWindow : OdinEditorWindow
-    #else
+#else
     public class CleanCharacterScriptsWindow : EditorWindow
-    #endif
+#endif
     {
         [MenuItem("Daft Apple Games/Characters/Clean Character Scripts")]
         public static void ShowWindow()
@@ -32,20 +32,20 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             selectedGameObject = Selection.gameObjects;
         }
 
-        #if ODIN_INSPECTOR
+#if ODIN_INSPECTOR
         [Button("Clean Scripts", ButtonSizes.Large), GUIColor(0, 1, 0)]
-        #else
+#else
         [Button("Clean Scripts")]
-        #endif
+#endif
         private void CleanScripts()
         {
-            foreach(GameObject currGameObject in selectedGameObject)
+            foreach (GameObject currGameObject in selectedGameObject)
             {
                 RemoveScripts(currGameObject);
             }
         }
 
-        #if PHYSIC_BONES
+#if PHYSIC_BONES
         private void RemovePhysicBonesScripts(GameObject currGameObject)
         {
             // Physics Bone
@@ -77,7 +77,7 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
             }
 
         }
-        #endif
+#endif
 
         private void RemoveScripts(GameObject currGameObject)
         {
@@ -94,9 +94,9 @@ namespace DaftAppleGames.Darskerry.Editor.Characters
                 instance = currGameObject;
             }
 
-            #if PHYSIC_BONES
+#if PHYSIC_BONES
             RemovePhysicBonesScripts(instance);
-            #endif
+#endif
 
             // Animator
             Animator[] animators = instance.GetComponentsInChildren<Animator>(true);

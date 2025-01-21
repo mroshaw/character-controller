@@ -17,6 +17,7 @@ namespace DaftAppleGames.TpCharacterController
 #if UNITY_EDITOR
         [BoxGroup("Debug")] [SerializeField] private NoiseEmitter[] noiseEmitters;
 #endif
+
         #endregion
 
         #region Update methods
@@ -31,9 +32,11 @@ namespace DaftAppleGames.TpCharacterController
 
             noiseLevel -= Time.deltaTime / fadeDuration;
         }
+
         #endregion
 
         #region Class methods
+
         public void MakeNoise(float noiseHeard)
         {
             this.noiseLevel = Math.Max(this.noiseLevel, noiseHeard);
@@ -43,8 +46,11 @@ namespace DaftAppleGames.TpCharacterController
         {
             return noiseLevel;
         }
+
         #endregion
+
         #region Editor methods
+
 #if UNITY_EDITOR
         [Button("Refresh Noise Emitters")]
         private void RefreshEmitters()
@@ -52,6 +58,7 @@ namespace DaftAppleGames.TpCharacterController
             noiseEmitters = GetComponentsInChildren<NoiseEmitter>(true);
         }
 #endif
+
         #endregion
     }
 }

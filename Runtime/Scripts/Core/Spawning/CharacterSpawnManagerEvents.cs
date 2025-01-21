@@ -11,13 +11,16 @@ namespace DaftAppleGames.TpCharacterController.AiController
     public class CharacterSpawnManagerEvents : MonoBehaviour
     {
         #region Class Variables
+
         [FoldoutGroup("Player Events")] public UnityEvent PlayerSpawnedEvent;
         [FoldoutGroup("NPC Events")] public UnityEvent NPCSpawnedEvent;
         [FoldoutGroup("Enemy Events")] public UnityEvent EnemySpawnedEvent;
         [FoldoutGroup("Animal Events")] public UnityEvent AnimalSpawnedEvent;
+
         #endregion
 
         #region Start
+
         private void OnEnable()
         {
             if (!CharacterSpawnManager.Instance)
@@ -39,15 +42,17 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         private void Start()
         {
-
         }
+
         #endregion
 
         #region Class Methods
+
         private void PlayerSpawnedProxy()
         {
             PlayerSpawnedEvent.Invoke();
         }
+
         #endregion
     }
 }

@@ -11,8 +11,9 @@ namespace DaftAppleGames.TpCharacterController.AiController
 {
     public class NavMeshSplineManager : MonoBehaviour
     {
-         #region Editor methods
-        #if UNITY_EDITOR
+        #region Editor methods
+
+#if UNITY_EDITOR
         [Button("Refresh All Modifiers")]
         private void RefreshAllModifiers()
         {
@@ -26,12 +27,13 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         internal static void RefreshNavMeshSurfaces()
         {
-            foreach(NavMeshSurface surface in FindObjectsByType<NavMeshSurface>(FindObjectsSortMode.None))
+            foreach (NavMeshSurface surface in FindObjectsByType<NavMeshSurface>(FindObjectsSortMode.None))
             {
                 surface.BuildNavMesh();
             }
         }
 #endif
+
         #endregion
     }
 }
