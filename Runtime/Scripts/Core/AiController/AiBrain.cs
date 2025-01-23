@@ -29,24 +29,24 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Class Variables
 
         [BoxGroup("Patrol Settings")] [SerializeField] private PatrolRoute patrolRoute;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolSpeed;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolRotationRate;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMinPause;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMaxPause;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolSpeed = 0.2f;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolRotationRate = 40.0f;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMinPause = 5.0f;
+        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMaxPause = 15.0f;
 
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderSpeed;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderRotationRate;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinRange;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxRange;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinPause;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxPause;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderSpeed = 0.2f;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderRotationRate = 40.0f;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinRange = 20.0f;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxRange = 60.0f;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinPause = 0.0f;
+        [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxPause = 10.0f;
         [BoxGroup("Wander Settings")] [SerializeField] private Transform wanderCenterTransform;
 
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeSpeed;
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRotationRate;
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMinRange;
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMaxRange;
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRestTime;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeSpeed = 0.9f;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRotationRate = 80.0f;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMinRange = 20.0f;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeMaxRange = 30.0f;
+        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRestTime = 30.0f;
 
         [BoxGroup("Needs")] [SerializeField] private float startingThirst = 100.0f;
         [BoxGroup("Needs")] [SerializeField] private float thirstRate = 0.01f;
@@ -61,7 +61,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Properties
 
         public NavMeshCharacter NavMeshCharacter { get; private set; }
-        public ThirdPersonCharacter TpCharacter { get; private set; }
+        public Character Character { get; private set; }
         public DetectorManager DetectorManager { get; private set; }
         public Animator Animator { get; private set; }
         public AiState AiState { get; private set; }
@@ -73,7 +73,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
         protected virtual void Awake()
         {
             NavMeshCharacter = GetComponent<NavMeshCharacter>();
-            TpCharacter = GetComponent<ThirdPersonCharacter>();
+            Character = GetComponent<Character>();
             DetectorManager = GetComponent<DetectorManager>();
             Animator = GetComponent<Animator>();
 
@@ -114,12 +114,12 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         public void SetMoveSpeed(float speed)
         {
-            TpCharacter.maxWalkSpeed = speed;
+            Character.maxWalkSpeed = speed;
         }
 
         public void SetRotationRate(float rotateRate)
         {
-            TpCharacter.rotationRate = rotateRate;
+            Character.rotationRate = rotateRate;
         }
 
         public bool HasArrived()

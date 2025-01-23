@@ -10,7 +10,7 @@ namespace DaftAppleGames.TpCharacterController
     public class CharacterAbilities : MonoBehaviour
     {
         [BoxGroup("Sprinting")] public float maxSprintSpeed = 10.0f;
-        [BoxGroup("Rolling")] public float rollSpeed = 5.0f;
+        [BoxGroup("Rolling")] public float minRollSpeed = 5.0f;
         [BoxGroup("Attack")] public float attackDamage = 5.0f;
 
         private Character _character;
@@ -25,7 +25,8 @@ namespace DaftAppleGames.TpCharacterController
         private bool _attackInputPressed;
         private bool _interactInputPressed;
         private float _cachedMaxWalkSpeed;
-
+        private float _cachedRollSpeed;
+        public float CachedRollSpeed => _cachedRollSpeed;
         /// <summary>
         /// Request the character to start to sprint.
         /// </summary>
@@ -60,6 +61,11 @@ namespace DaftAppleGames.TpCharacterController
         public void StopRolling()
         {
             _rollInputPressed = false;
+        }
+
+        public void RollComplete()
+        {
+            _isRolling = false;
         }
 
         public void StopAttacking()
@@ -108,6 +114,13 @@ namespace DaftAppleGames.TpCharacterController
             return _character.IsWalking() || _character.IsCrouched();
         }
 
+        private bool DoRoll()
+        {
+            _rollInputPressed = false;
+            _cachedRollSpeed = _character.GetMovementDirection().magnitude;
+            return true;
+        }
+
         private bool CanAttack()
         {
             return _character.IsWalking();
@@ -140,15 +153,15 @@ namespace DaftAppleGames.TpCharacterController
 
         private void CheckRollInput()
         {
-            if (!_isRolling && _rollInputPressed && CanRoll())
+            if (!_rollInputPressed)
             {
-                // Disable Root Motion
-                _isRolling = true;
+                return;
             }
-            else if (_isRolling && (!_rollInputPressed || !CanRoll()))
+
+            bool didRoll = CanRoll() && DoRoll();
+            if(didRoll)
             {
-                // Enable Root Motion
-                _isRolling = false;
+                _isRolling = true;
             }
         }
 

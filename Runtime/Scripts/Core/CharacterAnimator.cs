@@ -16,7 +16,7 @@ namespace DaftAppleGames.TpCharacterController
         private static readonly int Attack = Animator.StringToHash("Attack");
 
         // Cached Character
-        private ThirdPersonCharacter ThirdPersonCharacter { get; set; }
+        private Character Character { get; set; }
         private CharacterAbilities CharacterAbilities { get; set; }
         private Animator Animator { get; set; }
         private float ForwardAmount { get; set; }
@@ -26,35 +26,36 @@ namespace DaftAppleGames.TpCharacterController
 
         protected virtual void Awake()
         {
-            // Cache our Character
-            ThirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-            CharacterAbilities = GetComponent<CharacterAbilities>();
-            _hasAdditionalAbilities = CharacterAbilities != null;
+
         }
 
         protected virtual void Start()
         {
+            // Cache our Character
+            Character = GetComponent<Character>();
             // Get Character animator
-            Animator = ThirdPersonCharacter.GetAnimator();
+            Animator = Character.GetAnimator();
+            CharacterAbilities = GetComponent<CharacterAbilities>();
+            _hasAdditionalAbilities = CharacterAbilities != null;
         }
 
         protected virtual void Update()
         {
             float deltaTime = Time.deltaTime;
             // Compute input move vector in local space
-            MoveDirection = transform.InverseTransformDirection(ThirdPersonCharacter.GetMovementDirection());
+            MoveDirection = transform.InverseTransformDirection(Character.GetMovementDirection());
 
             // Update the animator parameters
-            ForwardAmount = ThirdPersonCharacter.useRootMotion && ThirdPersonCharacter.GetRootMotionController()
+            ForwardAmount = Character.useRootMotion && Character.GetRootMotionController()
                 ? MoveDirection.z
-                : Mathf.InverseLerp(0.0f, ThirdPersonCharacter.GetMaxSpeed(), ThirdPersonCharacter.GetSpeed());
+                : Mathf.InverseLerp(0.0f, Character.GetMaxSpeed(), Character.GetSpeed());
 
             Animator.SetFloat(Forward, ForwardAmount, 0.1f, deltaTime);
             Animator.SetFloat(Turn, Mathf.Atan2(MoveDirection.x, MoveDirection.z), 0.1f, deltaTime);
-            Animator.SetBool(Ground, ThirdPersonCharacter.IsGrounded());
+            Animator.SetBool(Ground, Character.IsGrounded());
 
-            Animator.SetBool(Crouch, ThirdPersonCharacter.IsCrouched());
-            Animator.SetBool(Swimming, ThirdPersonCharacter.IsSwimming());
+            Animator.SetBool(Crouch, Character.IsCrouched());
+            Animator.SetBool(Swimming, Character.IsSwimming());
 
             if (_hasAdditionalAbilities)
             {
@@ -68,14 +69,14 @@ namespace DaftAppleGames.TpCharacterController
             float runCycle = Mathf.Repeat(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + 0.2f, 1.0f);
             float jumpLeg = (runCycle < 0.5f ? 1.0f : -1.0f) * ForwardAmount;
 
-            if (ThirdPersonCharacter.IsGrounded())
+            if (Character.IsGrounded())
             {
                 Animator.SetFloat(JumpLeg, jumpLeg);
             }
 
-            if (ThirdPersonCharacter.IsFalling())
+            if (Character.IsFalling())
             {
-                Animator.SetFloat(Jump, ThirdPersonCharacter.GetVelocity().y, 0.1f, deltaTime);
+                Animator.SetFloat(Jump, Character.GetVelocity().y, 0.1f, deltaTime);
             }
         }
     }

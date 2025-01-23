@@ -12,13 +12,13 @@ namespace DaftAppleGames.TpCharacterController.Editor
 #if ODIN_INSPECTOR
     public class CleanCharacterScriptsWindow : OdinEditorWindow
 #else
-    public class CleanCharacterScriptsWindow : EditorWindow
+    public class CleanCharacterScriptsEditorWindow : EditorWindow
 #endif
     {
         [MenuItem("Daft Apple Games/Characters/Clean Character Scripts")]
         public static void ShowWindow()
         {
-            GetWindow(typeof(CleanCharacterScriptsWindow));
+            GetWindow(typeof(CleanCharacterScriptsEditorWindow));
         }
 
         [SerializeField] private bool disableInsteadOfDestroyCore = false;

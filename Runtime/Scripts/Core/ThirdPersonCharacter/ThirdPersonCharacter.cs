@@ -44,7 +44,10 @@ namespace DaftAppleGames.TpCharacterController
         /// </summary>
         public void AddControlYawInput(float value, float minValue = -180.0f, float maxValue = 180.0f)
         {
-            if (value != 0.0f) _cameraTargetYaw = MathLib.ClampAngle(_cameraTargetYaw + value, minValue, maxValue);
+            if (value != 0.0f)
+            {
+                _cameraTargetYaw = MathLib.ClampAngle(_cameraTargetYaw + value, minValue, maxValue);
+            }
         }
 
         /// <summary>
@@ -54,7 +57,9 @@ namespace DaftAppleGames.TpCharacterController
         public void AddControlPitchInput(float value, float minValue = -80.0f, float maxValue = 80.0f)
         {
             if (value != 0.0f)
+            {
                 _cameraTargetPitch = MathLib.ClampAngle(_cameraTargetPitch + value, minValue, maxValue);
+            }
         }
 
         /// <summary>

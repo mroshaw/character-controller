@@ -119,7 +119,6 @@ namespace DaftAppleGames.TpCharacterController
 
             // Look
             Vector2 lookInput = GetLookInput() * lookSensitivity;
-
             ThirdPersonCharacter.AddControlYawInput(lookInput.x);
             ThirdPersonCharacter.AddControlPitchInput(invertLook ? -lookInput.y : lookInput.y, minPitch, maxPitch);
 

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DaftAppleGames.Utils.Editor;
+using DaftAppleGames.Editor.Utils;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;

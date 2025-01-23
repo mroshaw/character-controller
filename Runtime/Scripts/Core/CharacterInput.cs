@@ -24,8 +24,6 @@ namespace DaftAppleGames.TpCharacterController
         [SerializeField]
         private CharacterAbilities characterAbilities;
 
-        private Vector3 _rollCachedDirection;
-
         /// <summary>
         /// Our controlled character.
         /// </summary>
@@ -92,7 +90,6 @@ namespace DaftAppleGames.TpCharacterController
         {
             if (context.started)
             {
-                _rollCachedDirection = character.GetMovementDirection();
                 characterAbilities.Roll();
             }
             else if (context.canceled)
@@ -282,16 +279,6 @@ namespace DaftAppleGames.TpCharacterController
 
         protected Vector3 CalcMovementDirection(Transform relativeTransform, Vector3 relativeVector)
         {
-            // Handle rolling
-            if (characterAbilities.IsRolling())
-            {
-                if (_rollCachedDirection.magnitude < 0.1f)
-                {
-                    _rollCachedDirection = character.transform.forward *  characterAbilities.rollSpeed;
-                }
-                character.SetMovementDirection(_rollCachedDirection);
-            }
-
             // Poll movement InputAction
             Vector2 movementInput = GetMovementInput();
             Vector3 movementDirection = Vector3.zero;
@@ -304,6 +291,22 @@ namespace DaftAppleGames.TpCharacterController
             {
                 // Make movement direction relative to its camera view direction
                 movementDirection = movementDirection.relativeTo(relativeTransform, relativeVector);
+            }
+
+            // Handle rolling
+            if (characterAbilities.IsRolling() && !character.useRootMotion)
+            {
+                // Check if character is not moving, and set a direction and velocity
+                float movementMagnitude = movementDirection.magnitude;
+                if (character.GetMovementDirection().magnitude <= 0.01f)
+                {
+                    movementDirection = character.transform.forward *  characterAbilities.minRollSpeed;
+                }
+                // If the character was moving when rolling, we want at least the minimum roll velocity
+                else if (character.GetMovementDirection().magnitude <= characterAbilities.minRollSpeed)
+                {
+                    movementDirection *= characterAbilities.minRollSpeed;
+                }
             }
 
             return movementDirection;

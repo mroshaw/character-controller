@@ -30,7 +30,7 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
 
         protected override Status OnUpdate()
         {
-            AiBrain.TpCharacter.RotateTowards((Target.Value.position - AiBrain.transform.position).normalized, Time.deltaTime, false);
+            AiBrain.Character.RotateTowards((Target.Value.position - AiBrain.transform.position).normalized, Time.deltaTime, false);
             float dot = Vector3.Dot(AiBrain.transform.forward, (Target.Value.position - AiBrain.transform.position).normalized);
             return dot > 0.7f ? Status.Success : Status.Running;
         }

@@ -109,6 +109,22 @@ namespace DaftAppleGames.TpCharacterController.AiController
             return _detectorTargetsByTag[tagToFind].GetClosestTarget()?.targetObject;
         }
 
+        public GameObject GetClosestTargetWithTags(List<string> tagsToFind)
+        {
+            DetectorTarget closestTarget = null;
+
+            foreach (string tagToFind in tagsToFind)
+            {
+                DetectorTarget target = _detectorTargetsByTag[tagToFind].GetClosestTarget();
+
+                if (closestTarget == null || target.Distance > closestTarget.Distance)
+                {
+                    closestTarget = target;
+                }
+            }
+            return closestTarget?.targetObject;
+        }
+
         private void NewTargetDetected(DetectorTarget detectorTarget)
         {
             _detectorTargetsByTag[detectorTarget.tag].Add(detectorTarget);

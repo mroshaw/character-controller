@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/tp-character-controller/Runtime/Scripts/Editor/Characters/EditorWindowStyles.uss?fileID=7433441132597879392&amp;guid=2247bb3b8f94bad4cad9443342133477&amp;type=3#EditorWindowStyles" />
+    <engine:EnumField label="Anim Type:" value="Human" type="UnityEditor.ModelImporterAnimationType, UnityEditor.CoreModule" name="ImportType" />
+    <editor:ObjectField label="Avatar:" name="Avatar" type="UnityEngine.Avatar, UnityEngine.AnimationModule" />
+    <engine:Button text="Fix Selected" name="FixButton" class="Button" />
+</engine:UXML>
