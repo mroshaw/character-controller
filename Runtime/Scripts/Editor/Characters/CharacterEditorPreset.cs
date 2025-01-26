@@ -1,3 +1,6 @@
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector.Editor;
+#endif
 using DaftAppleGames.Extensions;
 using System;
 using System.Collections.Generic;
@@ -150,7 +153,7 @@ namespace DaftAppleGames.TpCharacterController.Editor
             {
                 Animator targetAnimator = prefabInstance.EnsureComponent<Animator>();
 #if ODIN_INSPECTOR
-                EditorUtils.MoveComponentToTop(prefabInstance, targetAnimator);
+                // EditorUtils.MoveComponentToTop(prefabInstance, targetAnimator);
 #endif
                 EditorUtility.CopySerialized(sourceAnimator, targetAnimator);
                 DestroyImmediate(sourceAnimator);

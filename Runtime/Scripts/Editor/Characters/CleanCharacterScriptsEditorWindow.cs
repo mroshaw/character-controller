@@ -10,7 +10,7 @@ using UnityEngine;
 namespace DaftAppleGames.TpCharacterController.Editor
 {
 #if ODIN_INSPECTOR
-    public class CleanCharacterScriptsWindow : OdinEditorWindow
+    public class CleanCharacterScriptsEditorWindow : OdinEditorWindow
 #else
     public class CleanCharacterScriptsEditorWindow : EditorWindow
 #endif
