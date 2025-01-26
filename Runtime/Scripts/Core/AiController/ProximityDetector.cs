@@ -5,6 +5,7 @@ using DaftAppleGames.Attributes;
 #endif
 using System.Collections.Generic;
 using DaftAppleGames.Extensions;
+using DaftAppleGames.GameObjects;
 using UnityEngine;
 
 #if UNITY_EDITOR

@@ -5,6 +5,7 @@ using DaftAppleGames.Attributes;
 #endif
 using System;
 using System.Collections.Generic;
+using DaftAppleGames.GameObjects;
 using DaftAppleGames.Utilities;
 using UnityEngine;
 using UnityEngine.Events;

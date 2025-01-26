@@ -1,7 +1,7 @@
 {
   "name": "com.daftapplegames.tp-character-controller",
   "version": "1.0.0",
-  "displayName": "Third Person character controller",
+  "displayName": "Third Person Character Controller",
   "description": "An extension of Easy Character Movement 2, providing a feature rich Third Person controller in Unity 6 HDRP",
   "unity": "6000.0",
   "documentationUrl": "https://example.com/",
