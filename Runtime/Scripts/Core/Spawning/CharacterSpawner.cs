@@ -1,3 +1,4 @@
+using DaftAppleGames.Pooling;
 using DaftAppleGames.TpCharacterController.FootSteps;
 using ECM2;
 #if ODIN_INSPECTOR
