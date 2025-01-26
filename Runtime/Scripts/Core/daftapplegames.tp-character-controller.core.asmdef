@@ -1,5 +1,5 @@
 {
-    "name": "daftapplegames.hdrp-time-and-weather.core",
+    "name": "daftapplegames.tp-character-controller.core",
     "rootNamespace": "",
     "references": [
         "GUID:388f132624f9dfc408864ea2764b7698",
