@@ -14,8 +14,11 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Class Variables
 
         [BoxGroup("Settings")] [Tooltip("Only colliders on these layers will be considered as targets.")] [SerializeField] private LayerMask detectionLayerMask;
+        #if ODIN_INSPECTOR
+        [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] string[] detectionTags;
+        #else
         [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] [TagSelector] string[] detectionTags;
-
+        #endif
         [BoxGroup("Settings")] [Tooltip("Maximum number of colliders that can be detected by detectors. This is to avoid garbage collection.")]
         [SerializeField] protected int detectionBufferSize = 20;
 
