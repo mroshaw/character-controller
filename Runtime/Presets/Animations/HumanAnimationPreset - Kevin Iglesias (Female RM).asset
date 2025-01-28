@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b6eadbd399063240bb4cd065fef69a5, type: 3}
-  m_Name: HumanAnimationPreset - Basic Motions (Female RM)
+  m_Name: HumanAnimationPreset - Kevin Iglesias (Female RM)
   m_EditorClassIdentifier: 
   animMappings: {fileID: 11400000, guid: 51197ca75fd72724db0fb336bd3539a8, type: 2}
   animPresets:

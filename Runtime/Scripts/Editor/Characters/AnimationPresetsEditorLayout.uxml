@@ -1,15 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <Style
-        src="project://database/Assets/tp-character-controller/Runtime/Scripts/Editor/Characters/EditorWindowStyles.uss?fileID=7433441132597879392&amp;guid=2247bb3b8f94bad4cad9443342133477&amp;type=3#EditorWindowStyles" />
+    <Style src="project://database/Assets/tp-character-controller/Runtime/Scripts/Editor/Characters/EditorWindowStyles.uss?fileID=7433441132597879392&amp;guid=2247bb3b8f94bad4cad9443342133477&amp;type=3#EditorWindowStyles" />
     <ui:VisualElement style="flex-grow: 1;">
         <uie:PropertyField name="AnimMappingProperty" binding-path="animMappings" label="Animation Mapping&#x9;&#x9;" />
         <uie:PropertyField name="AnimPresetsProperty" binding-path="animPresets" />
-        <ui:Button text="Init Settings" parse-escape-sequences="true" display-tooltip-when-elided="true"
-                   name="InitSettingsButton" class="Button" />
-        <ui:Button text="Update" parse-escape-sequences="true" display-tooltip-when-elided="true"
-                   name="UpdateSettingsButton" class="Button" />
-        <ui:Button text="Validate" parse-escape-sequences="true" display-tooltip-when-elided="true"
-                   name="ValidateButton" class="Button" />
+        <ui:Button text="Init Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InitSettingsButton" class="Button" />
+        <ui:Button text="Update" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UpdateSettingsButton" class="Button" />
+        <ui:Button text="Validate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ValidateButton" class="Button" />
         <ui:Button text="Sort" name="SortButton" class="Button" />
+        <ui:Button text="Show All" name="ShowAllButton" class="Button"/>
+        <ui:Button text="Show Unmapped" name="ShowUnmappedButton" class="Button"/>
     </ui:VisualElement>
 </ui:UXML>

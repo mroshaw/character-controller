@@ -109,6 +109,8 @@ namespace DaftAppleGames.TpCharacterController.Editor
             public float animSpeed;
             [SerializeField] private AnimationMappings.AnimMapping animMapping;
 
+            public bool IsMapped => animClip == null;
+
             public AnimationMappings.AnimMapping AnimMapping => animMapping;
 
             public AnimPreset(AnimationMappings.AnimMapping mapping, AnimationClip clip)

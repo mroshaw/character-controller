@@ -1,3 +1,4 @@
+using DaftAppleGames.Attributes;
 using UnityEngine;
 
 namespace DaftAppleGames.TpCharacterController
@@ -9,25 +10,20 @@ namespace DaftAppleGames.TpCharacterController
         private static readonly int Turn = Animator.StringToHash("Turn");
         private static readonly int Ground = Animator.StringToHash("OnGround");
         private static readonly int JumpLeg = Animator.StringToHash("JumpLeg");
-        private static readonly int Roll = Animator.StringToHash("Roll");
+        private static readonly int Roll = Animator.StringToHash("Rolling");
         private static readonly int Crouch = Animator.StringToHash("Crouch");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Swimming = Animator.StringToHash("Swimming");
-        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Attack = Animator.StringToHash("Attacking");
+        private static readonly int AttackId = Animator.StringToHash("AttackID");
+        private static readonly int InAction = Animator.StringToHash("InAction");
+        private static readonly int ActionID = Animator.StringToHash("ActionID");
 
         // Cached Character
         private Character Character { get; set; }
-        private CharacterAbilities CharacterAbilities { get; set; }
         private Animator Animator { get; set; }
         private float ForwardAmount { get; set; }
         private Vector3 MoveDirection { get; set; }
-
-        private bool _hasAdditionalAbilities;
-
-        protected virtual void Awake()
-        {
-
-        }
 
         protected virtual void Start()
         {
@@ -35,9 +31,7 @@ namespace DaftAppleGames.TpCharacterController
             Character = GetComponent<Character>();
             // Get Character animator
             Animator = Character.GetAnimator();
-            CharacterAbilities = GetComponent<CharacterAbilities>();
-            _hasAdditionalAbilities = CharacterAbilities != null;
-        }
+   }
 
         protected virtual void Update()
         {
@@ -57,11 +51,10 @@ namespace DaftAppleGames.TpCharacterController
             Animator.SetBool(Crouch, Character.IsCrouched());
             Animator.SetBool(Swimming, Character.IsSwimming());
 
-            if (_hasAdditionalAbilities)
-            {
-                Animator.SetBool(Roll, CharacterAbilities.IsRolling());
-                Animator.SetBool(Attack, CharacterAbilities.IsAttacking());
-            }
+            Animator.SetBool(Roll, Character.IsRolling());
+            Animator.SetBool(Attack, Character.IsAttacking());
+            Animator.SetInteger(AttackId, 100);
+            Animator.SetInteger(ActionID, 100);
 
             // Calculate which leg is behind, so as to leave that leg trailing in the jump animation
             // (This code is reliant on the specific run cycle offset in our animations,

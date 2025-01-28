@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 5241225443362030944}
   - component: {fileID: 4692784312018820387}
   - component: {fileID: 5291397448986129401}
-  - component: {fileID: 2426202351033207420}
   - component: {fileID: 4166940186059110653}
   - component: {fileID: 7772635691886807894}
   - component: {fileID: 2380735575416249128}
@@ -264,26 +263,14 @@ MonoBehaviour:
   _pushForceScale: 1
   _standingDownwardForceScale: 1
   _camera: {fileID: 0}
+  maxSprintSpeed: 10
+  minRollSpeed: 5
+  attackDamage: 5
   followCamera: {fileID: 0}
   followTarget: {fileID: 6925541596680316173}
   followDistance: 5
   followMinDistance: 0
   followMaxDistance: 10
---- !u!114 &2426202351033207420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8924241024866228744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd3915688ad4c2459efed88f52335e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSprintSpeed: 10
-  minRollSpeed: 5
-  attackDamage: 5
 --- !u!114 &4166940186059110653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActionsAsset: {fileID: -944628639613478452, guid: 003fdb5442deecd40a25fce3201b0901, type: 3}
   character: {fileID: 5291397448986129401}
-  characterAbilities: {fileID: 2426202351033207420}
   invertLook: 1
   lookSensitivity: {x: 0.05, y: 0.05}
   zoomSensitivity: 1

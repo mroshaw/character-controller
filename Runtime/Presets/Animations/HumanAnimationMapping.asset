@@ -246,7 +246,7 @@ MonoBehaviour:
     blendTreeName: Upright Movement Blend Tree
     blendTreeIndex: 16
   - animationHeader: Upright Movement
-    animationName: Sprint Forward
+    animationName: Sprint Left
     stateName: Grounded
     stateMachineName: 
     layerName: Base Layer
@@ -256,6 +256,76 @@ MonoBehaviour:
     animationName: Death
     stateName: Dead
     stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Actions
+    animationName: Roll
+    stateName: Roll
+    stateMachineName: 
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Unarmed Melee
+    stateName: Unarmed Melee Attack
+    stateMachineName: Upper Body Attacks
+    layerName: Upper Body
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Sword Slash
+    stateName: Sword Slash Attack
+    stateMachineName: Upper Body Attacks
+    layerName: Upper Body
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Sword Stab
+    stateName: Sword Stab Attack
+    stateMachineName: Upper Body Attacks
+    layerName: Upper Body
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Hammer Smash
+    stateName: Hammer Smash Attack
+    stateMachineName: Upper Body Attacks
+    layerName: Upper Body
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Actions
+    animationName: Wave
+    stateName: Wave
+    stateMachineName: Upper Body Actions
+    layerName: Upper Body
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Actions
+    animationName: Pickup Ground
+    stateName: Pickup Ground
+    stateMachineName: Full Body Actions
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Actions
+    animationName: Open Door
+    stateName: Open Door
+    stateMachineName: Full Body Actions
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Power Unarmed Melee
+    stateName: Power Unarmed Melee
+    stateMachineName: Full Body Attacks
+    layerName: Base Layer
+    blendTreeName: 
+    blendTreeIndex: 0
+  - animationHeader: Attacks
+    animationName: Power Sword Slash
+    stateName: Power Sword Slash
+    stateMachineName: Full Body Attacks
     layerName: Base Layer
     blendTreeName: 
     blendTreeIndex: 0

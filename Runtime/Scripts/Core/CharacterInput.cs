@@ -20,10 +20,6 @@ namespace DaftAppleGames.TpCharacterController
         [SerializeField]
         private Character character;
 
-        [Tooltip("Additional character abilities. If left unassigned, this will attempt to locate a Character component within this GameObject.")]
-        [SerializeField]
-        private CharacterAbilities characterAbilities;
-
         /// <summary>
         /// Our controlled character.
         /// </summary>
@@ -81,37 +77,37 @@ namespace DaftAppleGames.TpCharacterController
         public virtual void OnSprint(InputAction.CallbackContext context)
         {
             if (context.started)
-                characterAbilities.Sprint();
+                character.Sprint();
             else if (context.canceled)
-                characterAbilities.StopSprinting();
+                character.StopSprinting();
         }
 
         public virtual void OnRoll(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                characterAbilities.Roll();
+                character.Roll();
             }
             else if (context.canceled)
             {
-                characterAbilities.StopRolling();
+                character.StopRolling();
             }
         }
 
         public virtual void OnAttack(InputAction.CallbackContext context)
         {
             if (context.started)
-                characterAbilities.Attack();
+                character.Attack();
             else if (context.canceled)
-                characterAbilities.StopAttacking();
+                character.StopAttacking();
         }
 
         public virtual void OnInteract(InputAction.CallbackContext context)
         {
             if (context.started)
-                characterAbilities.Interact();
+                character.Interact();
             else if (context.canceled)
-                characterAbilities.StopInteracting();
+                character.StopInteracting();
         }
 
         /// <summary>
@@ -294,18 +290,18 @@ namespace DaftAppleGames.TpCharacterController
             }
 
             // Handle rolling
-            if (characterAbilities.IsRolling() && !character.useRootMotion)
+            if (character.IsRolling() && !character.useRootMotion)
             {
                 // Check if character is not moving, and set a direction and velocity
                 float movementMagnitude = movementDirection.magnitude;
                 if (character.GetMovementDirection().magnitude <= 0.01f)
                 {
-                    movementDirection = character.transform.forward *  characterAbilities.minRollSpeed;
+                    movementDirection = character.transform.forward *  character.minRollSpeed;
                 }
                 // If the character was moving when rolling, we want at least the minimum roll velocity
-                else if (character.GetMovementDirection().magnitude <= characterAbilities.minRollSpeed)
+                else if (character.GetMovementDirection().magnitude <= character.minRollSpeed)
                 {
-                    movementDirection *= characterAbilities.minRollSpeed;
+                    movementDirection *= character.minRollSpeed;
                 }
             }
 
@@ -342,11 +338,6 @@ namespace DaftAppleGames.TpCharacterController
             if (character == null)
             {
                 character = GetComponent<Character>();
-            }
-
-            if (characterAbilities == null)
-            {
-                characterAbilities = GetComponent<CharacterAbilities>();
             }
         }
 

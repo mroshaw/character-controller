@@ -194,8 +194,15 @@ namespace DaftAppleGames.TpCharacterController.Editor
             private AnimatorState GetStateInController(AnimatorController animatorController)
             {
                 AnimatorControllerLayer layer = GetLayerByName(animatorController, layerName);
-                var stateMachine = string.IsNullOrEmpty(stateMachineName) ? layer.stateMachine : GetStateMachineInLayerByName(layer, stateMachineName);
-                return GetStateFromStateMachine(stateMachine, stateName);
+                AnimatorStateMachine stateMachine = string.IsNullOrEmpty(stateMachineName) ? layer.stateMachine : GetStateMachineInLayerByName(layer, stateMachineName);
+
+                AnimatorState animState = GetStateFromStateMachine(stateMachine, stateName);
+                if (!animState)
+                {
+                    Debug.LogError($"{animationHeader}/{animationName}: Could not get state {stateName} from state machine {stateMachineName}.");
+                }
+
+                return animState;
             }
 
             private BlendTree GetBlendTreeInState(AnimatorState animatorState)
@@ -224,7 +231,7 @@ namespace DaftAppleGames.TpCharacterController.Editor
                 }
 
                 // Iterate through the child motions
-                foreach (var childMotion in blendTree.children)
+                foreach (ChildMotion childMotion in blendTree.children)
                 {
                     // Check if the child motion is a BlendTree
                     if (childMotion.motion is BlendTree childBlendTree)

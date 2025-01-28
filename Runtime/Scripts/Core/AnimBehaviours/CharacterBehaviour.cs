@@ -10,10 +10,7 @@ namespace DaftAppleGames.TpCharacterController.AnimBehaviours
         #region Class Variables
 
         protected Character Character { get; private set; }
-        protected CharacterAbilities CharacterAbilities { get; private set; }
         protected AudioSource AudioSource { get; private set; }
-
-        protected bool HasAdditionalAbilities { get; private set; }
 
         #endregion
 
@@ -27,9 +24,6 @@ namespace DaftAppleGames.TpCharacterController.AnimBehaviours
                 {
                     Debug.LogError($"No GameCharacter found on {animator.transform.root.gameObject.name}");
                 }
-
-                CharacterAbilities = Character.gameObject.GetComponent<CharacterAbilities>();
-                HasAdditionalAbilities = CharacterAbilities != null;
             }
 
             if (AudioSource == null)

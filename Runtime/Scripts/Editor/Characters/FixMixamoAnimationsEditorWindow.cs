@@ -12,7 +12,22 @@ using UnityEngine.UIElements;
 
 namespace DaftAppleGames.TpCharacterController.Editor
 {
-    #if ODIN_INSPECTOR
+    public enum RootTransformRotation { Original, Body }
+
+    public enum RootTransformPositionY
+    {
+        Original,
+        CenterOfMass,
+        Feet
+    }
+
+    public enum RootTransformPositionXZ
+    {
+        Original,
+        CenterOfMass
+    }
+
+#if ODIN_INSPECTOR
     public class FixMixamoAnimationsEditorWindow : OdinEditorWindow
     #else
     public class FixMixamoAnimationsEditorWindow : EditorWindow
@@ -21,6 +36,10 @@ namespace DaftAppleGames.TpCharacterController.Editor
         [BoxGroup("Settings")] [SerializeField] private VisualTreeAsset tree;
         [BoxGroup("Settings")] private ModelImporterAnimationType modelImportType = ModelImporterAnimationType.Human;
         [BoxGroup("Settings")] private Avatar animAvatar;
+        [BoxGroup("Settings")] private RootTransformRotation rootTransformRotation = RootTransformRotation.Original;
+        [BoxGroup("Settings")] private RootTransformPositionY rootTransformPositionY = RootTransformPositionY.Original;
+        [BoxGroup("Settings")] private RootTransformPositionXZ rootTransformPositionXZ;
+
 
         [MenuItem("Daft Apple Games/Characters/Fix Mixamo Animations")]
         public static void ShowWindow()
@@ -43,6 +62,21 @@ namespace DaftAppleGames.TpCharacterController.Editor
                 animAvatar = evt.newValue as Avatar;
             });
 
+            rootVisualElement.Q<EnumField>("RootTransformRotation").RegisterValueChangedCallback(evt =>
+            {
+                rootTransformRotation = (RootTransformRotation)evt.newValue;
+            });
+
+
+            rootVisualElement.Q<EnumField>("RootTransformPositionY").RegisterValueChangedCallback(evt =>
+            {
+                rootTransformPositionY = (RootTransformPositionY)evt.newValue;
+            });
+
+            rootVisualElement.Q<EnumField>("RootTransformPositionXZ").RegisterValueChangedCallback(evt =>
+            {
+                rootTransformPositionXZ = (RootTransformPositionXZ)evt.newValue;
+            });
 
             Button fixButton = rootVisualElement.Q<Button>("FixButton");
 
@@ -86,13 +120,19 @@ namespace DaftAppleGames.TpCharacterController.Editor
             modelImporter.importTangents = ModelImporterTangents.None;
             modelImporter.importAnimation = true;
 
+            Debug.Log($"Saving: {fbxAssetName}...");
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
 
 
-            if (modelImporter.clipAnimations.Length != 1)
+            if (modelImporter.defaultClipAnimations.Length != 1)
             {
-                Debug.LogError($"There must be only one animation clip per FBX file. {fbxAssetName} has {modelImporter.clipAnimations.Length}.");
+                Debug.LogError($"There must be only one animation clip per FBX file. {fbxAssetName} has {modelImporter.defaultClipAnimations.Length}.");
                 return;
             }
+
+            modelImporter.animationRotationError = 0.2f;
+            modelImporter.animationScaleError = 0.2f;
+            modelImporter.animationPositionError = 0.2f;
 
             Debug.Log($"Processing: {fbxAssetName}...");
 
@@ -101,12 +141,28 @@ namespace DaftAppleGames.TpCharacterController.Editor
             ModelImporterClipAnimation animClip = newAnimClips[0];
 
             animClip.name = fbxAssetName;
-            animClip.keepOriginalOrientation = true;
+            animClip.keepOriginalOrientation = false;
             animClip.keepOriginalPositionY = true;
-            animClip.keepOriginalPositionXZ = true;
+            animClip.keepOriginalPositionXZ = false;
 
             animClip.rotationOffset = 0;
             animClip.lockRootRotation = false;
+
+            switch (rootTransformPositionY)
+            {
+                case RootTransformPositionY.Original:
+                    animClip.keepOriginalPositionY = true;
+                    break;
+                case RootTransformPositionY.CenterOfMass:
+                    animClip.keepOriginalPositionY = false;
+                    animClip.heightFromFeet = false;
+                    break;
+
+                case RootTransformPositionY.Feet:
+                    animClip.keepOriginalPositionY = false;
+                    animClip.heightFromFeet = true;
+                    break;
+            }
 
 
             modelImporter.clipAnimations = newAnimClips;

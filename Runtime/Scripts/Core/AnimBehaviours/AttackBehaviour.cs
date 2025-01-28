@@ -31,11 +31,8 @@ namespace DaftAppleGames.TpCharacterController.AnimBehaviours
                 _damageManager.DisableDamageAppliers();
             }
 
-            if (HasAdditionalAbilities)
-            {
-                CharacterAbilities.StopAttacking();
-            }
-        }
+            Character.StopAttacking();
+    }
 
         #endregion
     }

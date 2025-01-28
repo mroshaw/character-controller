@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CodiceApp;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -72,6 +73,7 @@ namespace DaftAppleGames.TpCharacterController.Editor
         private void Sort()
         {
             _target.Sort();
+            Repaint();
         }
     }
 
@@ -80,8 +82,9 @@ namespace DaftAppleGames.TpCharacterController.Editor
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
+
             // Create a new VisualElement to be the root the property UI.
-            var container = new VisualElement
+            VisualElement container = new VisualElement
             {
                 style =
                 {
@@ -93,6 +96,7 @@ namespace DaftAppleGames.TpCharacterController.Editor
             SerializedProperty animTargetProperty = property.FindPropertyRelative("animMapping");
             SerializedProperty mirrorProperty = property.FindPropertyRelative("mirrorAnimation");
             SerializedProperty animSpeedProperty = property.FindPropertyRelative("animSpeed");
+            SerializedProperty animClipProperty = property.FindPropertyRelative("animClip");
 
             // Derive the label from the AnimTarget properties
             if (animTargetProperty != null)
@@ -101,14 +105,33 @@ namespace DaftAppleGames.TpCharacterController.Editor
                 string animTargetName = animTargetProperty.FindPropertyRelative("animationName").stringValue;
                 string entryLabelText = $"{animTargetHeader}/{animTargetName}:";
 
-                container.Add(new PropertyField(property.FindPropertyRelative("animClip"), entryLabelText)
+                bool isEntryMapped = animClipProperty.objectReferenceValue != null;
+
+                Debug.Log($"Is Mapped: {isEntryMapped}");
+
+                if (isEntryMapped)
                 {
-                    style =
+                    container.Add(new PropertyField(property.FindPropertyRelative("animClip"), entryLabelText)
                     {
-                        width = new StyleLength(450),
-                        paddingRight = new StyleLength(10),
-                    }
-                });
+                        style =
+                        {
+                            width = new StyleLength(600),
+                            paddingRight = new StyleLength(10),
+                        }
+                    });
+                }
+                else
+                {
+                    container.Add(new PropertyField(property.FindPropertyRelative("animClip"), entryLabelText)
+                    {
+                        style =
+                        {
+                            width = new StyleLength(600),
+                            paddingRight = new StyleLength(10),
+                            backgroundColor = new Color(0.5f, 0, 0, 0.5f)
+                        }
+                    });
+                }
             }
             else
             {
