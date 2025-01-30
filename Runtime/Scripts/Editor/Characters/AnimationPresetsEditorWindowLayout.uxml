@@ -1,6 +1,6 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/tp-character-controller/Runtime/Scripts/Editor/Characters/EditorWindowStyles.uss?fileID=7433441132597879392&amp;guid=2247bb3b8f94bad4cad9443342133477&amp;type=3#EditorWindowStyles" />
+    <Style src="project://database/Packages/com.daftapplegames.daftapple-shared/Runtime/Scripts/Editor/EditorWindowStyles.uss?fileID=7433441132597879392&amp;guid=2247bb3b8f94bad4cad9443342133477&amp;type=3#EditorWindowStyles" />
     <editor:ObjectField label="Selected Animator:" name="SelectedAnimator" type="UnityEngine.Animator, UnityEngine.AnimationModule" binding-path="selectedAnimator" />
-    <editor:ObjectField label="Animation Presets:" name="AnimPresets" type="DaftAppleGames.TpCharacterController.Editor.AnimationPresets, daftapplegames.hdrp-time-and-weather.editor" />
+    <editor:ObjectField label="Animation Presets:" name="AnimPresets" type="DaftAppleGames.TpCharacterController.Editor.AnimationPresets, DaftAppleGames.TPCharacterController.Editor" />
     <engine:Button text="Update Animator" name="UpdateAnimatorButton" class="Button" />
 </engine:UXML>
