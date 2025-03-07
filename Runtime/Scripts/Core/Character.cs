@@ -1,4 +1,5 @@
 using ECM2;
+using UnityEngine;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #else
@@ -9,6 +10,9 @@ namespace DaftAppleGames.TpCharacterController
 {
     public class Character : ECM2.Character
     {
+        [BoxGroup("Movement")] public float rootMotionAccelerationDampening = 1.0f;
+        [BoxGroup("Movement")] public float rootMotionDecelerationDampening = 0.25f;
+
         [BoxGroup("Sprinting")] public float maxSprintSpeed = 10.0f;
         [BoxGroup("Rolling")] public float minRollSpeed = 5.0f;
         [BoxGroup("Attack")] public float attackDamage = 5.0f;
@@ -24,6 +28,10 @@ namespace DaftAppleGames.TpCharacterController
         private bool _interactInputPressed;
         private float _cachedMaxWalkSpeed;
         private float _cachedRollSpeed;
+
+        public bool IsAccelerationZero => _isAccelerationZero;
+        private bool _isAccelerationZero;
+
         public float CachedRollSpeed => _cachedRollSpeed;
         /// <summary>
         /// Request the character to start to sprint.
@@ -46,6 +54,16 @@ namespace DaftAppleGames.TpCharacterController
         public void Interact()
         {
             _interactInputPressed = true;
+        }
+
+        public override Vector3 CalcVelocity(Vector3 velocity, Vector3 desiredVelocity, float friction, bool isFluid, float deltaTime)
+        {
+            float desiredSpeed = desiredVelocity.magnitude;
+            Vector3 desiredMoveDirection = desiredSpeed > 0.0f ? desiredVelocity / desiredSpeed : Vector3.zero;
+            float analogInputModifier = ComputeAnalogInputModifier(desiredVelocity);
+            Vector3 inputAcceleration = GetMaxAcceleration() * analogInputModifier * desiredMoveDirection;
+            _isAccelerationZero = inputAcceleration.isZero();
+            return base.CalcVelocity(velocity, desiredVelocity, friction, isFluid, deltaTime);
         }
 
         /// <summary>

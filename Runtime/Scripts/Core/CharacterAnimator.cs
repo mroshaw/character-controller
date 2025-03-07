@@ -44,7 +44,18 @@ namespace DaftAppleGames.TpCharacterController
                 ? MoveDirection.z
                 : Mathf.InverseLerp(0.0f, Character.GetMaxSpeed(), Character.GetSpeed());
 
-            Animator.SetFloat(Forward, ForwardAmount, 0.1f, deltaTime);
+            if (Character.IsAccelerationZero)
+            {
+                // We're slowing down
+                Animator.SetFloat(Forward, ForwardAmount, Character.rootMotionDecelerationDampening, deltaTime);
+            }
+            else
+            {
+                // We're speeding up
+                Animator.SetFloat(Forward, ForwardAmount, Character.rootMotionAccelerationDampening, deltaTime);
+            }
+
+
             Animator.SetFloat(Turn, Mathf.Atan2(MoveDirection.x, MoveDirection.z), 0.1f, deltaTime);
             Animator.SetBool(Ground, Character.IsGrounded());
 
