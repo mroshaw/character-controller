@@ -1,3 +1,4 @@
+using DaftAppleGames.Gameplay;
 using ECM2;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +10,7 @@ using DaftAppleGames.Attributes;
 
 namespace DaftAppleGames.TpCharacterController
 {
-    public class ThirdPersonInput : CharacterInput
+    public class ThirdPersonInput : CharacterInput, IPausable
     {
         [Space(15.0f)]
         public bool invertLook = true;
@@ -26,6 +27,8 @@ namespace DaftAppleGames.TpCharacterController
 
         [Tooltip("How far in degrees can you move the camera up.")]
         public float maxPitch = 80.0f;
+
+        private bool _isPaused;
 
         /// <summary>
         /// Cached ThirdPersonCharacter.
@@ -113,6 +116,12 @@ namespace DaftAppleGames.TpCharacterController
 
         protected override void HandleInput()
         {
+            // Don't process any input if paused.
+            if (_isPaused)
+            {
+                return;
+            }
+
             // Move
             Vector3 movementDirection = CalcMovementDirection(ThirdPersonCharacter.cameraTransform, ThirdPersonCharacter.GetUpVector());
             ThirdPersonCharacter.SetMovementDirection(movementDirection);
@@ -125,6 +134,21 @@ namespace DaftAppleGames.TpCharacterController
             // Zoom
             Vector2 zoomInput = GetZoomInput() * zoomSensitivity;
             ThirdPersonCharacter.AddControlZoomInput(zoomInput.y);
+        }
+
+        void IPausable.Pause()
+        {
+            _isPaused = true;
+        }
+
+        void IPausable.Resume()
+        {
+            _isPaused = false;
+        }
+
+        bool IPausable.IsPaused()
+        {
+            return _isPaused;
         }
     }
 }

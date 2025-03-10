@@ -1,3 +1,4 @@
+using DaftAppleGames.Gameplay;
 using ECM2;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -9,7 +10,7 @@ using DaftAppleGames.Attributes;
 
 namespace DaftAppleGames.TpCharacterController
 {
-    public class ThirdPersonCharacter : Character
+    public class ThirdPersonCharacter : Character, IPausable
     {
         [Header("Cinemachine")]
         [Tooltip("The Cinemachine Camera following this Character.")]
@@ -37,6 +38,8 @@ namespace DaftAppleGames.TpCharacterController
         // Current follow distance
         private CinemachineThirdPersonFollow _cmThirdPersonFollow;
         protected float _followDistanceSmoothVelocity;
+
+        private bool _isPaused;
 
         /// <summary>
         /// Add input (affecting Yaw).
@@ -100,6 +103,21 @@ namespace DaftAppleGames.TpCharacterController
         private void LateUpdate()
         {
             UpdateCamera();
+        }
+
+        void IPausable.Pause()
+        {
+            _isPaused = true;
+        }
+
+        void IPausable.Resume()
+        {
+            _isPaused = false;
+        }
+
+        bool IPausable.IsPaused()
+        {
+            return _isPaused;
         }
     }
 }

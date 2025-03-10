@@ -19,32 +19,34 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
 
         #endregion
 
+        private PlayerControls _playerControls;
+
         #region Startup
 
         private void OnEnable()
         {
             // StartCoroutine(RegisterWithInputManagerAsync());
 
-            if (PlayerInputManager.Instance?.PlayerControls == null)
+            if (_playerControls == null)
             {
-                Debug.LogError("Player controls is not initialized - cannot enable");
-                return;
+                _playerControls = new PlayerControls();
+                _playerControls.Enable();
             }
 
-            PlayerInputManager.Instance.PlayerControls.SystemControls.Enable();
-            PlayerInputManager.Instance.PlayerControls.SystemControls.SetCallbacks(this);
+            _playerControls.SystemControls.Enable();
+            _playerControls.SystemControls.SetCallbacks(this);
         }
 
         private void OnDisable()
         {
-            if (PlayerInputManager.Instance?.PlayerControls == null)
+            if (_playerControls == null)
             {
                 Debug.LogError("Player controls is not initialized - cannot disable");
                 return;
             }
 
-            PlayerInputManager.Instance.PlayerControls.SystemControls.Disable();
-            PlayerInputManager.Instance.PlayerControls.SystemControls.RemoveCallbacks(this);
+            _playerControls.SystemControls.Disable();
+            _playerControls.SystemControls.RemoveCallbacks(this);
         }
 
         #endregion
@@ -57,18 +59,6 @@ namespace DaftAppleGames.TpCharacterController.PlayerController
             {
                 pausePressedEvent.Invoke();
             }
-        }
-
-        private IEnumerator RegisterWithInputManagerAsync()
-        {
-            while (PlayerInputManager.Instance == null || PlayerInputManager.Instance.PlayerControls == null)
-            {
-                yield return null;
-            }
-
-            Debug.Log("SystemActionsInpt: Found PlayerCharacterInputManager!");
-            PlayerInputManager.Instance.PlayerControls.SystemControls.Enable();
-            PlayerInputManager.Instance.PlayerControls.SystemControls.SetCallbacks(this);
         }
 
         #endregion
