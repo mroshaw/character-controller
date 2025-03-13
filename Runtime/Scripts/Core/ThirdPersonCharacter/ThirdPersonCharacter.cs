@@ -78,6 +78,10 @@ namespace DaftAppleGames.TpCharacterController
         /// </summary>
         private void UpdateCamera()
         {
+            if (_isPaused)
+            {
+                return;
+            }
             followTarget.transform.rotation = Quaternion.Euler(_cameraTargetPitch, _cameraTargetYaw, 0.0f);
 
             _cmThirdPersonFollow.CameraDistance =

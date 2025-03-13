@@ -20,14 +20,12 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [PropertyOrder(2)] [BoxGroup("Behaviour")] [SerializeField] protected bool spawnOnStart;
         [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private bool enableFootsteps;
         [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private string characterInstanceName = "Player Character";
-        [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] private string footstepPoolsInstanceName = "Footstep Pools";
         [PropertyOrder(3)] [BoxGroup("Character")] [SerializeField] protected Transform characterParentContainer;
 
         [PropertyOrder(10)]
         [FoldoutGroup("Events")] public UnityEvent CharacterSpawnedEvent;
 
         [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject characterGameObjectInstance;
-        [PropertyOrder(99)] [FoldoutGroup("DEBUG")] [SerializeField] private GameObject footstepPoolsGameObjectInstance;
 
         protected Character character { get; private set; }
         protected bool IsValidSpawn { get; set; } = false;
@@ -126,39 +124,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 spawnStatus = false;
             }
 
-            if (enableFootsteps)
-            {
-                footstepPoolsGameObjectInstance = SpawnPrefab(spawnSettings.footstepPoolsPrefab, Vector3.zero, Quaternion.identity, null, footstepPoolsInstanceName, false);
-                _footstepPools = footstepPoolsGameObjectInstance.GetComponentsInChildren<PrefabPool>();
-                if (_footstepPools.Length != 2)
-                {
-                    Debug.LogError($"CharacterSpawner: There should be 2 PrefabPools in PrefabInstance {spawnSettings.footstepPoolsPrefab.name}");
-                    spawnStatus = false;
-                }
-                else
-                {
-                    foreach (PrefabPool currPool in _footstepPools)
-                    {
-                        if (currPool.PrefabPoolType == PrefabPoolType.FootstepMarks)
-                        {
-                            _stepMarkPool = currPool;
-                        }
-
-                        if (currPool.PrefabPoolType == PrefabPoolType.FootstepParticles)
-                        {
-                            _particlePool = currPool;
-                        }
-                    }
-
-                    if (!_stepMarkPool || !_particlePool)
-                    {
-                        Debug.LogError(
-                            $"CharacterSpawner: There should be 1 'FootstepMarks' and 1 'FootstepParticles' ParticlePool in PrefabInstance {spawnSettings.footstepPoolsPrefab.name}");
-                        spawnStatus = false;
-                    }
-                }
-            }
-
             IsValidSpawn = spawnStatus;
             return IsValidSpawn;
         }
@@ -189,27 +154,10 @@ namespace DaftAppleGames.TpCharacterController.AiController
         protected virtual void Configure()
         {
             Debug.Log("In CharacterSpawnerConfigure");
-            if (!enableFootsteps)
-            {
-                if (_footstepManager)
-                {
-                    _footstepManager.footstepsEnabled = false;
-                }
-
-                return;
-            }
-
-            _footstepManager.SetParticlePool(_particlePool);
-            _footstepManager.SetDecalPrefabPool(_stepMarkPool);
         }
 
         protected virtual void SetSpawnsActive()
         {
-            if (enableFootsteps)
-            {
-                SetSpawnActive(footstepPoolsGameObjectInstance);
-            }
-
             SetSpawnActive(characterGameObjectInstance);
         }
 

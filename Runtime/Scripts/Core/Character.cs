@@ -66,6 +66,31 @@ namespace DaftAppleGames.TpCharacterController
             return base.CalcVelocity(velocity, desiredVelocity, friction, isFluid, deltaTime);
         }
 
+        /*
+        protected override void CalcDesiredVelocity(float deltaTime)
+        {
+            // Current movement direction
+
+            Vector3 movementDirection = Vector3.ClampMagnitude(GetMovementDirection(), 1.0f);
+            Vector3 smoothVelocity = new Vector3();
+
+            // The desired velocity from animation (if using root motion) or from input movement vector
+
+            Vector3 desiredVelocity = useRootMotion && rootMotionController
+                ? rootMotionController.ConsumeRootMotionVelocity(deltaTime)
+                : movementDirection * GetMaxSpeed();
+
+            // Return constrained desired velocity
+
+            if (useRootMotion && rootMotionController)
+            {
+                _desiredVelocity = Vector3.SmoothDamp(_desiredVelocity, desiredVelocity, ref smoothVelocity, 0.1f);
+            }
+
+            _desiredVelocity = ConstrainInputVector(smoothVelocity);
+        }
+        */
+
         /// <summary>
         /// Request the character to stop sprinting.
         /// </summary>

@@ -1,9 +1,9 @@
-using DaftAppleGames.TpCharacterController.AiController;
+using DaftAppleGames.Gameplay;
 using UnityEngine;
 
 namespace DaftAppleGames.TpCharacterController.FootSteps
 {
-    public class FootstepTrigger : CharacterTrigger
+    public class FootstepTrigger : ActionTrigger
     {
         #region Class Variables
 
@@ -38,7 +38,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         private void Start()
         {
-            if (!FootstepManager || !FootstepManager.footstepsEnabled)
+            if (!FootstepManager)
             {
                 GetComponent<SphereCollider>().enabled = false;
                 return;
@@ -203,7 +203,8 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             }
 
             // Texture is at index textureMaxIndex
-            textureName = (_terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex].diffuseTexture)
+            textureName = (_terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex] &&
+                           _terrainData.terrainLayers[textureMaxIndex].diffuseTexture)
                 ? (_terrainData.terrainLayers[textureMaxIndex]).diffuseTexture.name
                 : "";
 

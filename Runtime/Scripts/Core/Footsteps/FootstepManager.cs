@@ -15,7 +15,6 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
     {
         #region Class Variables
 
-        [BoxGroup("Settings")] public bool footstepsEnabled;
         [BoxGroup("Settings")] [SerializeField] private List<FootstepTrigger> footstepTriggers;
         [BoxGroup("Settings")] [SerializeField] private FootstepSurface[] footstepSurfaces;
         [BoxGroup("Settings")] [SerializeField] private FootstepSurface defaultSurface;
@@ -25,8 +24,8 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         [BoxGroup("Spawn Settings")] public bool alignToTerrainSlope;
 
-        [BoxGroup("Pool Settings")] [SerializeField] private PrefabPool particleFxPool;
-        [BoxGroup("Pool Settings")] [SerializeField] private PrefabPool decalPool;
+        private PrefabPool _particleFxPool;
+        private PrefabPool _decalPool;
 
         public bool DebugTextureName => debugTextureName;
 
@@ -52,6 +51,20 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         {
             // Create a dictionary of all supported textures to corresponding surfaces
             CreateSurfaceDictionary();
+
+            if (!FootstepPoolManager.Instance)
+            {
+                Debug.LogError("No Footstep Pool Manager found.");
+                enabled = false;
+                return;
+            }
+        }
+
+        private void Start()
+        {
+            // Get pools from the Pool Manager
+            _particleFxPool = FootstepPoolManager.Instance.HumanFootstepParticlePool;
+            _decalPool = FootstepPoolManager.Instance.HumanFootstepDecalPool;
         }
 
         #endregion
@@ -75,12 +88,12 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         public void SpawnFootStepParticleFx(Vector3 spawnPosition, Quaternion spawnRotation)
         {
-            particleFxPool.SpawnInstance(spawnPosition, spawnRotation);
+            _particleFxPool.SpawnInstance(spawnPosition, spawnRotation);
         }
 
         public void SpawnFootStepDecal(Vector3 spawnPosition, Quaternion spawnRotation)
         {
-            decalPool.SpawnInstance(spawnPosition, spawnRotation);
+            _decalPool.SpawnInstance(spawnPosition, spawnRotation);
         }
 
         private void CreateSurfaceDictionary()
@@ -142,16 +155,6 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             newAudioSource.spatialBlend = 1.0f;
 
             return newFootStepTrigger;
-        }
-
-        public void SetDecalPrefabPool(PrefabPool newDecalPool)
-        {
-            decalPool = newDecalPool;
-        }
-
-        public void SetParticlePool(PrefabPool newParticlePool)
-        {
-            particleFxPool = newParticlePool;
         }
 
         [Button("Find Triggers")]
