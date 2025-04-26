@@ -39,7 +39,6 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
 
         protected override void OnEnd()
         {
-            Target.Value = null;
         }
     }
 }

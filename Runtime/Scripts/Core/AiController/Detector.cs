@@ -16,7 +16,36 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [BoxGroup("Settings")] [Tooltip("The range of this detector, presented as a sphere around the gameObject transform.")] [SerializeField] protected float detectorRange;
 
         [BoxGroup("Settings")] [Tooltip("The number of frames to wait before refreshing the detector targets. Balance this between accuracy and performance.")]
-        [SerializeField] public float refreshFrequency = 5.0f;
+        [SerializeField] private float refreshFrequency = 5.0f;
+
+        [BoxGroup("Settings")] [Tooltip("Detection rays/spheres will only check on these layers")]
+        [SerializeField] private LayerMask detectionLayerMask;
+
+        [BoxGroup("Settings")] [Tooltip("Detector will look for these tags, which then map to the given TargetType")]
+        [SerializeField] private TargetTagMappingSO targetTagMappings;
+
+        internal float RefreshFrequency
+        {
+            get => refreshFrequency;
+            set => refreshFrequency = value;
+        }
+
+        internal LayerMask DetectionLayerMask
+        {
+            get => detectionLayerMask;
+            set => detectionLayerMask = value;
+        }
+
+        internal TargetTagMappingSO TargetTagMappings
+        {
+            get => targetTagMappings;
+            set
+            {
+                targetTagMappings = value;
+                RefreshDetectionTags();
+                RefreshDetectionTypes();
+            }
+        }
 
 #if UNITY_EDITOR
         [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] protected bool drawGizmos = true;
@@ -24,14 +53,29 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [PropertyOrder(3)] [FoldoutGroup("Gizmos")] [SerializeField] protected Color gizmoColor2 = Color.green;
 #endif
 
-        internal LayerMask DetectionLayerMask { get; set; }
-        internal string[] DetectionTags { get; set; }
+        internal TargetType[] DetectedTargetTypes { get; set; }
         internal int DetectionBufferSize { get; set; }
 
         [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<DetectorTarget> newTargetDetectedEvent;
         [PropertyOrder(2)] [FoldoutGroup("Events")] public UnityEvent<DetectorTarget> targetLostEvent;
 
         protected DetectorTargets DetectedTargets;
+
+        private string[] _detectionTags;
+        public string[] DetectionTags => _detectionTags;
+
+        #endregion
+
+        #region Startup
+
+        internal virtual void Awake()
+        {
+            if (targetTagMappings)
+            {
+                RefreshDetectionTags();
+                RefreshDetectionTypes();
+            }
+        }
 
         #endregion
 
@@ -44,14 +88,25 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         #region Class Methods
 
+        private void RefreshDetectionTags()
+        {
+            _detectionTags = targetTagMappings.GetTargetTags();
+        }
+
+        private void RefreshDetectionTypes()
+        {
+            DetectedTargetTypes = targetTagMappings.GetTargetTypes();
+        }
+
+
+        protected TargetType GetTargetTypeByTag(string tagToFind)
+        {
+            return targetTagMappings.GetTargetTypeByTag(tagToFind);
+        }
+
         protected void SetLayerMask(LayerMask layerMaskToSet)
         {
             DetectionLayerMask = layerMaskToSet;
-        }
-
-        protected void SetTag(string[] tagsToSet)
-        {
-            DetectionTags = tagsToSet;
         }
 
         protected virtual void NewTargetDetected(DetectorTarget detectedTarget, bool triggerEvents)

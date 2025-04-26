@@ -695,7 +695,7 @@ BlendTree:
     m_DirectBlendParameter: 
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400038, guid: e5366f5926c8dd949a168f5f0095a4d3, type: 3}
+    m_Motion: {fileID: 7400000, guid: 6fb3851da6a6f5948ab6892bee8ba920, type: 3}
     m_Threshold: 0.0952381
     m_Position: {x: 0.5, y: 0}
     m_TimeScale: 1
@@ -703,7 +703,7 @@ BlendTree:
     m_DirectBlendParameter: 
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400042, guid: e5366f5926c8dd949a168f5f0095a4d3, type: 3}
+    m_Motion: {fileID: 7400006, guid: 6fb3851da6a6f5948ab6892bee8ba920, type: 3}
     m_Threshold: 0.1904762
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -1908,14 +1908,14 @@ AnimatorStateMachine:
   - {fileID: 343292192334204087}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -1320117617044684587}
-    second:
-    - {fileID: 4160628064871898953}
+  - first: {fileID: 6973970490644540656}
+    second: []
   - first: {fileID: -3166783401824974665}
     second:
     - {fileID: 3211874129599285776}
-  - first: {fileID: 6973970490644540656}
-    second: []
+  - first: {fileID: -1320117617044684587}
+    second:
+    - {fileID: 4160628064871898953}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 30, y: 20, z: 0}
   m_EntryPosition: {x: 36, y: 108, z: 0}
@@ -2055,6 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fd0adb64c2be84397c829b491fddce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationExitDuration: 1
 --- !u!1107 &1694065445027273823
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2422,12 +2423,12 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -6470769671472897887}
-    second:
-    - {fileID: -2110337876634983800}
   - first: {fileID: 1694065445027273823}
     second:
     - {fileID: 981049727721305069}
+  - first: {fileID: -6470769671472897887}
+    second:
+    - {fileID: -2110337876634983800}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}

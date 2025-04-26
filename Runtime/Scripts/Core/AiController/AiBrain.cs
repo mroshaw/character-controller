@@ -1,6 +1,5 @@
 using System.Collections;
 using DaftAppleGames.Extensions;
-using ECM2;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #else
@@ -18,7 +17,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
         Wandering,
         Patrolling,
         Fleeing,
-        Attacking,
+        MovingToPosition,
+        Attacking
     }
 
     /// <summary>
@@ -29,21 +29,17 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Class Variables
 
         [BoxGroup("Patrol Settings")] [SerializeField] private PatrolRoute patrolRoute;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolSpeed = 0.2f;
-        [BoxGroup("Patrol Settings")] [SerializeField] private float patrolRotationRate = 40.0f;
+        [BoxGroup("Patrol Settings")] [SerializeField] private AiMoveSpeed patrolSpeed = AiMoveSpeed.Walking;
         [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMinPause = 5.0f;
         [BoxGroup("Patrol Settings")] [SerializeField] private float patrolMaxPause = 15.0f;
 
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderSpeed = 0.2f;
-        [BoxGroup("Wander Settings")] [SerializeField] private float wanderRotationRate = 40.0f;
+        [BoxGroup("Wander Settings")] [SerializeField] private AiMoveSpeed wanderSpeed = AiMoveSpeed.Walking;
         [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinRange = 20.0f;
         [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxRange = 60.0f;
         [BoxGroup("Wander Settings")] [SerializeField] private float wanderMinPause = 0.0f;
         [BoxGroup("Wander Settings")] [SerializeField] private float wanderMaxPause = 10.0f;
         [BoxGroup("Wander Settings")] [SerializeField] private Transform wanderCenterTransform;
 
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeSpeed = 0.9f;
-        [BoxGroup("Flee Settings")] [SerializeField] private float fleeRotationRate = 80.0f;
         [BoxGroup("Flee Settings")] [SerializeField] private float fleeMinRange = 20.0f;
         [BoxGroup("Flee Settings")] [SerializeField] private float fleeMaxRange = 30.0f;
         [BoxGroup("Flee Settings")] [SerializeField] private float fleeRestTime = 30.0f;
@@ -65,6 +61,12 @@ namespace DaftAppleGames.TpCharacterController.AiController
         public DetectorManager DetectorManager { get; private set; }
         public Animator Animator { get; private set; }
         public AiState AiState { get; private set; }
+
+        private bool _movementDestinationReached = false;
+        private bool _isMoving = false;
+
+        public bool MovementDestinationReached => _movementDestinationReached;
+        public bool IsMoving => _isMoving;
 
         #endregion
 
@@ -110,43 +112,23 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         #region Class methods
 
+        public void StopMovement()
+        {
+            _isMoving = false;
+            AiState = AiState.Idle;
+            NavMeshCharacter.StopMovement();
+        }
+
         #region Move methods
-
-        public void SetMoveSpeed(float speed)
-        {
-            Character.maxWalkSpeed = speed;
-        }
-
-        public void SetRotationRate(float rotateRate)
-        {
-            Character.rotationRate = rotateRate;
-        }
 
         public bool HasArrived()
         {
             return !NavMeshCharacter.agent.hasPath || NavMeshCharacter.agent.velocity.sqrMagnitude == 0.0f;
         }
 
-        public void MoveTo(Vector3 position)
+        public void MoveTo(Vector3 position, AiMoveSpeed speed, ECM2.NavMeshCharacter.DestinationReachedEventHandler arrivalCallBack = null)
         {
-            SetMoveSpeed(wanderSpeed);
-            SetRotationRate(wanderRotationRate);
-            NavMeshCharacter.MoveToDestination(position);
-        }
-
-        public void MoveTo(Vector3 position, float moveSpeed, float rotationRate)
-        {
-            SetMoveSpeed(moveSpeed);
-            SetRotationRate(rotationRate);
-            NavMeshCharacter.MoveToDestination(position);
-        }
-
-        public void MoveTo(Vector3 position, NavMeshCharacter.DestinationReachedEventHandler arrivalCallBack)
-        {
-            SetMoveSpeed(wanderSpeed);
-            NavMeshCharacter.DestinationReached -= arrivalCallBack;
-            NavMeshCharacter.DestinationReached += arrivalCallBack;
-            NavMeshCharacter.MoveToDestination(position);
+            NavMeshCharacter.MoveToDestination(position, speed, arrivalCallBack);
         }
 
         #endregion
@@ -168,9 +150,6 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
             NavMeshCharacter.DestinationReached -= ArrivedAtPatrolDestination;
             NavMeshCharacter.DestinationReached += ArrivedAtPatrolDestination;
-
-            SetMoveSpeed(patrolSpeed);
-            SetRotationRate(patrolRotationRate);
 
             NavMeshCharacter.MoveToDestination(patrolRoute.GetNextDestination().position);
             AiState = AiState.Patrolling;
@@ -204,10 +183,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 return;
             }
 
-            SetMoveSpeed(wanderSpeed);
-            SetRotationRate(wanderRotationRate);
             NavMeshCharacter.DestinationReached += ArrivedAtWanderDestination;
-            GoToRandomDestination();
+            GoToRandomDestination(wanderSpeed);
             AiState = AiState.Wandering;
         }
 
@@ -218,10 +195,10 @@ namespace DaftAppleGames.TpCharacterController.AiController
             AiState = AiState.Idle;
         }
 
-        private void GoToRandomDestination()
+        private void GoToRandomDestination(AiMoveSpeed moveSpeed)
         {
             Vector3 wanderLocation = GetRandomWanderLocation(wanderCenterTransform.position, wanderMinRange, wanderMaxRange);
-            NavMeshCharacter.MoveToDestination(wanderLocation);
+            NavMeshCharacter.MoveToDestination(wanderLocation, moveSpeed);
         }
 
         private Vector3 GetRandomWanderLocation(Vector3 center, float minDistance, float maxDistance)
@@ -230,15 +207,15 @@ namespace DaftAppleGames.TpCharacterController.AiController
             return location;
         }
 
-        private IEnumerator MoveToRandomPositionAfterDelayAsync()
+        private IEnumerator MoveToRandomPositionAfterDelayAsync(AiMoveSpeed moveSpeed)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(wanderMinPause, wanderMaxPause));
-            GoToRandomDestination();
+            GoToRandomDestination(moveSpeed);
         }
 
         private void ArrivedAtWanderDestination()
         {
-            StartCoroutine(MoveToRandomPositionAfterDelayAsync());
+            StartCoroutine(MoveToRandomPositionAfterDelayAsync(wanderSpeed));
         }
 
         #endregion
@@ -256,10 +233,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     break;
             }
 
-            SetMoveSpeed(fleeSpeed);
-            SetRotationRate(fleeRotationRate);
-            NavMeshCharacter.MoveToDestination(GetFleeDestination(fleeFromTarget));
-            NavMeshCharacter.DestinationReached += ArrivedAtFleeDestination;
+            NavMeshCharacter.MoveToDestination(GetFleeDestination(fleeFromTarget), AiMoveSpeed.Running, ArrivedAtFleeDestination );
             AiState = AiState.Fleeing;
         }
 

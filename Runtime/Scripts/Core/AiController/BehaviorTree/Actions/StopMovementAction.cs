@@ -16,7 +16,7 @@ public partial class StopMovementAction : AiBrainAction
         }
 
         Debug.Log($"Agent {Agent.Value.name} is stopping...");
-        AiBrain.NavMeshCharacter.StopMovement();
-        return Status.Running;
+        AiBrain.StopMovement();
+        return Status.Success;
     }
 }

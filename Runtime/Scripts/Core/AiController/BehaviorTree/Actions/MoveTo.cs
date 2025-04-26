@@ -6,11 +6,12 @@ using Unity.Properties;
 namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions
 {
     [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "AI Move To", story: "[Agent] moves to [Transform]", category: "Action/Navigation", id: "704c056a6c235a2d3dd8e4e731f7a37d")]
+    [NodeDescription(name: "AI Move To", story: "[Agent] moves to [Transform] at [MoveSpeed]", category: "Action/Navigation", id: "704c056a6c235a2d3dd8e4e731f7a37d")]
     public partial class MoveToAction : AiBrainAction
     {
         [SerializeReference] public BlackboardVariable<Transform> Transform;
-        private bool _hasMoved;
+        [SerializeReference] public BlackboardVariable<AiMoveSpeed> MoveSpeed;
+        private bool _hasArrived;
 
         protected override Status OnStart()
         {
@@ -25,21 +26,19 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
                 return Status.Failure;
             }
 
-            AiBrain.MoveTo(Transform.Value.position);
-            // AiBrain.MoveTo(Transform.Value.position, DestinationReached);
-            _hasMoved = false;
+            AiBrain.MoveTo(Transform.Value.position, MoveSpeed.Value, DestinationReached);
+            _hasArrived = false;
             return Status.Running;
         }
 
         protected override Status OnUpdate()
         {
-            return AiBrain.HasArrived() ? Status.Success : Status.Running;
-            // return _hasMoved ? Status.Success : Status.Running;
+            return _hasArrived ? Status.Success : Status.Running;
         }
 
         private void DestinationReached()
         {
-            _hasMoved = true;
+            _hasArrived = true;
         }
     }
 }

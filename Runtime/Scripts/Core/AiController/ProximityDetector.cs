@@ -90,7 +90,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                     if (!currentTargets.HasGuid(guid.Guid))
                     {
                         float distanceToTarget = GetDistanceToTarget(colliderGameObject);
-                        NewTargetDetected(currentTargets.AddTarget(guid.Guid, colliderGameObject, distanceToTarget, colliderGameObject.tag), triggerEvents);
+                        NewTargetDetected(currentTargets.AddTarget(guid.Guid, colliderGameObject, distanceToTarget, GetTargetTypeByTag(colliderGameObject.tag), colliderGameObject.tag), triggerEvents);
                     }
                 }
             }

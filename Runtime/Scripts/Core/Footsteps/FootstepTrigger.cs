@@ -23,6 +23,8 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         {
             _audioSource = GetComponent<AudioSource>();
 
+            ignoreTriggers = true;
+
             if (!_audioSource)
             {
                 Debug.LogError($"FootstepTrigger: no AudioSource on this gameobject! {gameObject}");
@@ -51,7 +53,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         #region Class methods
 
-        public override void TriggerEnter(Collider other)
+        protected override void TriggerEnter(Collider other)
         {
             if (_cooldownCounter > 0.0f || other is null)
             {
@@ -88,7 +90,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             _cooldownCounter -= Time.deltaTime;
         }
 
-        public override void TriggerExit(Collider other)
+        protected override void TriggerExit(Collider other)
         {
         }
 

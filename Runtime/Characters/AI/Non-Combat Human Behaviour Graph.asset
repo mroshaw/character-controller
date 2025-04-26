@@ -1,0 +1,1734 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7255895820478751003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: Non-Combat Human Behaviour Graph Blackboard
+  m_EditorClassIdentifier: 
+  VersionTimestamp: 638779108813662086
+  AssetID:
+    m_Value0: 3816287821644940695
+    m_Value1: 8553210926921649515
+  m_Blackboard:
+    m_Variables:
+    - rid: 6059619832544887435
+    - rid: 6059619832544887437
+    - rid: 6059619832544887438
+    - rid: 6059619832544887439
+    - rid: 6059619832544887441
+    - rid: 6059619832544887442
+    - rid: 6059619832544887443
+    - rid: 6059619832544887444
+    - rid: 6059620264047542556
+    - rid: 3756322442716119595
+    - rid: 3756322466117976589
+    - rid: 3756322466117976590
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3756322442716119595
+      type: {class: 'BlackboardVariable`1[[DaftAppleGames.TpCharacterController.AiController.ClosestTargets, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4588813987698965475
+          m_Value1: 13674849433724344357
+        Name: Closest Targets
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976589
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14298060436135659718
+          m_Value1: 11041669067648388314
+        Name: FleeTarget
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976590
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2280345299445539075
+          m_Value1: 11988718297203371769
+        Name: AttackTarget
+        m_Value: {fileID: 0}
+    - rid: 6059619832544887435
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 6059619832544887437
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15382450224429744143
+          m_Value1: 5147467468817119527
+        Name: Animator
+        m_Value: {fileID: 0}
+    - rid: 6059619832544887438
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1318775912870540500
+          m_Value1: 9085700364329305969
+        Name: Target
+        m_Value: {fileID: 0}
+    - rid: 6059619832544887439
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3835348174098883842
+          m_Value1: 10001754058424506032
+        Name: Water Source
+        m_Value: {fileID: 0}
+    - rid: 6059619832544887441
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11198164302754752574
+          m_Value1: 17308149696061585602
+        Name: Attack Distance
+        m_Value: 1.8
+    - rid: 6059619832544887442
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6854049291148848753
+          m_Value1: 5751734594124403802
+        Name: Min Attack Delay
+        m_Value: 1
+    - rid: 6059619832544887443
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9377658773362734177
+          m_Value1: 5192961964329023069
+        Name: Max Attack Delay
+        m_Value: 2
+    - rid: 6059619832544887444
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14777971361265629377
+          m_Value1: 3133936858752765674
+        Name: Target Escaped Distance
+        m_Value: 15
+    - rid: 6059620264047542556
+      type: {class: 'BlackboardVariable`1[[RelationshipToPlayer, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12620267528531281242
+          m_Value1: 14422210834632591353
+        Name: Relationship To Player
+        m_Value: 0
+--- !u!114 &-6969992538231738639
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: Non-Combat Human Behaviour Graph Blackboard
+  m_EditorClassIdentifier: 
+  AssetID:
+    m_Value0: 3816287821644940695
+    m_Value1: 8553210926921649515
+  m_Variables:
+  - rid: 6260567723480973748
+  - rid: 6260567972528259095
+  - rid: 6260567838019813482
+  - rid: 6260567959174643941
+  - rid: 6260567998176166222
+  - rid: 6260567998176166289
+  - rid: 6260567998176166290
+  - rid: 6260568000589988468
+  - rid: 6059620264047542542
+  - rid: 3756322442716119594
+  - rid: 3756322466117976587
+  - rid: 3756322466117976588
+  m_VersionTimestamp: 638779109031759827
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: -7255895820478751003}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3756322442716119594
+      type: {class: 'TypedVariableModel`1[[DaftAppleGames.TpCharacterController.AiController.ClosestTargets, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 4588813987698965475
+          m_Value1: 13674849433724344357
+        Name: Closest Targets
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976587
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14298060436135659718
+          m_Value1: 11041669067648388314
+        Name: FleeTarget
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976588
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2280345299445539075
+          m_Value1: 11988718297203371769
+        Name: AttackTarget
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6059620264047542542
+      type: {class: 'TypedVariableModel`1[[RelationshipToPlayer, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12620267528531281242
+          m_Value1: 14422210834632591353
+        Name: Relationship To Player
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 6260567723480973748
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567838019813482
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1318775912870540500
+          m_Value1: 9085700364329305969
+        Name: Target
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567959174643941
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 3835348174098883842
+          m_Value1: 10001754058424506032
+        Name: Water Source
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567972528259095
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15382450224429744143
+          m_Value1: 5147467468817119527
+        Name: Animator
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567998176166222
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11198164302754752574
+          m_Value1: 17308149696061585602
+        Name: Attack Distance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 1.8
+    - rid: 6260567998176166289
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 6854049291148848753
+          m_Value1: 5751734594124403802
+        Name: Min Attack Delay
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 1
+    - rid: 6260567998176166290
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 9377658773362734177
+          m_Value1: 5192961964329023069
+        Name: Max Attack Delay
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 2
+    - rid: 6260568000589988468
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14777971361265629377
+          m_Value1: 3133936858752765674
+        Name: Target Escaped Distance
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 15
+--- !u!114 &-5801731707225311110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db920e62f70f420bb33c771449926fa4, type: 3}
+  m_Name: Non-Combat Human Behaviour Graph
+  m_EditorClassIdentifier: 
+  Graphs:
+  - rid: 3756322466117976960
+  RootGraph:
+    rid: 3756322466117976960
+  m_DebugInfo: {fileID: -3460434447371940687}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3756322466117976958
+      type: {class: 'BlackboardVariable`1[[DaftAppleGames.TpCharacterController.AiController.TargetType, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 1
+    - rid: 3756322466117976960
+      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        AuthoringAssetID:
+          m_Value0: 3816287821644940695
+          m_Value1: 8553210926921649515
+        m_DebugInfo: {fileID: -3460434447371940687}
+        Root:
+          rid: 3756322466117976961
+        BlackboardReference:
+          rid: 3756322466117976962
+        BlackboardGroupReferences: []
+        ProcessedNodes: []
+        m_RunningNodes: []
+        m_NodesToEnd:
+          rid: 3756322466117976963
+        m_EndedNodes:
+          rid: 3756322466117976964
+        m_VersionTimestamp: 638779109031759827
+    - rid: 3756322466117976961
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 9252822159886622122
+          m_Value1: 13744896526561946588
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 3756322466117976965
+        Repeat: 0
+    - rid: 3756322466117976962
+      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Blackboard:
+          rid: 3756322466117976966
+        m_Source: {fileID: -7255895820478751003}
+    - rid: 3756322466117976963
+      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
+      data: 
+    - rid: 3756322466117976964
+      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
+      data: 
+    - rid: 3756322466117976965
+      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 1055473128686369458
+          m_Value1: 9708343205513442754
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976961
+        m_Children:
+        - rid: 3756322466117976967
+        - rid: 3756322466117976968
+        - rid: 3756322466117976969
+        - rid: 3756322466117976970
+        - rid: 3756322466117976971
+    - rid: 3756322466117976966
+      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Variables:
+        - rid: 3756322466117976972
+        - rid: 3756322466117976973
+        - rid: 3756322466117976974
+        - rid: 3756322466117976975
+        - rid: 3756322466117976976
+        - rid: 3756322466117976977
+        - rid: 3756322466117976978
+        - rid: 3756322466117976979
+        - rid: 3756322466117976980
+        - rid: 3756322466117976981
+        - rid: 3756322466117976982
+        - rid: 3756322466117976983
+    - rid: 3756322466117976967
+      type: {class: BranchingConditionComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 18168899214008465198
+          m_Value1: 16748789031426067573
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976965
+        m_Children:
+        - rid: 3756322466117976984
+        - rid: 3756322466117976985
+        m_Conditions:
+        - rid: 3756322466117976986
+        m_RequiresAllConditions: 0
+        True:
+          rid: 3756322466117976984
+        False:
+          rid: 3756322466117976985
+    - rid: 3756322466117976968
+      type: {class: AiLookForClosestTargetOfTypeAction, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 5694849740379213004
+          m_Value1: 13269247549332969942
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976965
+        Agent:
+          rid: 3756322466117976972
+        TargetType:
+          rid: 3756322466117976958
+        Target:
+          rid: 3756322466117976982
+    - rid: 3756322466117976969
+      type: {class: StopMovementAction, ns: , asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 15932070308933678393
+          m_Value1: 8293430676517837981
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976965
+        Agent:
+          rid: 3756322466117976972
+    - rid: 3756322466117976970
+      type: {class: FleeAction, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 17023451767594122988
+          m_Value1: 5982228254429390799
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976965
+        Agent:
+          rid: 3756322466117976972
+        Target:
+          rid: 3756322466117976987
+    - rid: 3756322466117976971
+      type: {class: SetVariableNullAction, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 5542592207439845079
+          m_Value1: 6525359072113990912
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976965
+        Variable:
+          rid: 3756322466117976982
+    - rid: 3756322466117976972
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976973
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15382450224429744143
+          m_Value1: 5147467468817119527
+        Name: Animator
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976974
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1318775912870540500
+          m_Value1: 9085700364329305969
+        Name: Target
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976975
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3835348174098883842
+          m_Value1: 10001754058424506032
+        Name: Water Source
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976976
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11198164302754752574
+          m_Value1: 17308149696061585602
+        Name: Attack Distance
+        m_Value: 1.8
+    - rid: 3756322466117976977
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6854049291148848753
+          m_Value1: 5751734594124403802
+        Name: Min Attack Delay
+        m_Value: 1
+    - rid: 3756322466117976978
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9377658773362734177
+          m_Value1: 5192961964329023069
+        Name: Max Attack Delay
+        m_Value: 2
+    - rid: 3756322466117976979
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14777971361265629377
+          m_Value1: 3133936858752765674
+        Name: Target Escaped Distance
+        m_Value: 15
+    - rid: 3756322466117976980
+      type: {class: 'BlackboardVariable`1[[RelationshipToPlayer, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12620267528531281242
+          m_Value1: 14422210834632591353
+        Name: Relationship To Player
+        m_Value: 0
+    - rid: 3756322466117976981
+      type: {class: 'BlackboardVariable`1[[DaftAppleGames.TpCharacterController.AiController.ClosestTargets, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4588813987698965475
+          m_Value1: 13674849433724344357
+        Name: Closest Targets
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976982
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14298060436135659718
+          m_Value1: 11041669067648388314
+        Name: FleeTarget
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976983
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2280345299445539075
+          m_Value1: 11988718297203371769
+        Name: AttackTarget
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976984
+      type: {class: PatrolAction, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 2682270405623746351
+          m_Value1: 918461373620119927
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976967
+        Agent:
+          rid: 3756322466117976972
+    - rid: 3756322466117976985
+      type: {class: WanderAction, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        ID:
+          m_Value0: 17974080198225006702
+          m_Value1: 2139650925237707295
+        Graph:
+          rid: 3756322466117976960
+        m_Parent:
+          rid: 3756322466117976967
+        Agent:
+          rid: 3756322466117976972
+    - rid: 3756322466117976986
+      type: {class: HasPatrolRouteCondition, ns: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Conditions, asm: DaftAppleGames.TPCharacterController.Core}
+      data:
+        Graph:
+          rid: 3756322466117976960
+        Agent:
+          rid: 3756322466117976972
+    - rid: 3756322466117976987
+      type: {class: 'GameObjectToComponentBlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+        m_LinkedVariable:
+          rid: 3756322466117976982
+--- !u!114 &-3460434447371940687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b27bb6d9a2c8d540a10dff10acc543e, type: 3}
+  m_Name: Non-Combat Human Behaviour Graph Debug Info
+  m_EditorClassIdentifier: 
+  m_CodeBreakPointsList: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad8f2220607dac4db5082ff333fafb8, type: 3}
+  m_Name: Non-Combat Human Behaviour Graph
+  m_EditorClassIdentifier: 
+  Blackboard: {fileID: -6969992538231738639}
+  m_Description: Simple animal behaviour graph.
+  m_Nodes:
+  - rid: 6260567723480973746
+  - rid: 6260567949426295504
+  - rid: 6260567949426295505
+  - rid: 6260567949426295506
+  - rid: 6260567949426295698
+  - rid: 6260567952152854579
+  - rid: 6260567952152854585
+  - rid: 6260567997684908625
+  - rid: 6260567997684908626
+  - rid: 3756322466117976492
+  - rid: 3756322466117976674
+  - rid: 3756322466117976742
+  - rid: 3756322466117976749
+  m_VersionTimestamp: 638779115727388854
+  m_DebugInfo: {fileID: -3460434447371940687}
+  m_RuntimeGraph: {fileID: -5801731707225311110}
+  AssetID:
+    m_Value0: 3816287821644940695
+    m_Value1: 8553210926921649515
+  Story:
+    Story: 
+    StoryVariableNames: []
+    Variables: []
+  m_NodeModelsInfo:
+  - Name: On Start
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 3335272451348827663
+      m_Value1: 11549843281177505721
+    Variables: []
+    NamedChildren: []
+  - Name: Conditional Branch
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 12334964803190848789
+      m_Value1: 14608808926743427008
+    Variables: []
+    NamedChildren:
+    - True
+    - False
+  - Name: Sequence
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 10181448252506100447
+      m_Value1: 8737116843063128493
+    Variables: []
+    NamedChildren: []
+  - Name: AI Wander
+    Story: '[Agent] wanders'
+    RuntimeTypeID:
+      m_Value0: 1351330945793938297
+      m_Value1: 9086185506995748502
+    Variables:
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Patrol
+    Story: '[Agent] patrols waypoints'
+    RuntimeTypeID:
+      m_Value0: 12092307830067959424
+      m_Value1: 1613155988586425706
+    Variables:
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AiLookForClosestTargetOfType
+    Story: '[Agent] looks for [TargetType] [Target]'
+    RuntimeTypeID:
+      m_Value0: 12677203691266228607
+      m_Value1: 6265896301239410743
+    Variables:
+    - Name: TargetType
+      Type:
+        m_SerializableType: DaftAppleGames.TpCharacterController.AiController.TargetType,
+          DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: Target
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Stop Movement
+    Story: '[Agent] stops moving'
+    RuntimeTypeID:
+      m_Value0: 4455268706083447018
+      m_Value1: 13453655903595073371
+    Variables:
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Flee
+    Story: '[Agent] flees from [Target]'
+    RuntimeTypeID:
+      m_Value0: 1822749127581634777
+      m_Value1: 6061410955423352114
+    Variables:
+    - Name: Target
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Set Variable Null
+    Story: 'Clear [Variable]'
+    RuntimeTypeID:
+      m_Value0: 18084709869829106801
+      m_Value1: 13300045933142078205
+    Variables:
+    - Name: Variable
+      Type:
+        m_SerializableType: Unity.Behavior.BlackboardVariable, Unity.Behavior, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Look for Closest Target
+    Story: '[Agent] looks for [ClosestTargets]'
+    RuntimeTypeID:
+      m_Value0: 14948044243100379319
+      m_Value1: 11869018812749785394
+    Variables:
+    - Name: ClosestTargets
+      Type:
+        m_SerializableType: DaftAppleGames.TpCharacterController.AiController.ClosestTargets,
+          DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: Inverter
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 1967250899303387600
+      m_Value1: 15806081860663257984
+    Variables: []
+    NamedChildren: []
+  - Name: Switch
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 7697158487413557231
+      m_Value1: 14836087705204215232
+    Variables:
+    - Name: EnumVariable
+      Type:
+        m_SerializableType: Unity.Behavior.BlackboardVariable, Unity.Behavior, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Find Water
+    Story: '[Agent] finds nearest [WaterSource]'
+    RuntimeTypeID:
+      m_Value0: 5673472717956497103
+      m_Value1: 10237524114267121559
+    Variables:
+    - Name: WaterSource
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Move To
+    Story: '[Agent] moves to [Transform]'
+    RuntimeTypeID:
+      m_Value0: 3267963428152888432
+      m_Value1: 9053351469660821565
+    Variables:
+    - Name: Transform
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: Repeat Until Success
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 12917250034115216299
+      m_Value1: 14181428205326875264
+    Variables: []
+    NamedChildren: []
+  - Name: Run In Parallel Until Any Succeeds
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 3118052729764074030
+      m_Value1: 1388175790504016299
+    Variables: []
+    NamedChildren: []
+  - Name: Wait
+    Story: Wait for [SecondsToWait] seconds
+    RuntimeTypeID:
+      m_Value0: 7729581452106168333
+      m_Value1: 8820302366443624372
+    Variables:
+    - Name: SecondsToWait
+      Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Drink
+    Story: '[Agent] drinks'
+    RuntimeTypeID:
+      m_Value0: 6328728070182282464
+      m_Value1: 1226252419798380822
+    Variables:
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Set Animator Bool
+    Story: 'Set [AnimBoolParam] to [AnimState] on [Agent]'
+    RuntimeTypeID:
+      m_Value0: 367922046604053704
+      m_Value1: 4998913980658317362
+    Variables:
+    - Name: AnimBoolParam
+      Type:
+        m_SerializableType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    - Name: AnimState
+      Type:
+        m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: Repeat While
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 17299482495328769724
+      m_Value1: 1892732619013874548
+    Variables: []
+    NamedChildren: []
+  - Name: AI Clear Target
+    Story: 'Clear [Target]'
+    RuntimeTypeID:
+      m_Value0: 14263505571094019877
+      m_Value1: 4442486452264471103
+    Variables:
+    - Name: Target
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: Random
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 15586748977048568638
+      m_Value1: 1886799870276249994
+    Variables: []
+    NamedChildren: []
+  - Name: Wait (Range)
+    Story: Wait between [Min] and [Max] seconds
+    RuntimeTypeID:
+      m_Value0: 1357124955953561018
+      m_Value1: 15647026721769409965
+    Variables:
+    - Name: Min
+      Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    - Name: Max
+      Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Rotate To Target
+    Story: '[Agent] rotates to [Target]'
+    RuntimeTypeID:
+      m_Value0: 5565535716327892234
+      m_Value1: 16749334821526617881
+    Variables:
+    - Name: Target
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: AI Set Animator Trigger
+    Story: 'Trigger anim [Trigger] in [Agent]'
+    RuntimeTypeID:
+      m_Value0: 0
+      m_Value1: 0
+    Variables:
+    - Name: Trigger
+      Type:
+        m_SerializableType: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    - Name: Agent
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+  - Name: Looks for Tags
+    Story: '[Self] looks for [Target] with [Tags]'
+    RuntimeTypeID:
+      m_Value0: 2686461140192474875
+      m_Value1: 12143216617311906120
+    Variables:
+    - Name: Self
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Target
+      Type:
+        m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Tags
+      Type:
+        m_SerializableType: System.Collections.Generic.List`1[[System.String, mscorlib,
+          Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+          Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      Tooltip: 
+    NamedChildren: []
+  m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: -6969992538231738639}
+  m_CommandBuffer:
+    m_Commands: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3756322466117976492
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1065.9543, y: -291.94046}
+        ID:
+          m_Value0: 5694849740379213004
+          m_Value1: 13269247549332969942
+        Parents: []
+        PortModels:
+        - rid: 3756322466117976493
+        - rid: 3756322466117976494
+        NodeType:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions.AiLookForClosestTargetOfTypeAction,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 12677203691266228607
+          m_Value1: 6265896301239410743
+        m_FieldValues:
+        - rid: 3756322466117976497
+        - rid: 3756322466117976526
+        - rid: 3756322466117976495
+    - rid: 3756322466117976493
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976492
+        m_Connections:
+        - rid: 6260567949426295700
+    - rid: 3756322466117976494
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976492
+        m_Connections: []
+    - rid: 3756322466117976495
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976498
+        LinkedVariable:
+          rid: 3756322466117976528
+    - rid: 3756322466117976497
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: TargetType
+        Type:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.TargetType,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976500
+        LinkedVariable:
+          rid: -2
+    - rid: 3756322466117976498
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976500
+      type: {class: 'BlackboardVariable`1[[DaftAppleGames.TpCharacterController.AiController.TargetType, DaftAppleGames.TPCharacterController.Core]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 1
+    - rid: 3756322466117976526
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Target
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976527
+        LinkedVariable:
+          rid: 3756322466117976620
+    - rid: 3756322466117976527
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976528
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976620
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14298060436135659718
+          m_Value1: 11041669067648388314
+        Name: FleeTarget
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976674
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -819.8411, y: -293.2693}
+        ID:
+          m_Value0: 15932070308933678393
+          m_Value1: 8293430676517837981
+        Parents: []
+        PortModels:
+        - rid: 3756322466117976675
+        - rid: 3756322466117976676
+        NodeType:
+          m_SerializableType: StopMovementAction, DaftAppleGames.TPCharacterController.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 4455268706083447018
+          m_Value1: 13453655903595073371
+        m_FieldValues:
+        - rid: 3756322466117976677
+    - rid: 3756322466117976675
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976674
+        m_Connections:
+        - rid: 6260567949426295700
+    - rid: 3756322466117976676
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976674
+        m_Connections: []
+    - rid: 3756322466117976677
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976678
+        LinkedVariable:
+          rid: 3756322466117976679
+    - rid: 3756322466117976678
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976679
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976742
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -640.9339, y: -291.42963}
+        ID:
+          m_Value0: 17023451767594122988
+          m_Value1: 5982228254429390799
+        Parents: []
+        PortModels:
+        - rid: 3756322466117976743
+        - rid: 3756322466117976744
+        NodeType:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions.FleeAction,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 1822749127581634777
+          m_Value1: 6061410955423352114
+        m_FieldValues:
+        - rid: 3756322466117976745
+        - rid: 3756322466117976746
+    - rid: 3756322466117976743
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976742
+        m_Connections:
+        - rid: 6260567949426295700
+    - rid: 3756322466117976744
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976742
+        m_Connections: []
+    - rid: 3756322466117976745
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Target
+        Type:
+          m_SerializableType: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976747
+        LinkedVariable:
+          rid: 3756322466117976758
+    - rid: 3756322466117976746
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3756322466117976748
+        LinkedVariable:
+          rid: 3756322466117976757
+    - rid: 3756322466117976747
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976748
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976749
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -449.33093, y: -292.6743}
+        ID:
+          m_Value0: 5542592207439845079
+          m_Value1: 6525359072113990912
+        Parents: []
+        PortModels:
+        - rid: 3756322466117976750
+        - rid: 3756322466117976751
+        NodeType:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions.SetVariableNullAction,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 18084709869829106801
+          m_Value1: 13300045933142078205
+        m_FieldValues:
+        - rid: 3756322466117976752
+    - rid: 3756322466117976750
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976749
+        m_Connections:
+        - rid: 6260567949426295700
+    - rid: 3756322466117976751
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3756322466117976749
+        m_Connections: []
+    - rid: 3756322466117976752
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Variable
+        Type:
+          m_SerializableType: System.Object, mscorlib, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        LocalValue:
+          rid: 3756322466117976753
+        LinkedVariable:
+          rid: 3756322466117976758
+    - rid: 3756322466117976753
+      type: {class: 'BlackboardVariable`1[[System.Object, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+    - rid: 3756322466117976757
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3756322466117976758
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14298060436135659718
+          m_Value1: 11041669067648388314
+        Name: FleeTarget
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6059619836374548627
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567723480973746
+      type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1058.0236, y: -601.542}
+        ID:
+          m_Value0: 9252822159886622122
+          m_Value1: 13744896526561946588
+        Parents: []
+        PortModels:
+        - rid: 6260567723480973747
+        NodeType:
+          m_SerializableType: Unity.Behavior.Start, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3335272451348827663
+          m_Value1: 11549843281177505721
+        m_FieldValues: []
+        Repeat: 0
+    - rid: 6260567723480973747
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567723480973746
+        m_Connections:
+        - rid: 6260567949426295699
+    - rid: 6260567949426295504
+      type: {class: BranchingConditionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1436.7095, y: -314.93152}
+        ID:
+          m_Value0: 18168899214008465198
+          m_Value1: 16748789031426067573
+        Parents: []
+        PortModels:
+        - rid: 6260567949426295507
+        - rid: 6260567949426295508
+        - rid: 6260567949426295509
+        NodeType:
+          m_SerializableType: Unity.Behavior.BranchingConditionComposite, Unity.Behavior,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 12334964803190848789
+          m_Value1: 14608808926743427008
+        m_FieldValues: []
+        <ConditionModels>k__BackingField:
+        - ConditionType:
+            m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Conditions.HasPatrolRouteCondition,
+              DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+              PublicKeyToken=null
+          ConditionTypeID:
+            m_Value0: 15586229296539195773
+            m_Value1: 2523795673983508676
+          NodeModel:
+            rid: 6260567949426295504
+          m_FieldValues:
+          - rid: 6260567999783371544
+          OperatorFieldModel:
+            rid: -2
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+    - rid: 6260567949426295505
+      type: {class: FloatingPortNodeModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -1567.5625, y: -185.26436}
+        ID:
+          m_Value0: 16636916749512526550
+          m_Value1: 6421455520590016445
+        Parents: []
+        PortModels:
+        - rid: 6260567949426295510
+        - rid: 6260567949426295511
+        ParentNodeID:
+          m_Value0: 18168899214008465198
+          m_Value1: 16748789031426067573
+        PortName: True
+    - rid: 6260567949426295506
+      type: {class: FloatingPortNodeModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -1314.7273, y: -184.18407}
+        ID:
+          m_Value0: 17164275165850790889
+          m_Value1: 17120813375412464618
+        Parents: []
+        PortModels:
+        - rid: 6260567949426295512
+        - rid: 6260567949426295513
+        ParentNodeID:
+          m_Value0: 18168899214008465198
+          m_Value1: 16748789031426067573
+        PortName: False
+    - rid: 6260567949426295507
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567949426295504
+        m_Connections:
+        - rid: 6260567949426295700
+    - rid: 6260567949426295508
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: True
+        m_PortDataFlowType: 1
+        m_IsFloating: 1
+        m_NodeModel:
+          rid: 6260567949426295504
+        m_Connections:
+        - rid: 6260567949426295510
+    - rid: 6260567949426295509
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: False
+        m_PortDataFlowType: 1
+        m_IsFloating: 1
+        m_NodeModel:
+          rid: 6260567949426295504
+        m_Connections:
+        - rid: 6260567949426295512
+    - rid: 6260567949426295510
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 1
+        m_NodeModel:
+          rid: 6260567949426295505
+        m_Connections:
+        - rid: 6260567949426295508
+    - rid: 6260567949426295511
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567949426295505
+        m_Connections:
+        - rid: 6260567952152854586
+    - rid: 6260567949426295512
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 1
+        m_NodeModel:
+          rid: 6260567949426295506
+        m_Connections:
+        - rid: 6260567949426295509
+    - rid: 6260567949426295513
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567949426295506
+        m_Connections:
+        - rid: 6260567952152854580
+    - rid: 6260567949426295698
+      type: {class: CompositeNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1057.6699, y: -495.14093}
+        ID:
+          m_Value0: 1055473128686369458
+          m_Value1: 9708343205513442754
+        Parents: []
+        PortModels:
+        - rid: 6260567949426295699
+        - rid: 6260567949426295700
+        NodeType:
+          m_SerializableType: Unity.Behavior.SequenceComposite, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 10181448252506100447
+          m_Value1: 8737116843063128493
+        m_FieldValues: []
+    - rid: 6260567949426295699
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567949426295698
+        m_Connections:
+        - rid: 6260567723480973747
+    - rid: 6260567949426295700
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567949426295698
+        m_Connections:
+        - rid: 6260567949426295507
+        - rid: 3756322466117976675
+        - rid: 3756322466117976493
+        - rid: 3756322466117976743
+        - rid: 3756322466117976750
+    - rid: 6260567952152854579
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1316.2784, y: -83.452805}
+        ID:
+          m_Value0: 17974080198225006702
+          m_Value1: 2139650925237707295
+        Parents: []
+        PortModels:
+        - rid: 6260567952152854580
+        - rid: 6260567952152854581
+        NodeType:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions.WanderAction,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 1351330945793938297
+          m_Value1: 9086185506995748502
+        m_FieldValues:
+        - rid: 6260567999653871908
+    - rid: 6260567952152854580
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567952152854579
+        m_Connections:
+        - rid: 6260567949426295513
+    - rid: 6260567952152854581
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567952152854579
+        m_Connections: []
+    - rid: 6260567952152854585
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -1569.5125, y: -83.62993}
+        ID:
+          m_Value0: 2682270405623746351
+          m_Value1: 918461373620119927
+        Parents: []
+        PortModels:
+        - rid: 6260567952152854586
+        - rid: 6260567952152854587
+        NodeType:
+          m_SerializableType: DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Actions.PatrolAction,
+            DaftAppleGames.TPCharacterController.Core, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 12092307830067959424
+          m_Value1: 1613155988586425706
+        m_FieldValues:
+        - rid: 6260567999537480576
+    - rid: 6260567952152854586
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567952152854585
+        m_Connections:
+        - rid: 6260567949426295511
+    - rid: 6260567952152854587
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6260567952152854585
+        m_Connections: []
+    - rid: 6260567997684908625
+      type: {class: StickyNoteModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -490.85095, y: -433.0249}
+        ID:
+          m_Value0: 6589694530752775974
+          m_Value1: 9195981139892195997
+        Parents: []
+        PortModels: []
+        Text: Flee behaviour
+    - rid: 6260567997684908626
+      type: {class: StickyNoteModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -1693.7985, y: -311.40186}
+        ID:
+          m_Value0: 14826397782298517605
+          m_Value1: 8187248444008027137
+        Parents: []
+        PortModels: []
+        Text: 'Exploration movement behaviour.
+
+          Agent will patrol if given
+          a PatrolRoute, otherwise
+
+          will wander within the bounds defined
+          in the AiBrain.'
+    - rid: 6260567999537480576
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 6260567999537480578
+        LinkedVariable:
+          rid: 6059619836374548627
+    - rid: 6260567999537480578
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6260567999653871908
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 6260567999653871910
+        LinkedVariable:
+          rid: 6059619836374548627
+    - rid: 6260567999653871910
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6260567999783371249
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6260567999783371544
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 6260567999783371545
+        LinkedVariable:
+          rid: 6260567999783371249
+    - rid: 6260567999783371545
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
