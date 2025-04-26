@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DaftAppleGames.Editor.Utils;
+using DaftAppleGames.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -166,15 +166,21 @@ namespace DaftAppleGames.TpCharacterController.Editor
             CreateTags();
         }
 
+        /// <summary>
+        /// Create the required layers
+        /// </summary>
         private void CreateLayers()
         {
-            EditorUtils.AddLayer("Player");
-            EditorUtils.AddLayer("Terrain");
+            CustomEditorTools.AddLayer("Player");
+            CustomEditorTools.AddLayer("Terrain");
         }
 
+        /// <summary>
+        /// Create the required tags
+        /// </summary>
         private void CreateTags()
         {
-            EditorUtils.AddTag("Player");
+            CustomEditorTools.AddTag("Player");
         }
     }
 }

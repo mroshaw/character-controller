@@ -51,7 +51,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         #region Class methods
 
-        public override void TriggerEnter(Collider other)
+        protected override void TriggerEnter(Collider other)
         {
             if (_cooldownCounter > 0.0f || other is null)
             {
@@ -74,7 +74,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             }
 
             // Play random audio
-            System.Random randomAudio = new System.Random();
+            System.Random randomAudio = new();
             int audioIndex = randomAudio.Next(0, footstepSurface.audioClips.Length);
             AudioClip audioClip = footstepSurface.audioClips[audioIndex];
             _audioSource.Stop();
@@ -88,7 +88,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             _cooldownCounter -= Time.deltaTime;
         }
 
-        public override void TriggerExit(Collider other)
+        protected override void TriggerExit(Collider other)
         {
         }
 
@@ -103,7 +103,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             if (otherCollider is TerrainCollider)
             {
                 Vector3 collisionPosition = footTransform.position;
-                if (!FindTerrainTextureAtPosition(footTransform.position, out var terrainTextureName))
+                if (!FindTerrainTextureAtPosition(footTransform.position, out string terrainTextureName))
                 {
                     footstepSurface = _defaultSurface;
                     spawnPosition = collisionPosition;
@@ -123,7 +123,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
                 ? otherCollider.ClosestPoint(footTransform.position)
                 : footTransform.position;
 
-            if (FindMaterialTextureFromCollider(otherCollider, out var meshTextureName))
+            if (FindMaterialTextureFromCollider(otherCollider, out string meshTextureName))
             {
                 footstepSurface = FootstepManager.GetSurfaceFromTextureName(meshTextureName);
                 return;
@@ -169,11 +169,11 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             }
 
             Vector3 terrainSize = Terrain.activeTerrain.terrainData.size;
-            Vector2 textureSize = new Vector2(Terrain.activeTerrain.terrainData.alphamapWidth,
+            Vector2 textureSize = new(Terrain.activeTerrain.terrainData.alphamapWidth,
                 Terrain.activeTerrain.terrainData.alphamapHeight);
 
-            int alphaX = (int)((collisionPosition.x / terrainSize.x) * textureSize.x + 0.5f);
-            int alphaY = (int)((collisionPosition.z / terrainSize.z) * textureSize.y + 0.5f);
+            int alphaX = (int)(collisionPosition.x / terrainSize.x * textureSize.x + 0.5f);
+            int alphaY = (int)(collisionPosition.z / terrainSize.z * textureSize.y + 0.5f);
 
             float[,,] terrainMaps = Terrain.activeTerrain.terrainData.GetAlphamaps(alphaX, alphaY, 1, 1);
 
@@ -203,9 +203,9 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             }
 
             // Texture is at index textureMaxIndex
-            textureName = (_terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex] &&
-                           _terrainData.terrainLayers[textureMaxIndex].diffuseTexture)
-                ? (_terrainData.terrainLayers[textureMaxIndex]).diffuseTexture.name
+            textureName = _terrainData != null && _terrainData.terrainLayers.Length > 0 && _terrainData.terrainLayers[textureMaxIndex] &&
+                          _terrainData.terrainLayers[textureMaxIndex].diffuseTexture
+                ? _terrainData.terrainLayers[textureMaxIndex].diffuseTexture.name
                 : "";
 
             if (FootstepManager.DebugTextureName)

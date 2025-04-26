@@ -112,7 +112,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #endregion
 
         #region Editor methods
-
+        #if UNITY_EDITOR
         [Button("Create Triggers")]
         private void CreateFootstepTriggers()
         {
@@ -144,7 +144,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             newTrigger.transform.localPosition = Vector3.zero;
             newTrigger.transform.localScale = Vector3.one;
             FootstepTrigger newFootStepTrigger = newTrigger.AddComponent<FootstepTrigger>();
-            newFootStepTrigger.triggerLayers = triggerLayerMask;
+            newFootStepTrigger.ConfigureInEditor(triggerLayerMask, null);
             SphereCollider newSphereCollider = newTrigger.AddComponent<SphereCollider>();
             newSphereCollider.radius = 0.1f;
             newSphereCollider.isTrigger = true;
@@ -164,7 +164,7 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
             footstepTriggers = new();
             footstepTriggers = foundTriggers.ToList();
         }
-
+        #endif
         #endregion
     }
 }
