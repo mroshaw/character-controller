@@ -21,10 +21,6 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Action
             {
                 return Status.Failure;
             }
-
-            // AiBrain.transform.LookAt(Target.Value);
-            // return Status.Success;
-            AiBrain.SetRotationRate(180.0f);
             return Status.Running;
         }
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 #else
@@ -6,6 +8,7 @@ using DaftAppleGames.Attributes;
 #endif
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace DaftAppleGames.TpCharacterController.AiController
 {
@@ -14,13 +17,15 @@ namespace DaftAppleGames.TpCharacterController.AiController
         #region Class Variables
 
         [BoxGroup("Settings")] [Tooltip("Only colliders on these layers will be considered as targets.")] [SerializeField] private LayerMask detectionLayerMask;
-        #if ODIN_INSPECTOR
-        [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] string[] detectionTags;
-        #else
-        [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] [TagSelector] string[] detectionTags;
-        #endif
+        [BoxGroup("Settings")] [Tooltip("Only colliders with these tags will be considered as targets.")] [SerializeField] private TargetTagMappingSO detectedTargetTagMapping;
+
         [BoxGroup("Settings")] [Tooltip("Maximum number of colliders that can be detected by detectors. This is to avoid garbage collection.")]
         [SerializeField] protected int detectionBufferSize = 20;
+
+        [BoxGroup("Settings")] [SerializeField] private bool overrideDetectorPolling = true;
+
+        [BoxGroup("Settings")] [Tooltip("Poll detectors every n frames. Lower values means greater accuracy but slower performance.")]
+        [SerializeField] private int detectorPollFrames = 5;
 
         [BoxGroup("Settings")]
         [Tooltip("List of detectors that will be queried by this manager. Use the button below to automatically populate, or manually drag in detectors required.")]
@@ -29,14 +34,14 @@ namespace DaftAppleGames.TpCharacterController.AiController
         [BoxGroup("Events")] [Tooltip("This event is fired when a new closest target is acquired.")] public UnityEvent newTargetDetectedEvent;
         [BoxGroup("Events")] [Tooltip("This event is fired when the current closest target is lost.")] public UnityEvent targetLostEvent;
 
-        [BoxGroup("Debug")] [ShowInInspector] [SerializeField] private SortedDetectorTargetList _sortedDetectedTargets;
-
-        [BoxGroup("Debug")] [ShowInInspector] private Dictionary<string, SortedDetectorTargetList> _detectorTargetsByTag;
+        [BoxGroup("Debug")] [ShowInInspector] [SerializeField] private DetectorTargets _allDetectedTargets;
+        [BoxGroup("Debug")] [SerializeField] [InlineEditor] private ClosestTargets _closestDetectedTargets;
+        [BoxGroup("Debug")] [ShowInInspector] private Dictionary<TargetType, SortedDetectorTargetList> _detectorTargetsByTargetType;
 
         // This is used to distribute 'Update' calls to sensors across DetectorManagers. So rather than all instances polling on exactly the same frame,
         // calls will be randomly distributed across the number of seed frames.
         private const int LoadBalanceSeed = 10;
-
+        private TargetType[] _detectedTargetTypes;
         private int _instanceLoadBalanceFrame;
 
         #endregion
@@ -55,18 +60,23 @@ namespace DaftAppleGames.TpCharacterController.AiController
         private void Awake()
         {
             _instanceLoadBalanceFrame = Random.Range(0, LoadBalanceSeed);
+            _closestDetectedTargets = ScriptableObject.CreateInstance<ClosestTargets>();
+            _detectedTargetTypes = detectedTargetTagMapping.GetTargetTypes();
 
             foreach (Detector detector in detectors)
             {
-                detector.DetectionTags = detectionTags;
+                detector.TargetTagMappings = detectedTargetTagMapping;
                 detector.DetectionBufferSize = detectionBufferSize;
                 detector.DetectionLayerMask = detectionLayerMask;
-            }
 
-            _detectorTargetsByTag = new Dictionary<string, SortedDetectorTargetList>();
-            foreach (string currTag in detectionTags)
-            {
-                _detectorTargetsByTag.Add(currTag, new SortedDetectorTargetList());
+                _detectorTargetsByTargetType = new Dictionary<TargetType, SortedDetectorTargetList>();
+                foreach (TargetType currTargetType in _detectedTargetTypes)
+                {
+                    if (!_detectorTargetsByTargetType.ContainsKey(currTargetType))
+                    {
+                        _detectorTargetsByTargetType.Add(currTargetType, new SortedDetectorTargetList());
+                    }
+                }
             }
         }
 
@@ -85,9 +95,22 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         private void Update()
         {
+            if (overrideDetectorPolling)
+            {
+                if ((Time.frameCount + _instanceLoadBalanceFrame) % detectorPollFrames == 0)
+                {
+                    foreach (Detector detector in detectors)
+                    {
+                        detector.CheckForTargets(true);
+                    }
+
+                    UpdateTargetDistances();
+                }
+            }
+
             foreach (Detector detector in detectors)
             {
-                if ((Time.frameCount + _instanceLoadBalanceFrame) % detector.refreshFrequency == 0)
+                if ((Time.frameCount + _instanceLoadBalanceFrame) % detector.RefreshFrequency == 0)
                 {
                     detector.CheckForTargets(true);
                     UpdateTargetDistances();
@@ -95,59 +118,66 @@ namespace DaftAppleGames.TpCharacterController.AiController
             }
         }
 
+        #endregion
+
         #region Class Methods
 
         public bool HasTarget()
         {
-            return _sortedDetectedTargets.Count() > 0;
-        }
-
-        public GameObject GetClosestTarget()
-        {
-            return _sortedDetectedTargets.GetClosestTarget()?.targetObject;
-        }
-
-        public GameObject GetClosestTargetWithTag(string tagToFind)
-        {
-            return _detectorTargetsByTag[tagToFind].GetClosestTarget()?.targetObject;
-        }
-
-        public GameObject GetClosestTargetWithTags(List<string> tagsToFind)
-        {
-            DetectorTarget closestTarget = null;
-
-            foreach (string tagToFind in tagsToFind)
-            {
-                DetectorTarget target = _detectorTargetsByTag[tagToFind].GetClosestTarget();
-
-                if (closestTarget == null || target.Distance > closestTarget.Distance)
-                {
-                    closestTarget = target;
-                }
-            }
-            return closestTarget?.targetObject;
+            return _allDetectedTargets.Any();
         }
 
         private void NewTargetDetected(DetectorTarget detectorTarget)
         {
-            _detectorTargetsByTag[detectorTarget.tag].Add(detectorTarget);
-            _sortedDetectedTargets.Add(detectorTarget);
+            _detectorTargetsByTargetType[detectorTarget.targetType].Add(detectorTarget);
+            _allDetectedTargets.AddTarget(detectorTarget);
+            CalculateClosestTargets();
             newTargetDetectedEvent.Invoke();
         }
 
         private void TargetLost(DetectorTarget detectorTarget)
         {
-            _sortedDetectedTargets.Remove(detectorTarget);
-            _detectorTargetsByTag[detectorTarget.tag].Remove(detectorTarget);
+            _allDetectedTargets.RemoveTarget(detectorTarget.guid);
+            _detectorTargetsByTargetType[detectorTarget.targetType].Remove(detectorTarget);
+            CalculateClosestTargets();
             targetLostEvent.Invoke();
         }
 
         private void UpdateTargetDistances()
         {
-            _sortedDetectedTargets.UpdateDistances(transform);
+            _allDetectedTargets.UpdateDistances(transform);
         }
 
-        #endregion
+        private void CalculateClosestTargets()
+        {
+            _closestDetectedTargets.Clear();
+            foreach (TargetType targetType in _detectedTargetTypes)
+            {
+                DetectorTarget target = _allDetectedTargets.GetClosestTargetByTargetType(targetType);
+                if (target != null)
+                {
+                    _closestDetectedTargets.Add(targetType, target.targetObject);
+                }
+            }
+        }
+
+        public ClosestTargets GetAllClosestTargets()
+        {
+            return _closestDetectedTargets;
+        }
+
+        public bool GetClosestTargetOfType(TargetType targetType, out GameObject closestTarget)
+        {
+            DetectorTarget target = _detectorTargetsByTargetType[targetType].GetClosestTarget();
+            if (target != null)
+            {
+                closestTarget = target.targetObject;
+                return true;
+            }
+
+            closestTarget = null;
+            return false;
+        }
 
         #endregion
 

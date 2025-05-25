@@ -13,6 +13,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
     [Serializable]
     public class DetectorTargets : IEnumerable<KeyValuePair<string, DetectorTarget>>
     {
+        // All detector targets, sorted by target object GUID
         [ShowInInspector] private readonly Dictionary<string, DetectorTarget> _targets = new();
 
         internal bool AddTarget(DetectorTarget detectorTarget)
@@ -26,7 +27,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
             return true;
         }
 
-        internal DetectorTarget AddTarget(string guid, GameObject target, float distance, string tagValue)
+        internal DetectorTarget AddTarget(string guid, GameObject target, float distance, TargetType targetType, string tagValue)
         {
             if (_targets.TryGetValue(guid, out DetectorTarget addTarget))
             {
@@ -38,7 +39,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
                 guid = guid,
                 targetObject = target,
                 Distance = distance,
-                tag = tagValue
+                targetType = targetType
             };
             _targets.Add(guid, newTarget);
 
@@ -67,7 +68,7 @@ namespace DaftAppleGames.TpCharacterController.AiController
 
         internal bool HasTargetWithTag(string tag)
         {
-            foreach (var entry in _targets)
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
             {
                 if (entry.Value.targetObject.CompareTag(tag))
                 {
@@ -78,12 +79,52 @@ namespace DaftAppleGames.TpCharacterController.AiController
             return false;
         }
 
+        internal bool HasTargetWithTargetType(TargetType targetTypeToFind)
+        {
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
+            {
+                if (entry.Value.targetType == targetTypeToFind)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        internal void UpdateDistances(Transform sourceTransform)
+        {
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
+            {
+                entry.Value.UpdateDistance(sourceTransform);
+            }
+        }
+
         internal DetectorTarget GetClosestTarget()
         {
             KeyValuePair<string, DetectorTarget> minTarget = default;
             float minDistance = float.MaxValue;
-            foreach (var entry in _targets)
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
             {
+                if (entry.Value.Distance < minDistance)
+                {
+                    minDistance = entry.Value.Distance;
+                    minTarget = entry;
+                }
+            }
+
+            return minTarget.Value;
+        }
+
+        internal DetectorTarget GetClosestTargetByTargetType(TargetType targetTypeToFind)
+        {
+            KeyValuePair<string, DetectorTarget> minTarget = default;
+            float minDistance = float.MaxValue;
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
+            {
+                if (entry.Value.targetType != targetTypeToFind)
+                {
+                    continue;
+                }
                 if (entry.Value.Distance < minDistance)
                 {
                     minDistance = entry.Value.Distance;
@@ -106,6 +147,23 @@ namespace DaftAppleGames.TpCharacterController.AiController
             foreach (var entry in _targets)
             {
                 if (entry.Value.targetObject.CompareTag(tag) && entry.Value.Distance < minDistance)
+                {
+                    minDistance = entry.Value.Distance;
+                    minTarget = entry;
+                }
+            }
+
+            // If target found, return closest. Otherwise, return null
+            return minDistance < float.MaxValue ? minTarget.Value.targetObject : null;
+        }
+
+        internal GameObject GetClosestTargetGameObjectWithTargetType(TargetType targetType)
+        {
+            KeyValuePair<string, DetectorTarget> minTarget = default;
+            float minDistance = float.MaxValue;
+            foreach (KeyValuePair<string, DetectorTarget> entry in _targets)
+            {
+                if (entry.Value.targetType == targetType && entry.Value.Distance < minDistance)
                 {
                     minDistance = entry.Value.Distance;
                     minTarget = entry;
@@ -205,8 +263,8 @@ namespace DaftAppleGames.TpCharacterController.AiController
     {
         [SerializeField] internal string guid;
         [SerializeField] internal GameObject targetObject;
-        [SerializeField] internal string tag;
-
+        [SerializeField] internal TargetType targetType;
+        [SerializeField] internal string targetTag;
         [SerializeField] private float distance;
 
         public float Distance

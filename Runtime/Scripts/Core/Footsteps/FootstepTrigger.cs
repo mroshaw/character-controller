@@ -23,6 +23,8 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         {
             _audioSource = GetComponent<AudioSource>();
 
+            ignoreTriggers = true;
+
             if (!_audioSource)
             {
                 Debug.LogError($"FootstepTrigger: no AudioSource on this gameobject! {gameObject}");

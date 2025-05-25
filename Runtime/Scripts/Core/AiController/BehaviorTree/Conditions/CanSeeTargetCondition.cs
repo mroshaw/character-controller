@@ -23,13 +23,14 @@ namespace DaftAppleGames.TpCharacterController.AiController.BehaviourTree.Condit
 
         public override bool IsTrue()
         {
-            GameObject target = AiBrain.DetectorManager.GetClosestTargetWithTag(Tag.Value);
+            /*
+            // GameObject target = AiBrain.DetectorManager.GetClosestTargetWithTag(Tag.Value);
             if (target)
             {
                 Target.Value = target.transform;
                 return true;
             }
-
+*/
             return false;
         }
     }
