@@ -84,8 +84,11 @@ namespace DaftAppleGames.TpCharacterController
             }
             followTarget.transform.rotation = Quaternion.Euler(_cameraTargetPitch, _cameraTargetYaw, 0.0f);
 
-            _cmThirdPersonFollow.CameraDistance =
-                Mathf.SmoothDamp(_cmThirdPersonFollow.CameraDistance, followDistance, ref _followDistanceSmoothVelocity, 0.1f);
+            if (_cmThirdPersonFollow)
+            {
+                _cmThirdPersonFollow.CameraDistance =
+                    Mathf.SmoothDamp(_cmThirdPersonFollow.CameraDistance, followDistance, ref _followDistanceSmoothVelocity, 0.1f);
+            }
         }
 
         protected override void Start()

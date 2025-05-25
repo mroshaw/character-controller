@@ -112,7 +112,8 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         #endregion
 
         #region Editor methods
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         [Button("Create Triggers")]
         private void CreateFootstepTriggers()
         {
@@ -139,12 +140,12 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
                 DestroyImmediate(existingTrigger.gameObject);
             }
 
-            GameObject newTrigger = new GameObject($"Footstep Trigger {footBone}");
+            GameObject newTrigger = new($"Footstep Trigger {footBone}");
             newTrigger.transform.SetParent(footTransform);
             newTrigger.transform.localPosition = Vector3.zero;
             newTrigger.transform.localScale = Vector3.one;
             FootstepTrigger newFootStepTrigger = newTrigger.AddComponent<FootstepTrigger>();
-            newFootStepTrigger.ConfigureInEditor(triggerLayerMask, null);
+            newFootStepTrigger.TriggerLayerMask = triggerLayerMask;
             SphereCollider newSphereCollider = newTrigger.AddComponent<SphereCollider>();
             newSphereCollider.radius = 0.1f;
             newSphereCollider.isTrigger = true;
@@ -161,10 +162,11 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
         private void FindTriggers()
         {
             FootstepTrigger[] foundTriggers = gameObject.GetComponentsInChildren<FootstepTrigger>(true);
-            footstepTriggers = new();
+            footstepTriggers = new List<FootstepTrigger>();
             footstepTriggers = foundTriggers.ToList();
         }
-        #endif
+#endif
+
         #endregion
     }
 }
