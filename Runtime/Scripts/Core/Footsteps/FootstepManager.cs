@@ -88,12 +88,18 @@ namespace DaftAppleGames.TpCharacterController.FootSteps
 
         public void SpawnFootStepParticleFx(Vector3 spawnPosition, Quaternion spawnRotation)
         {
-            _particleFxPool.SpawnInstance(spawnPosition, spawnRotation);
+            if(_particleFxPool)
+            {
+                _particleFxPool.SpawnInstance(spawnPosition, spawnRotation);
+            }
         }
 
         public void SpawnFootStepDecal(Vector3 spawnPosition, Quaternion spawnRotation)
         {
-            _decalPool.SpawnInstance(spawnPosition, spawnRotation);
+            if(_decalPool)
+            {
+                _decalPool.SpawnInstance(spawnPosition, spawnRotation);
+            }
         }
 
         private void CreateSurfaceDictionary()
