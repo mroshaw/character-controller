@@ -1,34 +1,32 @@
 {
-  "name": "com.daftapplegames.tp-character-controller",
+  "name": "com.daftapplegames.character-controller",
   "version": "1.0.0",
-  "displayName": "Third Person Character Controller",
-  "description": "An extension of Easy Character Movement 2, providing a feature rich Third Person controller in Unity 6 HDRP",
+  "displayName": "Daft Apple Character Controller",
+  "description": "An extension of Easy Character Movement 2, providing a feature rich character controller in Unity 6 HDRP",
   "unity": "6000.0",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
+  "documentationUrl": "https://mroshaw.github.io/unity-framework-docs/charactercontroller",
+  "changelogUrl": "https://mroshaw.github.io/unity-framework-docs/charactercontroller/changelog.html",
+  "licensesUrl": "https://raw.githubusercontent.com/mroshaw/character-controller/refs/heads/main/LICENSE",
   "dependencies": {
-    "com.unity.render-pipelines.high-definition": "17.0.3",
     "com.unity.cinemachine": "3.1.2",
     "com.unity.ai.navigation": "2.0.5",
     "com.unity.splines": "2.7.2"
- },
-"samples": [
-  {
-    "displayName": "Demo Scene",
-    "description": "Unity 6 HDRP scene demonstrating the features of the package.",
-    "path": "Samples~/DemoScene"
-  }
-],
- "keywords": [
-    "HDRP",
+  },
+  "samples": [
+    {
+      "displayName": "HDRP Demo Scene",
+      "description": "Unity 6 HDRP scene demonstrating the features of the package.",
+      "path": "Samples~/SampleHDRP"
+    }
+  ],
+  "keywords": [
     "controller",
     "tps",
     "third person"
   ],
   "author": {
-    "name": "Oli Ollerenshaw",
+    "name": "Daft Apple Games",
     "email": "oli@mroshaw.co.uk",
-    "url": ""
+    "url": "https://github.com/mroshaw"
   }
 }
